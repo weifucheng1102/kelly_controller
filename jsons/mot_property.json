@@ -1,0 +1,17 @@
+{
+    "motMetaKey": "MotorController",
+    "motMetaValues": [
+        "MOTOR_CONTROLLER",
+        "ANALOG_USER",
+        "THERMISTOR_PCB",
+        "THERMISTOR_MOSFETS_TOP",
+        "THERMISTOR_MOSFETS_BOT",
+        "VMONITOR_VPOS",
+        "VMONITOR_VSENSE",
+        "VMONITOR_VACC",
+        "PROTOCOLS",
+        "PROTOCOLS[1]",
+        "PROTOCOLS[2]",
+        "SHELL"
+    ]
+}

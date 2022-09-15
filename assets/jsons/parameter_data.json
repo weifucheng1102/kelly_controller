@@ -1,0 +1,2952 @@
+[
+    {
+        "id": 1,
+        "parm_name": "VSupply",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "black"
+        }
+    },
+    {
+        "id": 2,
+        "parm_name": "AdcVRef_MilliV",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 3,
+        "parm_name": "InputMode",
+        "@type": "enum",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 4,
+        "parm_name": "CoastMode",
+        "@type": "enum",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 5,
+        "parm_name": "BatteryZero",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 6,
+        "parm_name": "BatteryFull",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 7,
+        "parm_name": "CanServicesId",
+        "@type": "enum",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 8,
+        "parm_name": "IsCanEnable",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 9,
+        "parm_name": "BrakeMode",
+        "@type": "enum",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 10,
+        "parm_name": "BeepOnReverse",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 11,
+        "parm_name": "BeepThrottleOnInit",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 12,
+        "parm_name": "OptDinFunction",
+        "@type": "enum",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 13,
+        "parm_name": "OptDinSpeedLimit",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 14,
+        "parm_name": "ILimitScalarOnLowV",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 15,
+        "parm_name": "ILimitScalarOnHeat",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 16,
+        "parm_name": "FastBoot",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 17,
+        "parm_name": "Beep",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 18,
+        "parm_name": "Blink",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 19,
+        "parm_name": "LoadDefault",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 20,
+        "parm_name": "V_MAX",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 21,
+        "parm_name": "I_MAX",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 22,
+        "parm_name": "ADC_VREF_MAX_MILLIV",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 23,
+        "parm_name": "ADC_VREF_MIN_MILLIV",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 24,
+        "parm_name": "SOFTWARE_VERSION0",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 25,
+        "parm_name": "SOFTWARE_VERSION1",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 26,
+        "parm_name": "SOFTWARE_VERSION2",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 27,
+        "parm_name": "SOFTWARE_VERSION3",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 28,
+        "parm_name": "LIBRARY_VERSION0",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 29,
+        "parm_name": "LIBRARY_VERSION1",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 30,
+        "parm_name": "LIBRARY_VERSION2",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 31,
+        "parm_name": "LIBRARY_VERSION3",
+        "@type": "input",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 32,
+        "parm_name": "ThrottleZero_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 33,
+        "parm_name": "ThrottleMax_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 34,
+        "parm_name": "UseThrottleEdgePin",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 35,
+        "parm_name": "BrakeZero_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 36,
+        "parm_name": "BrakeMax_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 37,
+        "parm_name": "UseBrakeEdgePin",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 38,
+        "parm_name": "UseNeutralPin",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 39,
+        "parm_name": "UseForwardPin",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 40,
+        "parm_name": "UseBistateBrake",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 41,
+        "parm_name": "BistateBrakeValue_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 42,
+        "parm_name": "UseErrorAdcuRange",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 43,
+        "parm_name": "ThrottleEdge",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 44,
+        "parm_name": "BrakeEdge",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 45,
+        "parm_name": "Neutral",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 46,
+        "parm_name": "Forward",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 47,
+        "parm_name": "Reverse",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 48,
+        "parm_name": "BistateBrake",
+        "@type": "switcher",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 49,
+        "parm_name": "RNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 50,
+        "parm_name": "TNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 51,
+        "parm_name": "BConstant",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 52,
+        "parm_name": "VIn_Scalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 53,
+        "parm_name": "Shutdown_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 54,
+        "parm_name": "Threshold_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 55,
+        "parm_name": "Warning_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 56,
+        "parm_name": "CaptureScalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 57,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 58,
+        "parm_name": "RNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 59,
+        "parm_name": "TNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 60,
+        "parm_name": "BConstant",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 61,
+        "parm_name": "VIn_Scalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 62,
+        "parm_name": "Shutdown_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 63,
+        "parm_name": "Threshold_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 64,
+        "parm_name": "Warning_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 65,
+        "parm_name": "CaptureScalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 66,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 67,
+        "parm_name": "RNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 68,
+        "parm_name": "TNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 69,
+        "parm_name": "BConstant",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 70,
+        "parm_name": "VIn_Scalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 71,
+        "parm_name": "Shutdown_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 72,
+        "parm_name": "Threshold_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 73,
+        "parm_name": "Warning_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 74,
+        "parm_name": "CaptureScalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 75,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 76,
+        "parm_name": "LimitUpper_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 77,
+        "parm_name": "LimitLower_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 78,
+        "parm_name": "WarningUpper_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 79,
+        "parm_name": "WarningLower_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 80,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 81,
+        "parm_name": "LimitUpper_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 82,
+        "parm_name": "LimitLower_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 83,
+        "parm_name": "WarningUpper_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 84,
+        "parm_name": "WarningLower_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 85,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 86,
+        "parm_name": "LimitUpper_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 87,
+        "parm_name": "LimitLower_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 88,
+        "parm_name": "WarningUpper_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 89,
+        "parm_name": "WarningLower_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 90,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 91,
+        "parm_name": "XcvrId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 92,
+        "parm_name": "SpecsId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 93,
+        "parm_name": "WatchdogTime",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 94,
+        "parm_name": "IsEnableOnInit",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 95,
+        "parm_name": "XcvrId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 96,
+        "parm_name": "SpecsId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 97,
+        "parm_name": "WatchdogTime",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 98,
+        "parm_name": "IsEnableOnInit",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 99,
+        "parm_name": "XcvrId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 100,
+        "parm_name": "SpecsId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 101,
+        "parm_name": "WatchdogTime",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 102,
+        "parm_name": "IsEnableOnInit",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 103,
+        "parm_name": "XcvrId",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 104,
+        "parm_name": "BaudRate",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 105,
+        "parm_name": "IsEnableOnInit",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 106,
+        "parm_name": "PolePairs",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 107,
+        "parm_name": "SpeedFeedbackRef_Rpm",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 108,
+        "parm_name": "SpeedVMatchRef_Rpm",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 109,
+        "parm_name": "IaRefZero_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 110,
+        "parm_name": "IbRefZero_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 111,
+        "parm_name": "IcRefZero_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 112,
+        "parm_name": "SpeedLimitCcw_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 113,
+        "parm_name": "SpeedLimitCw_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 114,
+        "parm_name": "ILimitMotoring_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 115,
+        "parm_name": "ILimitGenerating_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 116,
+        "parm_name": "ILimitScalarHeat_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 117,
+        "parm_name": "DirectionCalibration",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 118,
+        "parm_name": "CommutationMode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 119,
+        "parm_name": "SensorMode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 120,
+        "parm_name": "FeedbackMode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 121,
+        "parm_name": "AlignMode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 122,
+        "parm_name": "AlignVoltage_Frac16",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 123,
+        "parm_name": "AlignTime_ControlCycles",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 124,
+        "parm_name": "PhasePwmMode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 125,
+        "parm_name": "OpenLoopVPwmMin",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 126,
+        "parm_name": "OpenLoopVPwmMax",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 127,
+        "parm_name": "OpenLoopSpeedStart",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 128,
+        "parm_name": "OpenLoopSpeedFinal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 129,
+        "parm_name": "CountsPerRevolution",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 130,
+        "parm_name": "DistancePerCount",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 131,
+        "parm_name": "IsQuadratureCaptureEnabled",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 132,
+        "parm_name": "IsALeadBPositive",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 133,
+        "parm_name": "ExtendedTimerDeltaTStop",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 134,
+        "parm_name": "SensorsTable0",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 135,
+        "parm_name": "SensorsTable1",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 136,
+        "parm_name": "SensorsTable2",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 137,
+        "parm_name": "SensorsTable3",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 138,
+        "parm_name": "SensorsTable4",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 139,
+        "parm_name": "SensorsTable5",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 140,
+        "parm_name": "SensorsTable6",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 141,
+        "parm_name": "SensorsTable7",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 142,
+        "parm_name": "RNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 143,
+        "parm_name": "TNominal",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 144,
+        "parm_name": "BConstant",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 145,
+        "parm_name": "VIn_Scalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 146,
+        "parm_name": "Shutdown_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 147,
+        "parm_name": "Threshold_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 148,
+        "parm_name": "Warning_Adcu",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 149,
+        "parm_name": "CaptureScalar",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 150,
+        "parm_name": "IsMonitorEnable",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 151,
+        "parm_name": "CalcFreq",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 152,
+        "parm_name": "Mode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 153,
+        "parm_name": "KpFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 154,
+        "parm_name": "KpDivisor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 155,
+        "parm_name": "KiFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 156,
+        "parm_name": "KiDivisor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 157,
+        "parm_name": "KdFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 158,
+        "parm_name": "KdDivisor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 159,
+        "parm_name": "CalcFreq",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 160,
+        "parm_name": "Mode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 161,
+        "parm_name": "KpFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 162,
+        "parm_name": "KpDivisor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 163,
+        "parm_name": "KiFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 164,
+        "parm_name": "KiDivisor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 165,
+        "parm_name": "KdFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 166,
+        "parm_name": "KdDivisor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 167,
+        "parm_name": "CalcFreq",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 168,
+        "parm_name": "Mode",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 169,
+        "parm_name": "KpFactor",
+        "@type": "input",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 170,
+        "parm_name": "KpDivisor",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 100.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 171,
+        "parm_name": "KiFactor",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 100.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 172,
+        "parm_name": "KiDivisor",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 100.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 173,
+        "parm_name": "KdFactor",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 100.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 174,
+        "parm_name": "KdDivisor",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 100.0
+    }
+]
