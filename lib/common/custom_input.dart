@@ -13,6 +13,7 @@ class CustomInput extends StatefulWidget {
   final double width;
   final double height;
   final TextEditingController? fieldCon;
+  final void Function(String)? onChanged;
   const CustomInput({
     Key? key,
     required this.title,
@@ -23,6 +24,7 @@ class CustomInput extends StatefulWidget {
     required this.height,
     this.fieldCon,
     this.textColor,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -61,6 +63,7 @@ class _CustomInputState extends State<CustomInput> {
               color: widget.textColor ?? Get.theme.highlightColor,
               fontSize: GetPlatform.isDesktop ? 20 : 16,
             ),
+            onChanged: widget.onChanged,
             // validator: (res) {
             //   if (res!.isEmpty) {
             //     return '2222222';

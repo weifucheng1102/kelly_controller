@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +23,7 @@ class _MonitorControlState extends State<MonitorControl> {
   ///档位
   RxString gear = ''.obs;
   RxDouble sliderValue = 0.0.obs;
+  RxDouble firstDashValue = 0.0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +95,7 @@ class _MonitorControlState extends State<MonitorControl> {
             maxnum: 200,
             interval: 20,
             size: showFilter.value ? 198 : 264,
-            endValue: 100,
+            endValue: firstDashValue.value,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -123,7 +126,7 @@ class _MonitorControlState extends State<MonitorControl> {
             size: showFilter.value ? 288 : 385,
             interval: 20,
             bottomPadding: 23,
-            endValue: 100,
+            endValue: 110,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -330,6 +333,8 @@ class _MonitorControlState extends State<MonitorControl> {
       padding: const EdgeInsets.symmetric(horizontal: 45),
       child: InkWell(
         onTap: () {
+          firstValueChange(100);
+
           if (gear.value != str) {
             gear.value = str;
           }
@@ -345,5 +350,21 @@ class _MonitorControlState extends State<MonitorControl> {
         ),
       ),
     );
+  }
+
+  firstValueChange(int newCount) async {
+    int oldValue = firstDashValue.value.toInt();
+
+    if (newCount > oldValue) {
+      for (var i = oldValue; i < newCount; i++) {
+        firstDashValue.value = i.toDouble();
+        await Future.delayed(const Duration(milliseconds: 1));
+      }
+    } else if (newCount < oldValue) {
+      for (var i = oldValue; i > newCount; i--) {
+        firstDashValue.value = i.toDouble();
+        await Future.delayed(const Duration(milliseconds: 1));
+      }
+    }
   }
 }

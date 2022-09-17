@@ -88,11 +88,17 @@ class _ParameterPageState extends State<ParameterPage> {
               preferBelow: false,
               message: e.toolTip,
               child: CustomInput(
-                  title: e.parmName,
-                  hint: 'hint',
-                  readOnly: false,
-                  width: ratioWidget,
-                  height: 66),
+                title: e.parmName,
+                hint: 'hint',
+                readOnly: false,
+                width: ratioWidget,
+                height: 66,
+                fieldCon: TextEditingController(
+                    text: parameterCon.all_parameter_value[e.parmName]),
+                onChanged: (res) async {
+                  await parameterCon.updateParameterValue(e, res);
+                },
+              ),
             ),
           )
           .toList(),
@@ -111,7 +117,20 @@ class _ParameterPageState extends State<ParameterPage> {
       children: list
           .map(
             (e) => CustomPopMenu(
-                title: e.parmName, width: ratioWidget, height: 66, value: -1),
+              title: e.parmName,
+              width: ratioWidget,
+              items: e.enumValue
+                  .map((value) => MenuItem(label: value, value: value))
+                  .toList(),
+              height: 66,
+              value: e.enumValue.length == 0 ||
+                      parameterCon.all_parameter_value[e.parmName].length == 0
+                  ? null
+                  : parameterCon.all_parameter_value[e.parmName],
+              valueChanged: (res) async {
+                await parameterCon.updateParameterValue(e, res);
+              },
+            ),
           )
           .toList(),
     );
@@ -147,9 +166,8 @@ class _ParameterPageState extends State<ParameterPage> {
                   CupertinoSwitch(
                     activeColor: Get.theme.primaryColor,
                     value: parameterCon.all_parameter_value[e.parmName],
-                    onChanged: (res) {
-                      parameterCon.all_parameter_value[e.parmName] =
-                          !parameterCon.all_parameter_value[e.parmName];
+                    onChanged: (res) async {
+                      await parameterCon.updateParameterValue(e, res);
                       switchbuild(() {});
                     },
                   )
@@ -163,74 +181,108 @@ class _ParameterPageState extends State<ParameterPage> {
 
   Widget sliderGridview(List<Parameter> list) {
     double ratioWidget = (1.sw - Config.left_menu_margin - 20 - 30) / 3;
-    return StatefulBuilder(builder: (context, switchbuild) {
-      return GridView.count(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        crossAxisCount: 3,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        childAspectRatio: ratioWidget / 110,
-        children: list
-            .map(
-              (e) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 21, bottom: 9),
-                    child: Text(
-                      e.parmName,
-                      style: TextStyle(
-                        color: Get.theme.hintColor,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SfSliderTheme(
-                          data: SfSliderThemeData(
-                            activeTrackHeight: 40,
-                            inactiveTrackHeight: 40,
-                            activeTrackColor: Get.theme.primaryColor,
-                            inactiveTrackColor: Get.theme.hintColor,
-                            trackCornerRadius: 20,
-                            thumbRadius: 25,
-                          ),
-                          child: SfSlider(
-                            min: 0,
-                            max: 5,
-                            stepSize: 1,
-                            value: 2,
-                            thumbIcon: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Get.theme.focusColor,
-                              ),
-                              padding: EdgeInsets.all(4),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Get.theme.primaryColor,
-                                ),
-                              ),
-                            ),
-                            onChanged: (res) {},
-                          ),
+    return StatefulBuilder(
+      builder: (context, switchbuild) {
+        return GridView.count(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          childAspectRatio: ratioWidget / 110,
+          children: list
+              .map(
+                (e) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 21, bottom: 9),
+                      child: Text(
+                        e.parmName,
+                        style: TextStyle(
+                          color: Get.theme.hintColor,
+                          fontSize: 20,
                         ),
                       ),
-                      SizedBox(
-                        width: 160,
-                        child: TextFormField(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-            .toList(),
-      );
-    });
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SfSliderTheme(
+                            data: SfSliderThemeData(
+                              activeTrackHeight: 40,
+                              inactiveTrackHeight: 40,
+                              activeTrackColor: Get.theme.primaryColor,
+                              inactiveTrackColor: Get.theme.hintColor,
+                              trackCornerRadius: 20,
+                              thumbRadius: 25,
+                            ),
+                            child: SfSlider(
+                              min: e.sliderMin,
+                              max: e.sliderMax,
+                              stepSize: 1,
+                              value:
+                                  parameterCon.all_parameter_value[e.parmName],
+                              thumbIcon: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Get.theme.focusColor,
+                                ),
+                                padding: EdgeInsets.all(4),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Get.theme.primaryColor,
+                                  ),
+                                ),
+                              ),
+                              onChanged: (res) async {
+                                await parameterCon.updateParameterValue(e, res);
+                                switchbuild(() {});
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 160,
+                          child: TextFormField(
+                            onChanged: (res) async {
+                              if (double.parse(res) > e.sliderMax) {
+                                await parameterCon.updateParameterValue(
+                                    e, e.sliderMax);
+                                switchbuild(() {});
+                              }
+                              if (double.parse(res) < e.sliderMin) {
+                                await parameterCon.updateParameterValue(
+                                    e, e.sliderMin);
+                                switchbuild(() {});
+                              }
+                            },
+                            onFieldSubmitted: (res) async {
+                              parameterCon.all_parameter_value[e.parmName] =
+                                  double.parse(res);
+                              await parameterCon.updateParameterValue(
+                                  e, double.parse(res));
+                              switchbuild(() {});
+                            },
+                            controller: TextEditingController(
+                              text: parameterCon.all_parameter_value[e.parmName]
+                                  .toStringAsFixed(1),
+                            ),
+                            style: TextStyle(
+                              color: Get.theme.highlightColor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+              .toList(),
+        );
+      },
+    );
   }
 }

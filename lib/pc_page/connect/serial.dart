@@ -1,11 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_libserialport/flutter_libserialport.dart';
+//import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
+import 'package:serial_port_win32/serial_port_win32.dart';
 
 class Serial extends StatefulWidget {
   const Serial({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _SerialState extends State<Serial> {
   @override
   void initState() {
     super.initState();
-    portList = SerialPort.availablePorts;
+    portList = SerialPort.getAvailablePorts();
   }
 
   @override
@@ -91,8 +92,10 @@ class _SerialState extends State<Serial> {
                   width: 165,
                   height: 64,
                   onTap: () {
-                    int a = port!.write(Uint8List.fromList("hello  hello  hello hello  hello ".codeUnits),
-                        timeout: 0);
+                    // int a = port!.write(
+                    //     Uint8List.fromList(
+                    //         "hello  hello  hello hello  hello ".codeUnits),
+                    //     timeout: 0);
                   },
                 ),
                 const SizedBox(width: 30),
@@ -107,22 +110,37 @@ class _SerialState extends State<Serial> {
                     if (selectPort == null) {
                       return;
                     }
-                    port = SerialPort(selectPort!);
-                    port!.config.baudRate = int.parse(baudRateCon.text);
-                    port!.config.bits = int.parse(bitsCon.text);
-                    port!.config.stopBits = int.parse(stopBitsCon.text);
-                    port!.config.parity = 0;
-                    if (!port!.isOpen) {
-                      port!.open(mode: 3);
-                    }
-                    print('串口是否开启${port!.isOpen}');
+                    port = SerialPort(
+                      selectPort!,
+                      openNow: false,
+                      BaudRate: int.parse(baudRateCon.text),
+                      ByteSize: int.parse(bitsCon.text),
+                      StopBits: int.parse(stopBitsCon.text),
+                      Parity: 0,
+                      ReadIntervalTimeout: 1,
+                      ReadTotalTimeoutConstant: 2,
+                    );
+                    port!.open();
+                    // port!.config.baudRate = int.parse(baudRateCon.text);
+                    // port!.config.bits = int.parse(bitsCon.text);
+                    // port!.config.stopBits = int.parse(stopBitsCon.text);
+                    // port!.config.parity = 0;
+                    // if (!port!.isOpen) {
+                    //   port!.open(mode: 3);
+                    // }
+                    // print('串口是否开启${port!.isOpen}');
+                    port!.readBytesOnListen(
+                        8, (value) => print(value.toString()));
+// or
+                    // port.readOnListenFunction = (value) {
+                    //   print(value);
+                    // };
+                    // final reader = SerialPortReader(port!, timeout: 50000);
+                    // reader.stream.listen((data) {
+                    //   String string = String.fromCharCodes(data);
 
-                    final reader = SerialPortReader(port!, timeout: 50000);
-                    reader.stream.listen((data) {
-                      String string = String.fromCharCodes(data);
-
-                      print('received: $string');
-                    });
+                    //   print('received: $string');
+                    // });
                   },
                 ),
               ],

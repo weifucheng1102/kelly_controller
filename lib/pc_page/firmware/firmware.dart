@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/custom_select_button.dart';
+import 'package:kelly_user_project/controller/parameter_con.dart';
 
 class Firmware extends StatefulWidget {
   const Firmware({Key? key}) : super(key: key);
@@ -78,15 +81,9 @@ class _FirmwareState extends State<Firmware> {
               onTap: () async {
                 if (canClick) {
                   canClick = false;
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles(
-                    dialogTitle: 'Select File',
-                  );
+                  file = await ParameterCon().readFile();
                   canClick = true;
-                  if (result != null && result.files.isNotEmpty) {
-                    file = result.files.first;
-                    setState(() {});
-                  }
+                  setState(() {});
                 }
               },
             ),
@@ -107,7 +104,12 @@ class _FirmwareState extends State<Firmware> {
                   bgColor: Get.theme.primaryColor,
                   borderWidth: 0,
                   borderColor: Colors.transparent,
-                  onTap: () {},
+                  onTap: () async {
+                    if (file != null) {
+                      String contents = await File(file!.path!).readAsString();
+                      print(contents);
+                    }
+                  },
                 ),
               ],
             ),

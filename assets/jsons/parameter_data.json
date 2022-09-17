@@ -38,7 +38,10 @@
         "parm_name": "InputMode",
         "@type": "enum",
         "@permission": "write",
-        "enum_value": [],
+        "enum_value": [
+            "1",
+            "2"
+        ],
         "slider_min": 0.0,
         "slider_max": 0.0,
         "toolTip": "Voltage at terminal B+",
@@ -2601,91 +2604,6 @@
         }
     },
     {
-        "id": 154,
-        "parm_name": "KpDivisor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 155,
-        "parm_name": "KiFactor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 156,
-        "parm_name": "KiDivisor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 157,
-        "parm_name": "KdFactor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 158,
-        "parm_name": "KdDivisor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
         "id": 159,
         "parm_name": "CalcFreq",
         "@type": "input",
@@ -2722,91 +2640,6 @@
     {
         "id": 161,
         "parm_name": "KpFactor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 162,
-        "parm_name": "KpDivisor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 163,
-        "parm_name": "KiFactor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 164,
-        "parm_name": "KiDivisor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 165,
-        "parm_name": "KdFactor",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "red"
-        }
-    },
-    {
-        "id": 166,
-        "parm_name": "KdDivisor",
         "@type": "input",
         "@permission": "write",
         "enum_value": [],
