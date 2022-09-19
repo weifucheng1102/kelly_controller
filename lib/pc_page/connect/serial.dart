@@ -95,10 +95,10 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
                   height: 64,
                   onTap: () {
                   print(connectionCon.port);
-                      int a = connectionCon.port!.write(
-                        Uint8List.fromList(
-                            "hello1  hello2  hello3 hello4  hello5 ".codeUnits),
-                        timeout: 0);
+                      // int a = connectionCon.port!.write(
+                      //   Uint8List.fromList(
+                      //       "hello1  hello2  hello3 hello4  hello5 ".codeUnits),
+                      //   timeout: 0);
                   },
                 ),
                 const SizedBox(width: 30),
