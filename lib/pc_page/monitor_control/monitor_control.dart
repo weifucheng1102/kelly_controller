@@ -362,6 +362,7 @@ class _MonitorControlState extends State<MonitorControl> {
       padding: const EdgeInsets.symmetric(horizontal: 45),
       child: InkWell(
         onTap: () {
+          Get.until((route) => false);
           if (gear.value != str) {
             gear.value = str;
           }

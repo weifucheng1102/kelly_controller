@@ -16,6 +16,7 @@ class ConnectionCon extends GetxController {
   Timer? timers;
   int millsecondtime = 500;
 
+  ///打开串口
   portOpenAction({
     required String portName,
     required int baudRate,
@@ -36,6 +37,7 @@ class ConnectionCon extends GetxController {
     print('串口是否开启${port!.isOpen}');
     final reader = SerialPortReader(port!, timeout: 50000);
     reader.stream.listen((data) {
+      ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据500ms 以内接受的数据拼成一个完整的数据
       if (millsecondtime > 0) {
         readerData = readerData + data;
         print('1');
@@ -48,7 +50,7 @@ class ConnectionCon extends GetxController {
       if (timers != null) {
         timers!.cancel();
       }
-      timers = Timer.periodic(Duration(microseconds: 10), (timer) {
+      timers = Timer.periodic(const Duration(microseconds: 10), (timer) {
         millsecondtime = millsecondtime - 10;
         if (millsecondtime <= 0) {
           timers!.cancel();
@@ -60,13 +62,18 @@ class ConnectionCon extends GetxController {
     });
   }
 
+  ///发送通知 去更新
   pushNotice(Uint8List uint8list) {
-    if (uint8list.first.toRadixString(16)=='f1') {
-      bus.emit('control',Uint8List.sublistView(uint8list, 2, 5));
+    ///修改仪表 的测试指令
+    if (uint8list.first.toRadixString(16) == 'f1') {
+      bus.emit('control', Uint8List.sublistView(uint8list, 2, 5));
     }
 
-
-
+    ///修改参数的 测试指令 （测试16个数据）
+    if (uint8list.first.toRadixString(16) == 'f3') {
+      bus.emit(
+          'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 18));
+    }
     // Uint8List sublist = Uint8List.sublistView(uint8list, 2, 5);
     // print(readerData);
     // print(uint8list);

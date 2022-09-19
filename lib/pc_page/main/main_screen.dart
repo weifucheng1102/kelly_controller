@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +12,7 @@ import 'package:get/instance_manager.dart';
 import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/config/config.dart';
+import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/controller/connection_con.dart';
 
 import 'package:kelly_user_project/controller/menu_controller.dart';
@@ -212,8 +215,30 @@ class _MainScreenState extends State<MainScreen> {
           bottomMenuItem(
             'Read file',
             -1,
-            indexTap: () {
-              print('Read file');
+            indexTap: () async {
+              ///读文件
+              PlatformFile? selectFile = await ParameterCon().readFile();
+              if (selectFile != null) {
+                String contents = await File(selectFile.path!).readAsString();
+                print(contents);
+
+                ///转json
+                Map map = json.decode(contents);
+
+                ///更新参数
+
+                map.keys.forEach((element) {
+                  print(element);
+                  if (parameterController.all_parameter_value.keys
+                      .contains(element)) {
+                    parameterController.all_parameter_value[element] =
+                        map[element];
+                  }
+                });
+
+                ///通知参数页 更新数据
+                bus.emit('updateParameterWithFile');
+              }
             },
           ),
           bottomMenuItem(
@@ -235,7 +260,7 @@ class _MainScreenState extends State<MainScreen> {
                   List.generate(list.length, (index) => int.parse(list[index]));
 
               intList.insertAll(0, [
-                hexToInt('f2'),
+                hexToInt('f3'),
                 hexToInt('10'),
               ]);
               connectionCon.port!

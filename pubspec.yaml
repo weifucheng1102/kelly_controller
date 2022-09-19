@@ -45,7 +45,7 @@ dependencies:
   common_utils: ^2.1.0
   extended_wrap: ^0.1.0
   quiver: ^3.1.0
-  libserialport: ^0.2.0+3
+  flutter_libserialport: ^0.2.3
   native_device_orientation: ^1.1.4
 dev_dependencies:
   flutter_test:

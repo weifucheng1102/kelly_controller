@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +9,7 @@ import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/filter_button.dart';
 import 'package:kelly_user_project/config/config.dart';
+import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
 import 'package:kelly_user_project/models/parameter.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -24,6 +27,28 @@ class _ParameterPageState extends State<ParameterPage> {
   @override
   void initState() {
     super.initState();
+
+    ///读取文件更新数据
+    bus.on('updateParameterWithFile', (arg) {
+      setState(() {});
+    });
+
+    ///串口指令处理数据
+    bus.on('updateParameterWithSerial', (arg) {
+      Uint8List list = arg;
+      List<String> keyList = parameterCon.all_parameter_value.keys.toList();
+      for (var i = 0; i < list.length; i++) {
+        parameterCon.all_parameter_value[keyList[i]] = list[i];
+      }
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    bus.off('updateParameterWithFile');
+    bus.off('updateParameterWithSerial');
   }
 
   @override
@@ -36,6 +61,7 @@ class _ParameterPageState extends State<ParameterPage> {
             child: Padding(
               padding: EdgeInsets.only(left: Config.left_menu_margin),
               child: ListView.separated(
+                  controller: ScrollController(),
                   itemBuilder: (context, index) {
                     List<String> keys = parameterCon
                         .filter_parameter_maplist.keys
@@ -73,6 +99,7 @@ class _ParameterPageState extends State<ParameterPage> {
     );
   }
 
+  ///输入框类型参数布局
   Widget inputGridview(List<Parameter> list) {
     double ratioWidget = (1.sw - Config.left_menu_margin - 20 - 30) / 4;
     return GridView.count(
@@ -105,6 +132,7 @@ class _ParameterPageState extends State<ParameterPage> {
     );
   }
 
+  ///选择框参数类型布局
   Widget enumGridview(List<Parameter> list) {
     double ratioWidget = (1.sw - Config.left_menu_margin - 20 - 30) / 4;
     return GridView.count(
@@ -136,6 +164,7 @@ class _ParameterPageState extends State<ParameterPage> {
     );
   }
 
+  ///开关类型参数布局
   Widget switcherGridview(List<Parameter> list) {
     double ratioWidget = (1.sw - Config.left_menu_margin - 20 - 30) / 3;
     return StatefulBuilder(builder: (context, switchbuild) {
@@ -179,6 +208,7 @@ class _ParameterPageState extends State<ParameterPage> {
     });
   }
 
+  ///滑块类型参数布局
   Widget sliderGridview(List<Parameter> list) {
     double ratioWidget = (1.sw - Config.left_menu_margin - 20 - 30) / 3;
     return StatefulBuilder(
