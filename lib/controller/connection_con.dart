@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/config/event.dart';
 import 'package:libserialport/libserialport.dart';
 
@@ -51,17 +52,25 @@ class ConnectionCon extends GetxController {
         millsecondtime = millsecondtime - 10;
         if (millsecondtime <= 0) {
           timers!.cancel();
-          String string = String.fromCharCodes(readerData);
-          print('received: $string');
-      
+          // String string = String.fromCharCodes(readerData);
+          // print('received: $string');
+          pushNotice(Uint8List.fromList(readerData));
         }
       });
     });
   }
 
-  // int a = port!.write(
-  //                       Uint8List.fromList(
-  //                           "hello1  hello2  hello3 hello4  hello5 ".codeUnits),
-  //                       timeout: 0);
+  pushNotice(Uint8List uint8list) {
+    if (uint8list.first.toRadixString(16)=='f1') {
+      bus.emit('control',Uint8List.sublistView(uint8list, 2, 5));
+    }
 
+
+
+    // Uint8List sublist = Uint8List.sublistView(uint8list, 2, 5);
+    // print(readerData);
+    // print(uint8list);
+    // int m = hexToInt(sublist.first.toString());
+    // print(m);
+  }
 }

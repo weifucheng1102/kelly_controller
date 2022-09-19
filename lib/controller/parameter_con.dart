@@ -43,27 +43,49 @@ class ParameterCon extends GetxController {
         await rootBundle.loadString('assets/jsons/parameter_data.json');
     final List data = await json.decode(response);
     all_parameterList = data.map((e) => Parameter.fromJson(e)).toList();
-    await getAllParameterValue();
     await getParameterWithType(all_parameterList);
+    await getAllParameterValue();
   }
 
   ///获取所有参数 的默认值
   Future getAllParameterValue() async {
-    all_parameterList.forEach((element) {
-      if (element.parameterTypeEnum == ParameterTypeEnum.Slider) {
-        all_parameter_value.addAll({
-          element.parmName: 0.0,
-        });
-      } else if (element.parameterTypeEnum == ParameterTypeEnum.Switcher) {
-        all_parameter_value.addAll({
-          element.parmName: true,
-        });
-      } else {
-        all_parameter_value.addAll({
-          element.parmName: '',
-        });
-      }
+    filter_parameter_maplist['input']?.forEach((element) {
+      all_parameter_value.addAll({
+        element.parmName: '',
+      });
     });
+
+    filter_parameter_maplist['enum']?.forEach((element) {
+      all_parameter_value.addAll({
+        element.parmName: '',
+      });
+    });
+    filter_parameter_maplist['switcher']?.forEach((element) {
+      all_parameter_value.addAll({
+        element.parmName: true,
+      });
+    });
+    filter_parameter_maplist['slider']?.forEach((element) {
+      all_parameter_value.addAll({
+        element.parmName: 0.0,
+      });
+    });
+
+    // all_parameterList.forEach((element) {
+    //   if (element.parameterTypeEnum == ParameterTypeEnum.Slider) {
+    //     all_parameter_value.addAll({
+    //       element.parmName: 0.0,
+    //     });
+    //   } else if (element.parameterTypeEnum == ParameterTypeEnum.Switcher) {
+    //     all_parameter_value.addAll({
+    //       element.parmName: true,
+    //     });
+    //   } else {
+    //     all_parameter_value.addAll({
+    //       element.parmName: '',
+    //     });
+    //   }
+    // });
   }
 
   ///更新参数值

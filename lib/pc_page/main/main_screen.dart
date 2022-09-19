@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/config/config.dart';
+import 'package:kelly_user_project/controller/connection_con.dart';
 
 import 'package:kelly_user_project/controller/menu_controller.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
@@ -31,6 +34,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final menuController = Get.put(MenuController());
   final parameterController = Get.put(ParameterCon());
+  final connectionCon = Get.put(ConnectionCon());
 
   @override
   void initState() {
@@ -224,7 +228,18 @@ class _MainScreenState extends State<MainScreen> {
             'Modify',
             -1,
             indexTap: () {
-              print('Modify');
+              List list = parameterController.all_parameter_value.values
+                  .toList()
+                  .sublist(0, 16);
+              List<int> intList =
+                  List.generate(list.length, (index) => int.parse(list[index]));
+
+              intList.insertAll(0, [
+                hexToInt('f2'),
+                hexToInt('10'),
+              ]);
+              connectionCon.port!
+                  .write(Uint8List.fromList(intList), timeout: 0);
             },
           ),
         ];

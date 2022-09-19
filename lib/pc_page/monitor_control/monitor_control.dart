@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/dash_board.dart';
 import 'package:kelly_user_project/common/get_box.dart';
+import 'package:kelly_user_project/config/event.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -24,6 +26,27 @@ class _MonitorControlState extends State<MonitorControl> {
   RxString gear = ''.obs;
   RxDouble sliderValue = 0.0.obs;
   RxDouble firstDashValue = 0.0.obs;
+  RxDouble secondDashValue = 0.0.obs;
+  RxDouble thirdDashValue = 0.0.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    print('=======');
+    bus.on('control', (arg) {
+      print(arg);
+      Uint8List list = arg;
+      dashValueChange(list.first, firstDashValue);
+      dashValueChange(list[1], secondDashValue);
+      dashValueChange(list.last, thirdDashValue);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    bus.off('control');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +118,14 @@ class _MonitorControlState extends State<MonitorControl> {
             maxnum: 200,
             interval: 20,
             size: showFilter.value ? 198 : 264,
-            endValue: firstDashValue.value,
+            endValue: firstDashValue.value > 200 ? 200 : firstDashValue.value,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '1',
+                  firstDashValue.value > 200
+                      ? '200'
+                      : firstDashValue.value.toStringAsFixed(0),
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -126,12 +151,14 @@ class _MonitorControlState extends State<MonitorControl> {
             size: showFilter.value ? 288 : 385,
             interval: 20,
             bottomPadding: 23,
-            endValue: 110,
+            endValue: secondDashValue.value > 240 ? 240 : secondDashValue.value,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '1',
+                  secondDashValue.value > 240
+                      ? '240'
+                      : secondDashValue.value.toStringAsFixed(0),
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -164,13 +191,15 @@ class _MonitorControlState extends State<MonitorControl> {
             maxnum: 10,
             minnum: 0,
             interval: 1,
-            endValue: 5,
+            endValue: thirdDashValue.value > 10 ? 10 : thirdDashValue.value,
             size: showFilter.value ? 198 : 264,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '1',
+                  thirdDashValue.value > 10
+                      ? '10'
+                      : thirdDashValue.value.toStringAsFixed(0),
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -333,8 +362,6 @@ class _MonitorControlState extends State<MonitorControl> {
       padding: const EdgeInsets.symmetric(horizontal: 45),
       child: InkWell(
         onTap: () {
-          firstValueChange(100);
-
           if (gear.value != str) {
             gear.value = str;
           }
@@ -352,17 +379,17 @@ class _MonitorControlState extends State<MonitorControl> {
     );
   }
 
-  firstValueChange(int newCount) async {
-    int oldValue = firstDashValue.value.toInt();
+  dashValueChange(int newCount, RxDouble dashValue) async {
+    int oldValue = dashValue.value.toInt();
 
     if (newCount > oldValue) {
       for (var i = oldValue; i < newCount; i++) {
-        firstDashValue.value = i.toDouble();
+        dashValue.value = i.toDouble();
         await Future.delayed(const Duration(milliseconds: 1));
       }
     } else if (newCount < oldValue) {
       for (var i = oldValue; i > newCount; i--) {
-        firstDashValue.value = i.toDouble();
+        dashValue.value = i.toDouble();
         await Future.delayed(const Duration(milliseconds: 1));
       }
     }

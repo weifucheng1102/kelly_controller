@@ -81,7 +81,10 @@ class _FirmwareState extends State<Firmware> {
               onTap: () async {
                 if (canClick) {
                   canClick = false;
-                  file = await ParameterCon().readFile();
+                 PlatformFile? selectFile = await ParameterCon().readFile();
+                 if (selectFile!=null) {
+                   file = selectFile;
+                 }
                   canClick = true;
                   setState(() {});
                 }
@@ -107,7 +110,7 @@ class _FirmwareState extends State<Firmware> {
                   onTap: () async {
                     if (file != null) {
                       String contents = await File(file!.path!).readAsString();
-                      print(contents);
+                      print('读取到文件内容：' + contents);
                     }
                   },
                 ),
