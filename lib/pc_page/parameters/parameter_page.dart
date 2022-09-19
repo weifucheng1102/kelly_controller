@@ -121,7 +121,7 @@ class _ParameterPageState extends State<ParameterPage> {
                 width: ratioWidget,
                 height: 66,
                 fieldCon: TextEditingController(
-                    text: parameterCon.all_parameter_value[e.parmName]),
+                    text: parameterCon.all_parameter_value[e.parmName].toString()),
                 onChanged: (res) async {
                   await parameterCon.updateParameterValue(e, res);
                 },

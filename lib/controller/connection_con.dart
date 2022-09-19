@@ -64,13 +64,15 @@ class ConnectionCon extends GetxController {
 
   ///发送通知 去更新
   pushNotice(Uint8List uint8list) {
+    print(uint8list);
+    print(uint8list.first.toRadixString(16));
     ///修改仪表 的测试指令
     if (uint8list.first.toRadixString(16) == 'f1') {
       bus.emit('control', Uint8List.sublistView(uint8list, 2, 5));
     }
 
     ///修改参数的 测试指令 （测试16个数据）
-    if (uint8list.first.toRadixString(16) == 'f3') {
+    if (uint8list.first.toRadixString(16) == 'f2') {
       bus.emit(
           'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 18));
     }
