@@ -21,7 +21,7 @@ class _SerialState extends State<Serial> {
 
   List portList = [];
   String? selectPort;
-  TextEditingController baudRateCon = TextEditingController(text: '14400');
+  TextEditingController baudRateCon = TextEditingController(text: '19200');
   TextEditingController bitsCon = TextEditingController(text: '8');
   TextEditingController stopBitsCon = TextEditingController(text: '1');
   TextEditingController parityCon = TextEditingController(text: '0');
