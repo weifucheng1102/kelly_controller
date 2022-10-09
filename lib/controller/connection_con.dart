@@ -14,7 +14,7 @@ class ConnectionCon extends GetxController {
   List<int> readerData = [];
 
   Timer? timers;
-  int millsecondtime = 500;
+  int millsecondtime = 50;
 
   ///打开串口
   portOpenAction({
@@ -35,10 +35,11 @@ class ConnectionCon extends GetxController {
     port!.open(mode: 3);
     connectPort = portName;
     print('串口是否开启${port!.isOpen}');
-    // port!.read(255);
+    port!.read(255);
     final reader = SerialPortReader(port!, timeout: 50000);
     reader.stream.listen((data) {
-      ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据500ms 以内接受的数据拼成一个完整的数据
+      print(data);
+      ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据50ms 以内接受的数据拼成一个完整的数据
       if (millsecondtime > 0) {
         readerData = readerData + data;
         print('1');
@@ -47,11 +48,11 @@ class ConnectionCon extends GetxController {
         print('2');
       }
 
-      millsecondtime = 500;
+      millsecondtime = 50;
       if (timers != null) {
         timers!.cancel();
       }
-      timers = Timer.periodic(const Duration(microseconds: 10), (timer) {
+      timers = Timer.periodic(const Duration(milliseconds: 10), (timer) {
         millsecondtime = millsecondtime - 10;
         if (millsecondtime <= 0) {
           timers!.cancel();
@@ -65,8 +66,31 @@ class ConnectionCon extends GetxController {
 
   ///发送通知 去更新
   pushNotice(Uint8List uint8list) {
+    print('接收数据');
     print(uint8list);
-    print(uint8list.first.toRadixString(16));
+    String radix16String = uint8list.first.toRadixString(16);
+    print(radix16String);
+
+    ///读取参数信息
+    if(radix16String =='61'){
+ bus.emit(
+           'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
+    }
+  ///写入参数成功
+    if(radix16String =='62'){
+    
+      if (uint8list.join(',')=='98,1,0,99') {
+        print('写入成功');
+        bus.emit('updateParameterSuccess');
+      }else{
+        print('写入失败');
+      }
+       //[98, 1, 0, 99]
+//  bus.emit(
+//            'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
+    }
+
+
 
     ///修改仪表 的测试指令
     if (uint8list.first.toRadixString(16) == 'f1') {
@@ -74,10 +98,10 @@ class ConnectionCon extends GetxController {
     }
 
     ///修改参数的 测试指令 （测试16个数据）
-    if (uint8list.first.toRadixString(16) == 'f2') {
-      bus.emit(
-          'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 18));
-    }
+    // if (uint8list.first.toRadixString(16) == 'f2') {
+    //   bus.emit(
+    //       'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 18));
+    // }
     // Uint8List sublist = Uint8List.sublistView(uint8list, 2, 5);
     // print(readerData);
     // print(uint8list);

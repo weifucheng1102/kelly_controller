@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
+import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/filter_button.dart';
 import 'package:kelly_user_project/config/config.dart';
 import 'package:kelly_user_project/config/event.dart';
+import 'package:kelly_user_project/controller/connection_con.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
 import 'package:kelly_user_project/models/parameter.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -24,17 +26,19 @@ class ParameterPage extends StatefulWidget {
 
 class _ParameterPageState extends State<ParameterPage> {
   final parameterCon = Get.put(ParameterCon());
+  final connectionCon = Get.put(ConnectionCon());
   @override
-  void initState() {
-    super.initState();
-
-    ///读取文件更新数据
+  void initState() {   ///读取文件更新数据
     bus.on('updateParameterWithFile', (arg) {
       setState(() {});
+    });
+    bus.on('updateParameterSuccess', (arg) { 
+      
     });
 
     ///串口指令处理数据
     bus.on('updateParameterWithSerial', (arg) {
+      
       Uint8List list = arg;
       List<String> keyList = parameterCon.all_parameter_value.keys.toList();
       for (var i = 0; i < list.length; i++) {
@@ -42,6 +46,19 @@ class _ParameterPageState extends State<ParameterPage> {
       }
       setState(() {});
     });
+    super.initState();
+    
+  ///发送 获取参数指令
+  
+              connectionCon.port!
+                  .write(Uint8List.fromList([hexToInt('61'),hexToInt('00'),hexToInt('61')]), timeout: 0);
+  
+
+
+
+
+
+ 
   }
 
   @override
@@ -49,6 +66,7 @@ class _ParameterPageState extends State<ParameterPage> {
     super.dispose();
     bus.off('updateParameterWithFile');
     bus.off('updateParameterWithSerial');
+    bus.off('updateParameterSuccess');
   }
 
   @override

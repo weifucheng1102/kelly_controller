@@ -255,14 +255,22 @@ class _MainScreenState extends State<MainScreen> {
             indexTap: () {
               List list = parameterController.all_parameter_value.values
                   .toList()
-                  .sublist(0, 16);
+                  .sublist(0, 2);
               List<int> intList =
-                  List.generate(list.length, (index) => int.parse(list[index]));
+                  List.generate(list.length, (index) => int.parse(list[index].toString()));
 
               intList.insertAll(0, [
-                hexToInt('f3'),
-                hexToInt('10'),
+                hexToInt('62'),
+                hexToInt('02'),
               ]);
+              int sum = 0;
+              
+              intList.forEach((element) { 
+                sum = sum+element;
+              });
+              print(sum);
+              intList.add(sum);
+              ///参数数据写入电机
               connectionCon.port!
                   .write(Uint8List.fromList(intList), timeout: 0);
             },
