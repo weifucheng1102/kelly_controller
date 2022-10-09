@@ -27,7 +27,7 @@ class _SerialMobileState extends State<SerialMobile> {
               width: width,
               height: height,
               title: 'Port',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               value: null,
               items: [
                 MenuItem(label: '111', value: 1),
@@ -41,7 +41,7 @@ class _SerialMobileState extends State<SerialMobile> {
               width: width,
               height: height,
               title: 'Set1',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               value: 2,
               items: [
                 MenuItem(label: '111', value: 1),
@@ -55,7 +55,7 @@ class _SerialMobileState extends State<SerialMobile> {
               width: width,
               height: height,
               title: 'Set2',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               value: 2,
               items: [
                 MenuItem(label: '111', value: 1),

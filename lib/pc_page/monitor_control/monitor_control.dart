@@ -29,6 +29,8 @@ class _MonitorControlState extends State<MonitorControl> {
   RxDouble secondDashValue = 0.0.obs;
   RxDouble thirdDashValue = 0.0.obs;
 
+  Timer? timer;
+
   @override
   void initState() {
     super.initState();
@@ -40,12 +42,18 @@ class _MonitorControlState extends State<MonitorControl> {
       dashValueChange(list[1], secondDashValue);
       dashValueChange(list.last, thirdDashValue);
     });
+
+    ///发送指令 每100ms 发送一次
+    timer = Timer.periodic(Duration(milliseconds: 100), (timer) {});
   }
 
   @override
   void dispose() {
     super.dispose();
     bus.off('control');
+    if (timer != null) {
+      timer!.cancel();
+    }
   }
 
   @override

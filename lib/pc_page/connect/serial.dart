@@ -17,7 +17,7 @@ class Serial extends StatefulWidget {
 }
 
 class _SerialState extends State<Serial> {
-ConnectionCon connectionCon =Get.put(ConnectionCon());
+  ConnectionCon connectionCon = Get.put(ConnectionCon());
 
   List portList = [];
   String? selectPort;
@@ -29,6 +29,9 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
   void initState() {
     super.initState();
     portList = SerialPort.availablePorts;
+
+    ///判断port 是否开启
+    //
   }
 
   @override
@@ -42,7 +45,7 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
               width: 682,
               height: 66,
               title: 'Port',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               value: null,
               items: portList.map((e) => MenuItem(label: e, value: e)).toList(),
               valueChanged: (res) {
@@ -52,7 +55,7 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
             SizedBox(height: 43),
             CustomInput(
               title: 'baudRate',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: baudRateCon,
               width: 682,
@@ -61,7 +64,7 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
             SizedBox(height: 43),
             CustomInput(
               title: 'parity',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: parityCon,
               width: 682,
@@ -70,7 +73,7 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
             SizedBox(height: 43),
             CustomInput(
               title: 'stopBits',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: stopBitsCon,
               width: 682,
@@ -79,7 +82,7 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
             SizedBox(height: 43),
             CustomInput(
               title: 'bits',
-              hint: 'Please ebter the content here',
+              hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: bitsCon,
               width: 682,
@@ -94,11 +97,11 @@ ConnectionCon connectionCon =Get.put(ConnectionCon());
                   width: 165,
                   height: 64,
                   onTap: () {
-                  print(connectionCon.port);
-                      // int a = connectionCon.port!.write(
-                      //   Uint8List.fromList(
-                      //       "hello1  hello2  hello3 hello4  hello5 ".codeUnits),
-                      //   timeout: 0);
+                    print(connectionCon.port);
+                    // int a = connectionCon.port!.write(
+                    //   Uint8List.fromList(
+                    //       "hello1  hello2  hello3 hello4  hello5 ".codeUnits),
+                    //   timeout: 0);
                   },
                 ),
                 const SizedBox(width: 30),

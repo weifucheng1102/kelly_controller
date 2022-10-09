@@ -4,19 +4,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:kelly_user_project/common/filter_view.dart';
+import 'package:kelly_user_project/config/event.dart';
+import 'package:kelly_user_project/controller/parameter_con.dart';
 
 import 'custom_button.dart';
 import 'custom_dialog.dart';
 import 'get_box.dart';
 
 class FilterButton extends StatefulWidget {
-  const FilterButton({Key? key}) : super(key: key);
+  final VoidCallback voidCallback;
+  const FilterButton({
+    Key? key,
+    required this.voidCallback,
+  }) : super(key: key);
 
   @override
   State<FilterButton> createState() => _FilterButtonState();
 }
 
 class _FilterButtonState extends State<FilterButton> {
+  final parameterCon = Get.put(ParameterCon());
+
   RxBool showFilter = false.obs;
 
   @override
@@ -96,7 +104,13 @@ class _FilterButtonState extends State<FilterButton> {
                 text: 'Verfy',
                 width: 165,
                 height: 64,
-                onTap: () {},
+                onTap: () async {
+                  await parameterCon.getDefaultProPertySelectList();
+                  await parameterCon.getParameterWithProperty();
+
+                  Navigator.pop(context);
+                  widget.voidCallback();
+                },
               ),
               const SizedBox(width: 30),
               CustomButton(
@@ -106,7 +120,11 @@ class _FilterButtonState extends State<FilterButton> {
                 bgColor: Get.theme.primaryColor,
                 borderWidth: 0,
                 borderColor: Colors.transparent,
-                onTap: () {},
+                onTap: () async {
+                  await parameterCon.getParameterWithProperty();
+                  Navigator.pop(context);
+                  widget.voidCallback();
+                },
               ),
             ],
           ),

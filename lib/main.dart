@@ -22,15 +22,14 @@ void main() async {
     // 必须加上这一行。
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(1920, 1080),
-      center: true,
-      backgroundColor: Colors.transparent,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.normal,
-      minimumSize: Size(1920, 1080)
-    );
+        size: Size(1920, 1080),
+        center: true,
+        backgroundColor: Colors.transparent,
+        skipTaskbar: false,
+        titleBarStyle: TitleBarStyle.normal,
+        minimumSize: Size(1920, 1080));
 
-     windowManager.waitUntilReadyToShow(windowOptions, () async {
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
       await windowManager.focus();
     });
@@ -77,7 +76,7 @@ class _MyAppState extends State<MyApp> {
           navigatorKey: NavKey.navKey,
           theme: Get.theme,
           themeMode: ThemeMode.light,
-          home: const IndexMobile(),
+          home: IndexMobile(),
         ),
       );
     }

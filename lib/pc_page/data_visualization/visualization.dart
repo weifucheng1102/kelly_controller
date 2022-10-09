@@ -44,7 +44,11 @@ class _VisualizationState extends State<Visualization> {
           Expanded(
             child: LineChartWidget(),
           ),
-          FilterButton(),
+          FilterButton(
+            voidCallback: () {
+              setState(() {});
+            },
+          ),
         ],
       ),
     );

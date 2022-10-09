@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
@@ -34,7 +35,11 @@ class ParameterCon extends GetxController {
     print(data);
     property_list = data.map((e) => MotProperty.fromJson(e)).toList();
     property_select_more = data.map((e) => false).toList();
-    property_isSelect_list = data.map((e) => -1).toList();
+    await getDefaultProPertySelectList();
+  }
+
+  Future getDefaultProPertySelectList() async {
+    property_isSelect_list = property_list.map((e) => -1).toList();
   }
 
   ///获取全部参数
@@ -88,6 +93,39 @@ class ParameterCon extends GetxController {
     // });
   }
 
+  ///根据category 筛选参数
+  ///根据 category  筛选 参数
+  Future getParameterWithProperty() async {
+    List<Parameter> temp_categpry_parm = List.generate(
+        all_parameterList.length, (index) => all_parameterList[index]);
+
+    for (var i = 0; i < property_isSelect_list.length; i++) {
+      int item = property_isSelect_list[i];
+      if (item != -1) {
+        String mapKey = property_list[i].motMetaKey;
+        String mapValue = property_list[i].motMetaValues[item];
+        temp_categpry_parm.removeWhere(
+            (element) => element.motProperties[mapKey] != mapValue);
+      }
+    }
+
+    // if (select_filter_map.keys.isEmpty) {
+    //   temp_categpry_parm = all_parameterList;
+    // } else {
+    //   select_filter_map.keys.forEach((propertyKey) {
+    //     all_parameterList.forEach((element) {
+    //       if (element.motProperties.keys.contains(propertyKey) &&
+    //           element.motProperties[propertyKey] ==
+    //               select_filter_map[propertyKey]) {
+    //         temp_categpry_parm.add(element);
+    //       }
+    //     });
+    //   });
+    // }
+
+    await getParameterWithType(temp_categpry_parm);
+  }
+
   ///更新参数值
   Future updateParameterValue(Parameter parameter, value) async {
     all_parameter_value[parameter.parmName] = value;
@@ -119,6 +157,8 @@ class ParameterCon extends GetxController {
         default:
       }
     });
+
+    print(filter_parameter_maplist);
   }
 
   ///读文件

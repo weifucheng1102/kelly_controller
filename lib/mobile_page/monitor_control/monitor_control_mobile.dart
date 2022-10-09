@@ -44,105 +44,29 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
   }
 
   Widget dashboardWidget() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            DashBoard(
-              minnum: 0,
-              maxnum: 200,
-              interval: 20,
-              size: 1.sw / 2,
-              endValue: 100,
-              centerWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                  Text(
-                    'Km/A',
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            DashBoard(
-              minnum: 0,
-              maxnum: 10,
-              interval: 1,
-              size: 1.sw / 2,
-              endValue: 5,
-              centerWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                  Text(
-                    'x 1000rpm',
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        DashBoard(
-          minnum: 0,
-          maxnum: 240,
-          interval: 20,
-          size: 1.sw / 3 * 2,
-          endValue: 100,
-          bottomPadding: 20,
-          centerWidget: Column(
+    if (isLandScape()) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DashBoard1(3.5),
+          DashBoard2(3),
+          DashBoard3(3.5),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '1',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Get.theme.highlightColor,
-                ),
-              ),
-              Text(
-                'Km/h',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Get.theme.highlightColor,
-                ),
-              ),
+              DashBoard1(2),
+              DashBoard3(2),
             ],
           ),
-          bottomWidget: Text(
-            gear.value,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Get.theme.focusColor,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
-    );
+          DashBoard2(2),
+        ],
+      );
+    }
   }
 
   Widget infoWidget() {
@@ -161,6 +85,106 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
           rowItem('Rotating speed', '80', 'Km/h'),
           rowItem('Voltage', '200', 'V'),
           rowItem('Current', '10', ' A'),
+        ],
+      ),
+    );
+  }
+
+  Widget DashBoard1(double sizeratio) {
+    return DashBoard(
+      minnum: 0,
+      maxnum: 200,
+      interval: 20,
+      size: (1.sw - getMobileLeftMargin()) / sizeratio,
+      endValue: 100,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '1',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            'Km/A',
+            style: TextStyle(
+              fontSize: 8,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget DashBoard2(double sizeratio) {
+    return DashBoard(
+      minnum: 0,
+      maxnum: 240,
+      interval: 20,
+      size: (1.sw - getMobileLeftMargin()) / sizeratio,
+      endValue: 100,
+      bottomPadding: 20,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '1',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            'Km/h',
+            style: TextStyle(
+              fontSize: 10,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+        ],
+      ),
+      bottomWidget: Text(
+        gear.value,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Get.theme.focusColor,
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget DashBoard3(double sizeratio) {
+    return DashBoard(
+      minnum: 0,
+      maxnum: 10,
+      interval: 1,
+      size: (1.sw - getMobileLeftMargin()) / sizeratio,
+      endValue: 5,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '1',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            'x 1000rpm',
+            style: TextStyle(
+              fontSize: 8,
+              color: Get.theme.highlightColor,
+            ),
+          ),
         ],
       ),
     );

@@ -50,37 +50,58 @@ class _IndexMobileState extends State<IndexMobile> {
 
   ///横屏
   landscapeWidget() {
-    return Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: ListView.separated(
-            itemBuilder: (context, index) => const SizedBox(),
-            separatorBuilder: (context, index) => InkWell(
-              onTap: () {
-                menuCon.selectIndex.value = index;
-              },
-              child: Obx(
-                () => Text(
-                  menuCon.title[index],
-                  style: TextStyle(
-                      color: menuCon.selectIndex.value == index
-                          ? Colors.red
-                          : Colors.black),
+    return Obx(
+      () => Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Get.theme.dialogBackgroundColor,
+              child: ListView.separated(
+                padding: EdgeInsets.only(left: 20, top: 40, bottom: 20),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 20,
                 ),
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    menuCon.selectIndex.value = index;
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        menuCon.selectIndex.value == index
+                            ? 'assets/images/theme${box.read("theme")}/${menuCon.image[index]}'
+                            : 'assets/images/theme${box.read("theme")}/${menuCon.unImage[index]}',
+                        width: 15,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        menuCon.title[index],
+                        style: TextStyle(
+                          color: menuCon.selectIndex.value == index
+                              ? Get.theme.highlightColor
+                              : Get.theme.hintColor,
+                          fontSize: 13,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                itemCount: menuCon.title.length,
               ),
             ),
-            itemCount: menuCon.title.length,
           ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Container(
-            color: Colors.black,
-            child: ParameterPageMobile(),
+          Expanded(
+            flex: 3,
+            child: Container(
+              color: Colors.black,
+              child: currentPage(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

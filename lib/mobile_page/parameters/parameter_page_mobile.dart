@@ -121,11 +121,18 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
           .map((e) => SizedBox(
                 width: (1.sw - leftMenuMargin - 40) / 2,
                 child: CustomInput(
-                    title: e.parmName,
-                    hint: 'hint',
-                    readOnly: false,
-                    width: (1.sw - leftMenuMargin - 40) / 2,
-                    height: 40),
+                  title: e.parmName,
+                  hint: 'hint',
+                  readOnly: false,
+                  width: (1.sw - leftMenuMargin - 40) / 2,
+                  height: 40,
+                  fieldCon: TextEditingController(
+                      text: parameterCon.all_parameter_value[e.parmName]
+                          .toString()),
+                  onChanged: (res) async {
+                    await parameterCon.updateParameterValue(e, res);
+                  },
+                ),
               ))
           .toList(),
     );
@@ -174,7 +181,7 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
                           !parameterCon.all_parameter_value[e.parmName];
                       switchbuild(() {});
                     },
-                  ) 
+                  )
                 ],
               ),
             )
@@ -221,7 +228,7 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
                             thumbIcon: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(32),
-                                color: Get.theme.focusColor, 
+                                color: Get.theme.focusColor,
                               ),
                               padding: EdgeInsets.all(4),
                               child: Container(
