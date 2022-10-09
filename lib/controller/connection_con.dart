@@ -38,14 +38,14 @@ class ConnectionCon extends GetxController {
     port!.read(255);
     final reader = SerialPortReader(port!, timeout: 50000);
     reader.stream.listen((data) {
-      print(data);
+    
       ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据50ms 以内接受的数据拼成一个完整的数据
       if (millsecondtime > 0) {
         readerData = readerData + data;
-        print('1');
+      
       } else {
         readerData = data;
-        print('2');
+      
       }
 
       millsecondtime = 50;
@@ -89,6 +89,17 @@ class ConnectionCon extends GetxController {
 //  bus.emit(
 //            'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
     }
+
+  ///监控页面电机数据
+    if(radix16String =='63'){
+    
+   bus.emit('updateControl',Uint8List.sublistView(uint8list, 2, 18));
+ 
+    }
+
+
+
+
 
 
 

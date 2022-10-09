@@ -4,11 +4,13 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/dash_board.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/config/event.dart';
+import 'package:kelly_user_project/controller/connection_con.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -21,9 +23,9 @@ class MonitorControl extends StatefulWidget {
 
 class _MonitorControlState extends State<MonitorControl> {
   RxBool showFilter = false.obs;
-
-  ///档位
-  RxString gear = ''.obs;
+  final connectionCon = Get.put(ConnectionCon());
+  ///档位(前进 后退)
+  RxString gear = 'N'.obs;
   RxDouble sliderValue = 0.0.obs;
   RxDouble firstDashValue = 0.0.obs;
   RxDouble secondDashValue = 0.0.obs;
@@ -33,6 +35,14 @@ class _MonitorControlState extends State<MonitorControl> {
 
   @override
   void initState() {
+    bus.on('updateControl', (arg) {
+      print(arg);
+      Uint8List list = arg;
+      dashValueChange(list.first, secondDashValue);
+      ///第5位 前进开关   第6位 后退开关
+      getGearData(list[4],list[5]);
+
+     });
     super.initState();
     print('=======');
     bus.on('control', (arg) {
@@ -43,8 +53,15 @@ class _MonitorControlState extends State<MonitorControl> {
       dashValueChange(list.last, thirdDashValue);
     });
 
+   
+  
     ///发送指令 每100ms 发送一次
-    timer = Timer.periodic(Duration(milliseconds: 100), (timer) {});
+    timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
+      print('2');
+       ///发送指令
+    connectionCon.port!
+                  .write(Uint8List.fromList([hexToInt('63'),hexToInt('00'),hexToInt('63')]), timeout: 0);
+    });
   }
 
   @override
@@ -389,18 +406,31 @@ class _MonitorControlState extends State<MonitorControl> {
   }
 
   dashValueChange(int newCount, RxDouble dashValue) async {
+  
     int oldValue = dashValue.value.toInt();
-
     if (newCount > oldValue) {
-      for (var i = oldValue; i < newCount; i++) {
+      for (var i = oldValue; i < newCount+1; i++) {
         dashValue.value = i.toDouble();
         await Future.delayed(const Duration(milliseconds: 1));
       }
     } else if (newCount < oldValue) {
-      for (var i = oldValue; i > newCount; i--) {
+      for (var i = oldValue; i > newCount-1; i--) {
         dashValue.value = i.toDouble();
         await Future.delayed(const Duration(milliseconds: 1));
       }
     }
+  }
+
+
+  getGearData(int D,int R){
+    print('d'+D.toString()+'r'+R.toString());
+    if(D==0){
+      gear.value = 'D';
+    }else if (R==0) {
+      gear.value = 'R';
+    }else{
+gear.value = 'N';
+    }
+    
   }
 }

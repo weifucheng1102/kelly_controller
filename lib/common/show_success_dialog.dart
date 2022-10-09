@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kelly_user_project/common/custom_button.dart';
+import 'package:kelly_user_project/common/get_box.dart';
 
 class ShowSuccessDialog extends StatefulWidget {
   const ShowSuccessDialog({Key? key}) : super(key: key);
@@ -14,11 +16,10 @@ class _ShowSuccessDialogState extends State<ShowSuccessDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 562.w,
-      height: 600.w,
+     padding: EdgeInsets.all(50),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.w),
-        color: const Color(0xFF2E3A46),
+        borderRadius: BorderRadius.circular(20),
+        color:  Get.theme.dialogBackgroundColor,
       ),
       child: dialogView(),
     );
@@ -26,48 +27,39 @@ class _ShowSuccessDialogState extends State<ShowSuccessDialog> {
 
   Widget dialogView() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Column(
           children: [
             Image.asset(
-              'images/sucess.png',
-              width: 150.w,
-              fit: BoxFit.fill,
+              'assets/images/theme${box.read("theme")}/sucess.png',
+            
             ),
             SizedBox(
-              height: 28.w,
+              height: 28,
             ),
             Text(
               'modify successfully',
               style: TextStyle(
-                fontSize: 30.sp,
-                color: Colors.white,
+                fontSize: 30,
+                color: Get.theme.highlightColor,
               ),
             ),
           ],
         ),
-        GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Container(
-            height: 88.w,
-            width: 340.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.w),
-              gradient: LinearGradient(
-                colors: [
-                  Get.theme.appBarTheme.backgroundColor!,
-                  Get.theme.appBarTheme.foregroundColor!,
-                ],
+        SizedBox(height: 30,),
+          CustomButton(
+                text: 'Modify',
+                width: 165,
+                height: 64,
+                bgColor: Get.theme.primaryColor,
+                borderWidth: 0,
+                borderColor: Colors.transparent,
+                onTap: () async {
+                 
+                  Navigator.pop(context);
+                
+                },
               ),
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              'Modify',
-              style: Get.theme.textTheme.bodyText1,
-            ),
-          ),
-        ),
       ],
     );
   }

@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:kelly_user_project/common/common.dart';
+import 'package:kelly_user_project/common/custom_dialog.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/filter_button.dart';
+import 'package:kelly_user_project/common/show_success_dialog.dart';
 import 'package:kelly_user_project/config/config.dart';
 import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/controller/connection_con.dart';
@@ -33,7 +35,8 @@ class _ParameterPageState extends State<ParameterPage> {
       setState(() {});
     });
     bus.on('updateParameterSuccess', (arg) { 
-      
+      print('2222');
+      CustomDialog.showCustomDialog(context, child: ShowSuccessDialog());
     });
 
     ///串口指令处理数据
