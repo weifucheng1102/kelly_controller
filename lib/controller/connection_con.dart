@@ -76,7 +76,19 @@ class ConnectionCon extends GetxController {
  bus.emit(
            'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
     }
-
+  ///写入参数成功
+    if(radix16String =='62'){
+    
+      if (uint8list.join(',')=='98,1,0,99') {
+        print('写入成功');
+        bus.emit('updateParameterSuccess');
+      }else{
+        print('写入失败');
+      }
+       //[98, 1, 0, 99]
+//  bus.emit(
+//            'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
+    }
 
 
 

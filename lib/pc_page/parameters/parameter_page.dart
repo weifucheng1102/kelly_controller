@@ -32,6 +32,9 @@ class _ParameterPageState extends State<ParameterPage> {
     bus.on('updateParameterWithFile', (arg) {
       setState(() {});
     });
+    bus.on('updateParameterSuccess', (arg) { 
+      
+    });
 
     ///串口指令处理数据
     bus.on('updateParameterWithSerial', (arg) {
@@ -46,22 +49,10 @@ class _ParameterPageState extends State<ParameterPage> {
     super.initState();
     
   ///发送 获取参数指令
-        //  List list = parameterController.all_parameter_value.values
-        //           .toList()
-        //           .sublist(0, 16);
-        //       List<int> intList =
-        //           List.generate(list.length, (index) => int.parse(list[index]));
-
-        //       intList.insertAll(0, [
-        //         hexToInt('f3'),
-        //         hexToInt('10'),
-        //       ]);
+  
               connectionCon.port!
                   .write(Uint8List.fromList([hexToInt('61'),hexToInt('00'),hexToInt('61')]), timeout: 0);
-        Uint8List list =connectionCon.port!.read(255);
-       print('-------');
-       print(list);
-
+  
 
 
 
@@ -75,6 +66,7 @@ class _ParameterPageState extends State<ParameterPage> {
     super.dispose();
     bus.off('updateParameterWithFile');
     bus.off('updateParameterWithSerial');
+    bus.off('updateParameterSuccess');
   }
 
   @override
