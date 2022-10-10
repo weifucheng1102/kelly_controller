@@ -30,18 +30,18 @@ class _ParameterPageState extends State<ParameterPage> {
   final parameterCon = Get.put(ParameterCon());
   final connectionCon = Get.put(ConnectionCon());
   @override
-  void initState() {   ///读取文件更新数据
+  void initState() {
+    ///读取文件更新数据
     bus.on('updateParameterWithFile', (arg) {
       setState(() {});
     });
-    bus.on('updateParameterSuccess', (arg) { 
+    bus.on('updateParameterSuccess', (arg) {
       print('2222');
       CustomDialog.showCustomDialog(context, child: ShowSuccessDialog());
     });
 
     ///串口指令处理数据
     bus.on('updateParameterWithSerial', (arg) {
-      
       Uint8List list = arg;
       List<String> keyList = parameterCon.all_parameter_value.keys.toList();
       for (var i = 0; i < list.length; i++) {
@@ -50,18 +50,13 @@ class _ParameterPageState extends State<ParameterPage> {
       setState(() {});
     });
     super.initState();
-    
-  ///发送 获取参数指令
-  
-              connectionCon.port!
-                  .write(Uint8List.fromList([hexToInt('61'),hexToInt('00'),hexToInt('61')]), timeout: 0);
-  
 
-
-
-
-
- 
+    ///发送 获取参数指令
+    if (connectionCon.port != null) {
+      connectionCon.port!.write(
+          Uint8List.fromList([hexToInt('61'), hexToInt('00'), hexToInt('61')]),
+          timeout: 0);
+    }
   }
 
   @override

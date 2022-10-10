@@ -6,7 +6,9 @@ import 'package:kelly_user_project/common/app_bar_mobile.dart';
 import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/top_tabbar_item_mobile.dart';
 import 'package:kelly_user_project/controller/menu_controller.dart';
+import 'package:kelly_user_project/mobile_page/connect/bluetooth_mobile.dart';
 import 'package:kelly_user_project/mobile_page/connect/serial_mobile.dart';
+import 'package:kelly_user_project/pc_page/connect/bluetooth.dart';
 
 class ConnectMobile extends StatefulWidget {
   const ConnectMobile({Key? key}) : super(key: key);
@@ -35,7 +37,7 @@ class _ConnectMobileState extends State<ConnectMobile> {
               tabbarWidget(),
               Expanded(
                 child: menuController.bottomMenuIndex.value == 0
-                    ? SerialMobile()
+                    ? BluetoothMobile()
                     : Container(),
               )
             ],
@@ -48,17 +50,17 @@ class _ConnectMobileState extends State<ConnectMobile> {
   Widget tabbarWidget() {
     return Row(
       children: const [
+        // Expanded(
+        //   child: TopTabbarItemMobile('Serial', 0),
+        // ),
         Expanded(
-          child: TopTabbarItemMobile('Serial', 0),
+          child: TopTabbarItemMobile('Bluetooth', 0),
         ),
         Expanded(
-          child: TopTabbarItemMobile('Bluetooth', 1),
+          child: TopTabbarItemMobile('X', 1),
         ),
         Expanded(
-          child: TopTabbarItemMobile('X', 2),
-        ),
-        Expanded(
-          child: TopTabbarItemMobile('Y', 3),
+          child: TopTabbarItemMobile('Y', 2),
         ),
       ],
     );

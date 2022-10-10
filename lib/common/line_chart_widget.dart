@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LineChartWidget extends StatelessWidget {
-  const LineChartWidget({Key? key}) : super(key: key);
+  final List<Color> colorList;
+  final List<List<FlSpot>> lineChartData;
+  const LineChartWidget({
+    Key? key,
+    required this.colorList,
+    required this.lineChartData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +139,25 @@ class LineChartWidget extends StatelessWidget {
       ),
       swapAnimationDuration: Duration(milliseconds: 150), // Optional
       swapAnimationCurve: Curves.linear, // Optional
+    );
+  }
+
+  LineChartBarData lineChartBarData({
+    required List<FlSpot> spots,
+    required Color color,
+  }) {
+    return LineChartBarData(
+      spots: spots,
+      color: color,
+      dotData: FlDotData(
+        show: false,
+      ),
+
+      //? 是否显示线下区域
+      belowBarData: BarAreaData(show: true, color: color.withAlpha(50)),
+
+      ///是否是曲线
+      isCurved: true,
     );
   }
 }

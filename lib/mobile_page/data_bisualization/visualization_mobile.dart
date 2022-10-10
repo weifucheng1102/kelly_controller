@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,6 +20,8 @@ class VisualizationMobile extends StatefulWidget {
 }
 
 class _VisualizationMobileState extends State<VisualizationMobile> {
+  List<Color> colorList = [];
+  List<List<FlSpot>> linechartData = [];
   final menuController = Get.put(MenuController());
 
   @override
@@ -49,14 +52,20 @@ class _VisualizationMobileState extends State<VisualizationMobile> {
                             ? Expanded(
                                 child: Container(
                                   padding: EdgeInsets.all(20),
-                                  child: LineChartWidget(),
+                                  child: LineChartWidget(
+                                    colorList: colorList,
+                                    lineChartData: linechartData,
+                                  ),
                                 ),
                               )
                             : Container(
                                 height: 1.sw,
                                 width: 1.sw,
                                 padding: EdgeInsets.all(20),
-                                child: LineChartWidget(),
+                                child: LineChartWidget(
+                                  colorList: colorList,
+                                  lineChartData: linechartData,
+                                ),
                               )
                         : Container(),
                   ],

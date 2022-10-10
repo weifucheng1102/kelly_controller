@@ -38,14 +38,11 @@ class ConnectionCon extends GetxController {
     port!.read(255);
     final reader = SerialPortReader(port!, timeout: 50000);
     reader.stream.listen((data) {
-    
       ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据50ms 以内接受的数据拼成一个完整的数据
       if (millsecondtime > 0) {
         readerData = readerData + data;
-      
       } else {
         readerData = data;
-      
       }
 
       millsecondtime = 50;
@@ -72,36 +69,25 @@ class ConnectionCon extends GetxController {
     print(radix16String);
 
     ///读取参数信息
-    if(radix16String =='61'){
- bus.emit(
-           'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
+    if (radix16String == '61') {
+      bus.emit(
+          'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
     }
-  ///写入参数成功
-    if(radix16String =='62'){
-    
-      if (uint8list.join(',')=='98,1,0,99') {
+
+    ///写入参数成功
+    if (radix16String == '62') {
+      if (uint8list.join(',') == '98,1,0,99') {
         print('写入成功');
         bus.emit('updateParameterSuccess');
-      }else{
+      } else {
         print('写入失败');
       }
-       //[98, 1, 0, 99]
-//  bus.emit(
-//            'updateParameterWithSerial', Uint8List.sublistView(uint8list, 2, 4));
     }
 
-  ///监控页面电机数据
-    if(radix16String =='63'){
-    
-   bus.emit('updateControl',Uint8List.sublistView(uint8list, 2, 18));
- 
+    ///监控页面电机数据
+    if (radix16String == '63') {
+      bus.emit('updateControl', Uint8List.sublistView(uint8list, 2, 18));
     }
-
-
-
-
-
-
 
     ///修改仪表 的测试指令
     if (uint8list.first.toRadixString(16) == 'f1') {

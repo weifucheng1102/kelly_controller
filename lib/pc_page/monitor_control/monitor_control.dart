@@ -24,6 +24,7 @@ class MonitorControl extends StatefulWidget {
 class _MonitorControlState extends State<MonitorControl> {
   RxBool showFilter = false.obs;
   final connectionCon = Get.put(ConnectionCon());
+
   ///档位(前进 后退)
   RxString gear = 'N'.obs;
   RxDouble sliderValue = 0.0.obs;
@@ -39,10 +40,10 @@ class _MonitorControlState extends State<MonitorControl> {
       print(arg);
       Uint8List list = arg;
       dashValueChange(list.first, secondDashValue);
-      ///第5位 前进开关   第6位 后退开关
-      getGearData(list[4],list[5]);
 
-     });
+      ///第5位 前进开关   第6位 后退开关
+      getGearData(list[4], list[5]);
+    });
     super.initState();
     print('=======');
     bus.on('control', (arg) {
@@ -53,14 +54,15 @@ class _MonitorControlState extends State<MonitorControl> {
       dashValueChange(list.last, thirdDashValue);
     });
 
-   
-  
     ///发送指令 每100ms 发送一次
     timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
-      print('2');
-       ///发送指令
-    connectionCon.port!
-                  .write(Uint8List.fromList([hexToInt('63'),hexToInt('00'),hexToInt('63')]), timeout: 0);
+      if (connectionCon.port != null) {
+        ///发送指令
+        connectionCon.port!.write(
+            Uint8List.fromList(
+                [hexToInt('63'), hexToInt('00'), hexToInt('63')]),
+            timeout: 0);
+      }
     });
   }
 
@@ -68,6 +70,7 @@ class _MonitorControlState extends State<MonitorControl> {
   void dispose() {
     super.dispose();
     bus.off('control');
+    bus.off('updateControl');
     if (timer != null) {
       timer!.cancel();
     }
@@ -406,31 +409,28 @@ class _MonitorControlState extends State<MonitorControl> {
   }
 
   dashValueChange(int newCount, RxDouble dashValue) async {
-  
     int oldValue = dashValue.value.toInt();
     if (newCount > oldValue) {
-      for (var i = oldValue; i < newCount+1; i++) {
+      for (var i = oldValue; i < newCount + 1; i++) {
         dashValue.value = i.toDouble();
         await Future.delayed(const Duration(milliseconds: 1));
       }
     } else if (newCount < oldValue) {
-      for (var i = oldValue; i > newCount-1; i--) {
+      for (var i = oldValue; i > newCount - 1; i--) {
         dashValue.value = i.toDouble();
         await Future.delayed(const Duration(milliseconds: 1));
       }
     }
   }
 
-
-  getGearData(int D,int R){
-    print('d'+D.toString()+'r'+R.toString());
-    if(D==0){
+  getGearData(int D, int R) {
+    print('d' + D.toString() + 'r' + R.toString());
+    if (D == 0) {
       gear.value = 'D';
-    }else if (R==0) {
+    } else if (R == 0) {
       gear.value = 'R';
-    }else{
-gear.value = 'N';
+    } else {
+      gear.value = 'N';
     }
-    
   }
 }
