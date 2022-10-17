@@ -38,13 +38,13 @@ class _CustomInputState extends State<CustomInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:
-              EdgeInsets.only(left: GetPlatform.isDesktop ? 21 : 0, bottom: 9),
+          padding: EdgeInsets.only(
+              left: GetPlatform.isDesktop ? 21.w : 0, bottom: 9),
           child: Text(
             widget.title,
             style: TextStyle(
               color: Get.theme.hintColor,
-              fontSize: GetPlatform.isDesktop ? 20 : 16,
+              fontSize: GetPlatform.isDesktop ? 24.sp : 16,
             ),
           ),
         ),
@@ -58,10 +58,11 @@ class _CustomInputState extends State<CustomInput> {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: widget.hint,
+              isCollapsed: true,
             ),
             style: TextStyle(
               color: widget.textColor ?? Get.theme.highlightColor,
-              fontSize: GetPlatform.isDesktop ? 20 : 16,
+              fontSize: GetPlatform.isDesktop ? 24.sp : 16,
             ),
             onChanged: widget.onChanged,
             // validator: (res) {

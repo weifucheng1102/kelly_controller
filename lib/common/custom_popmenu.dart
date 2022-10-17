@@ -47,13 +47,13 @@ class _CustomPopMenuState extends State<CustomPopMenu> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:
-              EdgeInsets.only(left: GetPlatform.isDesktop ? 21 : 0, bottom: 9),
+          padding: EdgeInsets.only(
+              left: GetPlatform.isDesktop ? 21.w : 0, bottom: 9),
           child: Text(
             widget.title,
             style: TextStyle(
               color: Get.theme.hintColor,
-              fontSize: GetPlatform.isDesktop ? 20 : 16,
+              fontSize: GetPlatform.isDesktop ? 24.sp : 16,
             ),
           ),
         ),
@@ -61,7 +61,7 @@ class _CustomPopMenuState extends State<CustomPopMenu> {
           width: widget.width, // 682,
           height: widget.height, // 66,
           child: Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding: EdgeInsets.only(right: 10.w),
               child: DropdownButtonHideUnderline(
                 child: Theme(
                   data: ThemeData(
@@ -72,7 +72,7 @@ class _CustomPopMenuState extends State<CustomPopMenu> {
                     dropdownColor: Get.theme.dialogBackgroundColor,
                     icon: Image.asset(
                       'assets/images/theme${box.read("theme")}/point_down.png',
-                      width: 19,
+                      width: 19.w,
                     ),
                     isExpanded: true,
                     items: widget.items
@@ -83,7 +83,7 @@ class _CustomPopMenuState extends State<CustomPopMenu> {
                               item.label,
                               style: TextStyle(
                                 color: Get.theme.highlightColor,
-                                fontSize: GetPlatform.isDesktop ? 20 : 16,
+                                fontSize: GetPlatform.isDesktop ? 24.sp : 16,
                               ),
                             ),
                           ),
@@ -94,7 +94,7 @@ class _CustomPopMenuState extends State<CustomPopMenu> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: GetPlatform.isDesktop ? 20 : 16,
+                        fontSize: GetPlatform.isDesktop ? 24.sp : 16,
                         color: widget.hintColor ?? Get.theme.hintColor,
                       ),
                     ),

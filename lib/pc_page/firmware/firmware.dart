@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/common/back_widget.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
@@ -29,7 +30,7 @@ class _FirmwareState extends State<Firmware> {
         Column(
           children: [
             SizedBox(
-              height: 70,
+              height: 70.h,
             ),
             Text(
               'Version Information',
@@ -39,71 +40,71 @@ class _FirmwareState extends State<Firmware> {
               ),
             ),
             SizedBox(
-              height: 38,
+              height: 38.h,
             ),
             CustomInput(
               title: 'name',
               hint: 'content here',
               readOnly: false,
-              width: 462,
-              height: 66,
+              width: 462.w,
+              height: 66.h,
               onTap: () async {},
             ),
             SizedBox(
-              height: 38,
+              height: 38.h,
             ),
             CustomInput(
               title: 'Production Date',
               hint: 'content here',
               readOnly: false,
-              width: 462,
-              height: 66,
+              width: 462.w,
+              height: 66.h,
               onTap: () async {},
             ),
             SizedBox(
-              height: 38,
+              height: 38.h,
             ),
             CustomInput(
               title: 'serial number',
               hint: 'content here',
               readOnly: false,
-              width: 462,
-              height: 66,
+              width: 462.w,
+              height: 66.h,
               onTap: () async {},
             ),
-            SizedBox(height: 38),
+            SizedBox(height: 38.h),
             CustomSelectButton(
-              width: 462,
-              height: 66,
+              width: 462.w,
+              height: 66.h,
               title: 'Select File',
               text: file == null ? 'Please enter the content here' : file!.name,
               textColor: file == null ? null : Get.theme.highlightColor,
               onTap: () async {
                 if (canClick) {
                   canClick = false;
-                 PlatformFile? selectFile = await ParameterCon().readFile();
-                 if (selectFile!=null) {
-                   file = selectFile;
-                 }
+                  PlatformFile? selectFile = await ParameterCon().readFile();
+                  if (selectFile != null) {
+                    file = selectFile;
+                  }
                   canClick = true;
                   setState(() {});
                 }
               },
             ),
-            const SizedBox(height: 57),
+            SizedBox(height: 57.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CustomButton(
+                CustomButton(
                   text: 'Verfy',
-                  width: 165,
-                  height: 64,
+                  width: 165.w,
+                  height: 64.h,
                 ),
-                const SizedBox(width: 30),
+                SizedBox(width: 30.w),
                 CustomButton(
                   text: 'Program',
-                  width: 165,
-                  height: 64,
+                  width: 165.w,
+                  height: 64.h,
                   bgColor: Get.theme.primaryColor,
                   borderWidth: 0,
                   borderColor: Colors.transparent,

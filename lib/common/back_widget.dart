@@ -24,20 +24,21 @@ class BackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double borderwidth = borderWidth ?? (GetPlatform.isDesktop ? 1 : 1.w);
+    double borderwidth = borderWidth ?? (1.w);
     return InkWell(
       onTap: onTap,
       child: Container(
         width: width, // 682,
         height: height, // 66,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
         decoration: BoxDecoration(
           color: bgColor,
           border: Border.all(
             width: borderwidth,
             color: borderColor ?? Get.theme.hintColor,
           ),
-          borderRadius: BorderRadius.circular(GetPlatform.isDesktop ? 15 : 10),
+          borderRadius:
+              BorderRadius.circular(GetPlatform.isDesktop ? 15.w : 10),
         ),
         alignment: Alignment.center,
         child: child,

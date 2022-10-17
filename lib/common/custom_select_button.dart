@@ -33,13 +33,13 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding:
-              EdgeInsets.only(left: GetPlatform.isDesktop ? 21 : 0, bottom: 9),
+          padding: EdgeInsets.only(
+              left: GetPlatform.isDesktop ? 21.w : 0, bottom: 9),
           child: Text(
             widget.title,
             style: TextStyle(
               color: Get.theme.hintColor,
-              fontSize: GetPlatform.isDesktop ? 20 : 16,
+              fontSize: GetPlatform.isDesktop ? 24.sp : 16,
             ),
           ),
         ),
@@ -48,7 +48,7 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
           height: widget.height, // 66,
           onTap: widget.onTap,
           child: Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10.w),
             child: Row(
               children: [
                 Expanded(
@@ -57,14 +57,14 @@ class _CustomSelectButtonState extends State<CustomSelectButton> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: GetPlatform.isDesktop ? 20 : 16,
+                      fontSize: GetPlatform.isDesktop ? 24.sp : 16,
                       color: widget.textColor ?? Get.theme.hintColor,
                     ),
                   ),
                 ),
                 Image.asset(
                   'assets/images/theme${box.read("theme")}/point_down.png',
-                  width: GetPlatform.isDesktop ? 19 : 13,
+                  width: GetPlatform.isDesktop ? 19.w : 13,
                 )
               ],
             ),

@@ -22,12 +22,11 @@ void main() async {
     // 必须加上这一行。
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-        size: Size(1920, 1080),
         center: true,
         backgroundColor: Colors.transparent,
         skipTaskbar: false,
         titleBarStyle: TitleBarStyle.normal,
-        minimumSize: Size(1920, 1080));
+        minimumSize: Size(1080, 640));
 
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();

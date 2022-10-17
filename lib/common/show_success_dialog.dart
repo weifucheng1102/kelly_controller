@@ -16,9 +16,9 @@ class _ShowSuccessDialogState extends State<ShowSuccessDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(50),
+      padding: EdgeInsets.all(50.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.w),
         color: Get.theme.dialogBackgroundColor,
       ),
       child: dialogView(),
@@ -34,24 +34,24 @@ class _ShowSuccessDialogState extends State<ShowSuccessDialog> {
               'assets/images/theme${box.read("theme")}/sucess.png',
             ),
             SizedBox(
-              height: 28,
+              height: 28.h,
             ),
             Text(
               'modify successfully',
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 30.sp,
                 color: Get.theme.highlightColor,
               ),
             ),
           ],
         ),
         SizedBox(
-          height: 30,
+          height: 30.h,
         ),
         CustomButton(
-          text: 'Modify',
-          width: 165,
-          height: 64,
+          text: 'OK',
+          width: 165.w,
+          height: 64.h,
           bgColor: Get.theme.primaryColor,
           borderWidth: 0,
           borderColor: Colors.transparent,

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
@@ -22,7 +23,7 @@ class MonitorControl extends StatefulWidget {
 }
 
 class _MonitorControlState extends State<MonitorControl> {
-  RxBool showFilter = false.obs;
+  //RxBool showFilter = false.obs;
   final connectionCon = Get.put(ConnectionCon());
 
   ///档位(前进 后退)
@@ -79,17 +80,15 @@ class _MonitorControlState extends State<MonitorControl> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 10, top: 100),
+      padding: EdgeInsets.only(bottom: 10.h, top: 50.h),
       child: Obx(
-        () => Column(
+        () => ListView(
+          controller: ScrollController(),
           children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: widgetList(),
-              ),
+            Column(
+              children: widgetList(),
             ),
-            _filterButton(),
+            // _filterButton(),
           ],
         ),
       ),
@@ -105,7 +104,7 @@ class _MonitorControlState extends State<MonitorControl> {
             Text(
               title,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 color: Get.theme.hintColor,
               ),
             ),
@@ -115,7 +114,7 @@ class _MonitorControlState extends State<MonitorControl> {
                   TextSpan(
                     text: amount,
                     style: TextStyle(
-                      fontSize: 60,
+                      fontSize: 60.sp,
                       color: Get.theme.highlightColor,
                       fontWeight: FontWeight.bold,
                     ),
@@ -123,7 +122,7 @@ class _MonitorControlState extends State<MonitorControl> {
                   TextSpan(
                     text: ' $unit',
                     style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 26.sp,
                       color: Get.theme.highlightColor,
                     ),
                   ),
@@ -145,7 +144,7 @@ class _MonitorControlState extends State<MonitorControl> {
             minnum: 0,
             maxnum: 200,
             interval: 20,
-            size: showFilter.value ? 198 : 264,
+            size: 330.w,
             endValue: firstDashValue.value > 200 ? 200 : firstDashValue.value,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -155,15 +154,15 @@ class _MonitorControlState extends State<MonitorControl> {
                       ? '200'
                       : firstDashValue.value.toStringAsFixed(0),
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 25.sp,
                     fontWeight: FontWeight.bold,
                     color: Get.theme.highlightColor,
                   ),
                 ),
                 Text(
-                  'Km/A',
+                  'A',
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 10.sp,
                     color: Get.theme.highlightColor,
                   ),
                 ),
@@ -171,14 +170,14 @@ class _MonitorControlState extends State<MonitorControl> {
             ),
           ),
           SizedBox(
-            width: 25,
+            width: 25.w,
           ),
           DashBoard(
             minnum: 0,
             maxnum: 240,
-            size: showFilter.value ? 288 : 385,
+            size: 400.w,
             interval: 20,
-            bottomPadding: 23,
+            bottomPadding: 23.h,
             endValue: secondDashValue.value > 240 ? 240 : secondDashValue.value,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +187,7 @@ class _MonitorControlState extends State<MonitorControl> {
                       ? '240'
                       : secondDashValue.value.toStringAsFixed(0),
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 40.sp,
                     fontWeight: FontWeight.bold,
                     color: Get.theme.highlightColor,
                   ),
@@ -196,7 +195,7 @@ class _MonitorControlState extends State<MonitorControl> {
                 Text(
                   'Km/h',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: Get.theme.highlightColor,
                   ),
                 ),
@@ -207,20 +206,20 @@ class _MonitorControlState extends State<MonitorControl> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Get.theme.focusColor,
-                fontSize: 52,
+                fontSize: 52.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           SizedBox(
-            width: 25,
+            width: 25.w,
           ),
           DashBoard(
             maxnum: 10,
             minnum: 0,
             interval: 1,
             endValue: thirdDashValue.value > 10 ? 10 : thirdDashValue.value,
-            size: showFilter.value ? 198 : 264,
+            size: 330.w,
             centerWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -229,7 +228,7 @@ class _MonitorControlState extends State<MonitorControl> {
                       ? '10'
                       : thirdDashValue.value.toStringAsFixed(0),
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 25.sp,
                     fontWeight: FontWeight.bold,
                     color: Get.theme.highlightColor,
                   ),
@@ -237,7 +236,7 @@ class _MonitorControlState extends State<MonitorControl> {
                 Text(
                   'x 1000rpm',
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 10.sp,
                     color: Get.theme.highlightColor,
                   ),
                 ),
@@ -246,8 +245,11 @@ class _MonitorControlState extends State<MonitorControl> {
           ),
         ],
       ),
+      SizedBox(
+        height: 25.h,
+      ),
       Container(
-        width: 664,
+        width: 664.w,
         decoration: BoxDecoration(
           image: DecorationImage(
             alignment: Alignment.topCenter,
@@ -264,133 +266,147 @@ class _MonitorControlState extends State<MonitorControl> {
           ],
         ),
       ),
+      SizedBox(
+        height: 25.h,
+      ),
+      CustomInput(
+        title: 'Error code',
+        hint: '',
+        readOnly: true,
+        textColor: Get.theme.errorColor,
+        width: 472.w,
+        height: 66.h,
+        fieldCon: TextEditingController(text: 'ErrorCode：2021'),
+      ),
+      SizedBox(
+        height: 25.h,
+      ),
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     const CustomPopMenu(
+      //       title: 'Battery',
+      //       width: 472,
+      //       height: 66,
+      //       value: null,
+      //     ),
+      //     const SizedBox(
+      //       width: 95,
+      //     ),
+      //     CustomInput(
+      //       title: 'Error code',
+      //       hint: '',
+      //       readOnly: true,
+      //       textColor: Get.theme.errorColor,
+      //       width: 472,
+      //       height: 66,
+      //       fieldCon: TextEditingController(text: 'ErrorCode：2021'),
+      //     ),
+      //   ],
+      // ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CustomPopMenu(
-            title: 'Battery',
-            width: 472,
-            height: 66,
-            value: null,
-          ),
-          const SizedBox(
-            width: 95,
-          ),
-          CustomInput(
-            title: 'Error code',
-            hint: '',
-            readOnly: true,
-            textColor: Get.theme.errorColor,
-            width: 472,
-            height: 66,
-            fieldCon: TextEditingController(text: 'ErrorCode：2021'),
-          ),
+          gearButton('R'),
+          gearButton('N'),
+          gearButton('D'),
         ],
       ),
-    ];
-    if (showFilter.value) {
-      list.addAll([
-        Container(
-          width: 606,
-          child: SfSliderTheme(
-            data: SfSliderThemeData(
-              activeTrackHeight: 50,
-              inactiveTrackHeight: 50,
-              activeTrackColor: Get.theme.primaryColor,
-              inactiveTrackColor: Get.theme.hintColor,
-              trackCornerRadius: 25,
-              thumbRadius: 30,
-            ),
-            child: SfSlider(
-              min: 0,
-              max: 5,
-              stepSize: 1,
-              value: sliderValue.value,
-              thumbIcon: Container(
+      SizedBox(
+        height: 25.h,
+      ),
+      Container(
+        width: 606.w,
+        child: SfSliderTheme(
+          data: SfSliderThemeData(
+            activeTrackHeight: 50.h,
+            inactiveTrackHeight: 50.h,
+            activeTrackColor: Get.theme.primaryColor,
+            inactiveTrackColor: Get.theme.hintColor,
+            trackCornerRadius: 25.h,
+            thumbRadius: 30.h,
+          ),
+          child: SfSlider(
+            min: 0,
+            max: 5,
+            stepSize: 1,
+            value: sliderValue.value,
+            thumbIcon: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.w),
+                color: Get.theme.focusColor,
+              ),
+              padding: EdgeInsets.all(4.w),
+              child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Get.theme.focusColor,
+                  color: Get.theme.primaryColor,
                 ),
-                padding: EdgeInsets.all(4),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Get.theme.primaryColor,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    sliderValue.value.toStringAsFixed(0),
-                    style: TextStyle(
-                      color: Get.theme.highlightColor,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+                alignment: Alignment.center,
+                child: Text(
+                  sliderValue.value.toStringAsFixed(0),
+                  style: TextStyle(
+                    color: Get.theme.highlightColor,
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              onChanged: (res) {
-                sliderValue.value = res;
-              },
             ),
+            onChanged: (res) {
+              sliderValue.value = res;
+            },
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            gearButton('R'),
-            gearButton('N'),
-            gearButton('D'),
-          ],
-        ),
-      ]);
-    }
+      ),
+    ];
+
     return list;
   }
 
-  Widget _filterButton() {
-    return InkWell(
-      highlightColor: Colors.transparent,
-      onTap: () {
-        showFilter.value = !showFilter.value;
-        setState(() {});
-      },
-      child: Container(
-        width: 1039,
-        height: 79,
-        decoration: BoxDecoration(
-          color: Get.theme.dialogBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Hide',
-              style: TextStyle(
-                fontSize: 22,
-                color: Get.theme.highlightColor,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Image.asset(
-              showFilter.value
-                  ? 'assets/images/theme${box.read("theme")}/filter_up.png'
-                  : 'assets/images/theme${box.read("theme")}/filter_down.png',
-              width: 19,
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _filterButton() {
+  //   return InkWell(
+  //     highlightColor: Colors.transparent,
+  //     onTap: () {
+  //       showFilter.value = !showFilter.value;
+  //       setState(() {});
+  //     },
+  //     child: Container(
+  //       width: 1039,
+  //       height: 79,
+  //       decoration: BoxDecoration(
+  //         color: Get.theme.dialogBackgroundColor,
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Text(
+  //             'Hide',
+  //             style: TextStyle(
+  //               fontSize: 22,
+  //               color: Get.theme.highlightColor,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 8),
+  //           Image.asset(
+  //             showFilter.value
+  //                 ? 'assets/images/theme${box.read("theme")}/filter_up.png'
+  //                 : 'assets/images/theme${box.read("theme")}/filter_down.png',
+  //             width: 19,
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   ///档位
   Widget gearButton(str) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 45),
+      padding: EdgeInsets.symmetric(horizontal: 45.w),
       child: InkWell(
         onTap: () {
-          Get.until((route) => false);
           if (gear.value != str) {
             gear.value = str;
           }
@@ -398,7 +414,7 @@ class _MonitorControlState extends State<MonitorControl> {
         child: Text(
           str,
           style: TextStyle(
-            fontSize: 37,
+            fontSize: 37.sp,
             fontWeight: FontWeight.bold,
             color:
                 gear.value == str ? Get.theme.focusColor : Get.theme.hintColor,

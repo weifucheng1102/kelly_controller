@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/config/config.dart';
 
@@ -20,7 +21,7 @@ class _ConnectionState extends State<Connection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Config.left_menu_margin),
+      padding: EdgeInsets.symmetric(horizontal: 320.w, vertical: 40.h),
       child: Obx(
         () =>
             menuController.bottomMenuIndex.value == 0 ? Serial() : Bluetooth(),

@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: GetPlatform.isDesktop ? 26 : 16,
+          fontSize: GetPlatform.isDesktop ? 26.sp : 16,
           color: Get.theme.highlightColor,
         ),
       ),

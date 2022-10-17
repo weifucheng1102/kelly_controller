@@ -3,5 +3,5 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:kelly_user_project/common/common.dart';
 
 class Config {
-  static double left_menu_margin = 320;
+  static double left_menu_margin = 320.w;
 }

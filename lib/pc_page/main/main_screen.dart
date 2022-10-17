@@ -74,9 +74,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget _mainWidget() {
     return Obx(
       () => Positioned(
-        top: 0,
+        top: 100.h,
         left: 0,
-        bottom: 0,
+        bottom: 100.h,
         right: 0,
         child: _indexWidget(),
       ),
@@ -89,7 +89,7 @@ class _MainScreenState extends State<MainScreen> {
       left: 0,
       bottom: 0,
       child: Container(
-        width: Config.left_menu_margin,
+        width: 320.w,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -98,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
             fit: BoxFit.fill,
           ),
         ),
-        padding: EdgeInsets.only(top: 100, left: 42),
+        padding: EdgeInsets.only(top: 100.h, left: 42.w),
         child: const LeftMenu(),
       ),
     );
@@ -109,23 +109,24 @@ class _MainScreenState extends State<MainScreen> {
       top: 0,
       left: 0,
       right: 0,
-      height: 100,
+      height: 100.h,
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               'assets/images/theme${box.read("theme")}/top_bg.png',
             ),
+            fit: BoxFit.fill,
           ),
         ),
         alignment: Alignment.center,
-        padding: EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.only(bottom: 20.h),
         child: Obx(
           () => Text(
             menuController.title[menuController.selectIndex.value],
             style: TextStyle(
               color: Get.theme.focusColor,
-              fontSize: 29,
+              fontSize: 29.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -139,17 +140,18 @@ class _MainScreenState extends State<MainScreen> {
       bottom: 0,
       left: 0,
       right: 0,
-      height: 100,
+      height: 100.h,
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               'assets/images/theme${box.read("theme")}/bottom_bg.png',
             ),
+            fit: BoxFit.fill,
           ),
         ),
         alignment: Alignment.center,
-        padding: EdgeInsets.only(top: 20, left: 450, right: 450),
+        padding: EdgeInsets.only(top: 20.h, left: 450.w, right: 450.w),
         child: Obx(
           () => Row(
             children: bottomMenuList(),
@@ -164,36 +166,18 @@ class _MainScreenState extends State<MainScreen> {
       case 0:
         return Container();
       case 1:
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 100),
-          child: Connection(),
-        );
+        return Connection();
 
       case 2:
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 100),
-          child: ParameterPage(),
-        );
+        return ParameterPage();
       case 3:
-        return const Padding(
-          padding: EdgeInsets.only(bottom: 100),
-          child: MonitorPage(),
-        );
+        return MonitorPage();
       case 4:
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 100),
-          child: Visualization(),
-        );
+        return Visualization();
       case 5:
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 100),
-          child: Firmware(),
-        );
+        return Firmware();
       case 6:
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 100),
-          child: Setting(),
-        );
+        return Setting();
       default:
         return Container();
     }
@@ -245,7 +229,7 @@ class _MainScreenState extends State<MainScreen> {
             'Write file',
             -1,
             indexTap: () {
-              parameterController.writeFile(
+              parameterController.writeFile(context,
                   json.encode(parameterController.all_parameter_value));
             },
           ),
@@ -256,20 +240,21 @@ class _MainScreenState extends State<MainScreen> {
               List list = parameterController.all_parameter_value.values
                   .toList()
                   .sublist(0, 2);
-              List<int> intList =
-                  List.generate(list.length, (index) => int.parse(list[index].toString()));
+              List<int> intList = List.generate(
+                  list.length, (index) => int.parse(list[index].toString()));
 
               intList.insertAll(0, [
                 hexToInt('62'),
                 hexToInt('02'),
               ]);
               int sum = 0;
-              
-              intList.forEach((element) { 
-                sum = sum+element;
+
+              intList.forEach((element) {
+                sum = sum + element;
               });
               print(sum);
               intList.add(sum);
+
               ///参数数据写入电机
               connectionCon.port!
                   .write(Uint8List.fromList(intList), timeout: 0);
@@ -319,7 +304,7 @@ class _MainScreenState extends State<MainScreen> {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 22.sp,
               color: menuController.bottomMenuIndex.value == index
                   ? Get.theme.focusColor
                   : Get.theme.hintColor,

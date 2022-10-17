@@ -25,30 +25,31 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   final parameterCon = Get.put(ParameterCon());
 
-  RxBool showFilter = false.obs;
+  // RxBool showFilter = false.obs;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => filterButton());
+    return filterButton();
   }
 
   Widget filterButton() {
     return InkWell(
       highlightColor: Colors.transparent,
       onTap: () {
-        showFilter.value = !showFilter.value;
-        if (!showFilter.value) {
-          Get.back();
-        } else {
-          showDialogWidget();
-        }
+        widget.voidCallback();
+        // showFilter.value = !showFilter.value;
+        // if (!showFilter.value) {
+        //   Get.back();
+        // } else {
+        //   showDialogWidget();
+        // }
       },
       child: Container(
-        width: 1039,
-        height: 79,
+        width: 1039.w,
+        height: 79.h,
         decoration: BoxDecoration(
           color: Get.theme.dialogBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.w),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,81 +57,20 @@ class _FilterButtonState extends State<FilterButton> {
             Text(
               'Filter',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 22.sp,
                 color: Get.theme.highlightColor,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Image.asset(
-              showFilter.value
-                  ? 'assets/images/theme${box.read("theme")}/filter_up.png'
-                  : 'assets/images/theme${box.read("theme")}/filter_down.png',
-              width: 19,
+              // showFilter.value
+              //     ? 'assets/images/theme${box.read("theme")}/filter_up.png'
+              // :
+              'assets/images/theme${box.read("theme")}/filter_down.png',
+              width: 19.w,
             )
           ],
         ),
-      ),
-    );
-  }
-
-  showDialogWidget() {
-    CustomDialog.showCustomDialog(
-      context,
-      dismissCallback: () {
-        showFilter.value = false;
-      },
-      child: dialogWidget(),
-    );
-  }
-
-  Widget dialogWidget() {
-    return Container(
-      width: 1039,
-      height: 1.sh - 220,
-      decoration: BoxDecoration(
-        color: Get.theme.dialogBackgroundColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          const Expanded(
-            child: FilterView(),
-          ),
-          const SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButton(
-                text: 'Verfy',
-                width: 165,
-                height: 64,
-                onTap: () async {
-                  await parameterCon.getDefaultProPertySelectList();
-                  await parameterCon.getParameterWithProperty();
-
-                  Navigator.pop(context);
-                  widget.voidCallback();
-                },
-              ),
-              const SizedBox(width: 30),
-              CustomButton(
-                text: 'Program',
-                width: 165,
-                height: 64,
-                bgColor: Get.theme.primaryColor,
-                borderWidth: 0,
-                borderColor: Colors.transparent,
-                onTap: () async {
-                  await parameterCon.getParameterWithProperty();
-                  Navigator.pop(context);
-                  widget.voidCallback();
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          filterButton(),
-        ],
       ),
     );
   }

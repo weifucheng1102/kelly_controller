@@ -51,23 +51,6 @@
         }
     },
     {
-        "id": 1,
-        "parm_name": "VSupply",
-        "@type": "input",
-        "@permission": "write",
-        "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
-        "toolTip": "Voltage at terminal B+",
-        "motProperties": {
-            "categoryMain": "MotorController",
-            "MotorController": "VMONITOR_VPOS",
-            "unit": "Volts",
-            "category1": "VoltageMonitor",
-            "color": "black"
-        }
-    },
-    {
         "id": 2,
         "parm_name": "AdcVRef_MilliV",
         "@type": "input",

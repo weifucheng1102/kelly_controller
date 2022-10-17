@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
@@ -37,13 +38,13 @@ class _SerialState extends State<Serial> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(top: 128),
+      controller: ScrollController(),
       children: [
         Column(
           children: [
             CustomPopMenu(
-              width: 682,
-              height: 66,
+              width: 682.w,
+              height: 66.h,
               title: 'Port',
               hint: 'Please enter the content here',
               value: null,
@@ -52,50 +53,50 @@ class _SerialState extends State<Serial> {
                 selectPort = res;
               },
             ),
-            SizedBox(height: 43),
+            SizedBox(height: 30.h),
             CustomInput(
               title: 'baudRate',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: baudRateCon,
-              width: 682,
-              height: 66,
+              width: 682.w,
+              height: 66.h,
             ),
-            SizedBox(height: 43),
+            SizedBox(height: 30.h),
             CustomInput(
               title: 'parity',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: parityCon,
-              width: 682,
-              height: 66,
+              width: 682.w,
+              height: 66.h,
             ),
-            SizedBox(height: 43),
+            SizedBox(height: 30.h),
             CustomInput(
               title: 'stopBits',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: stopBitsCon,
-              width: 682,
-              height: 66,
+              width: 682.w,
+              height: 66.h,
             ),
-            SizedBox(height: 43),
+            SizedBox(height: 30.h),
             CustomInput(
               title: 'bits',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: bitsCon,
-              width: 682,
-              height: 66,
+              width: 682.w,
+              height: 66.h,
             ),
-            const SizedBox(height: 70),
+            SizedBox(height: 40.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
                   text: 'Scin',
-                  width: 165,
-                  height: 64,
+                  width: 165.w,
+                  height: 64.h,
                   onTap: () {
                     print(connectionCon.port);
                     // int a = connectionCon.port!.write(
@@ -107,8 +108,8 @@ class _SerialState extends State<Serial> {
                 const SizedBox(width: 30),
                 CustomButton(
                   text: 'Connect',
-                  width: 165,
-                  height: 64,
+                  width: 165.w,
+                  height: 64.h,
                   borderWidth: 0,
                   borderColor: Colors.transparent,
                   bgColor: Get.theme.primaryColor,

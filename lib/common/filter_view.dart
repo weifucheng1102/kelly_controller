@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
 
@@ -17,8 +19,12 @@ class _FilterViewState extends State<FilterView> {
 
   @override
   Widget build(BuildContext context) {
+    return dialogWidget();
+  }
+
+  filterListView() {
     return ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 78, vertical: 42),
+        padding: EdgeInsets.symmetric(horizontal: 78.w, vertical: 42.h),
         itemBuilder: (context, index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,11 +33,11 @@ class _FilterViewState extends State<FilterView> {
                 parameterCon.property_list[index].motMetaKey,
                 style: TextStyle(
                   color: Get.theme.highlightColor,
-                  fontSize: 22,
+                  fontSize: 22.sp,
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,8 +49,8 @@ class _FilterViewState extends State<FilterView> {
                       physics: const NeverScrollableScrollPhysics(),
                       crossAxisCount: 6,
                       childAspectRatio: 120 / 40,
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15.w,
+                      crossAxisSpacing: 15.h,
                       children: gridViewList(
                         index,
                         parameterCon.property_list[index].motMetaValues,
@@ -52,11 +58,11 @@ class _FilterViewState extends State<FilterView> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 10.w,
                   ),
                   Container(
-                    height: 44,
-                    width: 90,
+                    height: 44.h,
+                    width: 90.w,
                     alignment: Alignment.centerLeft,
                     child:
                         parameterCon.property_list[index].motMetaValues.length >
@@ -116,7 +122,7 @@ class _FilterViewState extends State<FilterView> {
                       color: Colors.transparent,
                       border: Border.all(
                         color: Get.theme.hintColor,
-                        width: 1,
+                        width: 1.w,
                       ),
                     ),
               child: Text(
@@ -124,7 +130,7 @@ class _FilterViewState extends State<FilterView> {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: parameterCon.property_isSelect_list[index] == i
                       ? Get.theme.highlightColor
                       : Get.theme.hintColor,
@@ -157,18 +163,70 @@ class _FilterViewState extends State<FilterView> {
             parameterCon.property_select_more[index] ? 'Fold' : 'Unfold',
             style: TextStyle(
               color: Get.theme.hintColor,
-              fontSize: 20,
+              fontSize: 20.sp,
             ),
           ),
-          const SizedBox(
-            width: 4,
+          SizedBox(
+            width: 4.w,
           ),
           Image.asset(
             parameterCon.property_select_more[index]
                 ? 'assets/images/theme${box.read("theme")}/filter_up.png'
                 : 'assets/images/theme${box.read("theme")}/filter_down.png',
-            width: 16,
+            width: 16.w,
           )
+        ],
+      ),
+    );
+  }
+
+  Widget dialogWidget() {
+    return Container(
+      width: 1039.w,
+      height: 1.sh - 220.h,
+      decoration: BoxDecoration(
+        color: Get.theme.dialogBackgroundColor,
+        borderRadius: BorderRadius.circular(10.w),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: filterListView(),
+          ),
+          SizedBox(height: 40.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                text: 'Verfy',
+                width: 165.w,
+                height: 64.h,
+                onTap: () async {
+                  await parameterCon.getDefaultProPertySelectList();
+                  await parameterCon.getParameterWithProperty();
+
+                  Navigator.pop(context);
+                  // widget.voidCallback();
+                },
+              ),
+              SizedBox(width: 30.w),
+              CustomButton(
+                text: 'Program',
+                width: 165.w,
+                height: 64.h,
+                bgColor: Get.theme.primaryColor,
+                borderWidth: 0,
+                borderColor: Colors.transparent,
+                onTap: () async {
+                  await parameterCon.getParameterWithProperty();
+                  Navigator.pop(context);
+                  //widget.voidCallback();
+                },
+              ),
+            ],
+          ),
+          SizedBox(height: 40.h),
+          //filterButton(),
         ],
       ),
     );

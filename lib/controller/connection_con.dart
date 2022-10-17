@@ -35,7 +35,7 @@ class ConnectionCon extends GetxController {
     port!.open(mode: 3);
     connectPort = portName;
     print('串口是否开启${port!.isOpen}');
-    port!.read(255);
+
     final reader = SerialPortReader(port!, timeout: 50000);
     reader.stream.listen((data) {
       ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据50ms 以内接受的数据拼成一个完整的数据

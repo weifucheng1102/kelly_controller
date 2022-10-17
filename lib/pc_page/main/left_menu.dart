@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/controller/menu_controller.dart';
-
 
 class LeftMenu extends StatefulWidget {
   const LeftMenu({Key? key}) : super(key: key);
@@ -21,10 +21,10 @@ class _LeftMenuState extends State<LeftMenu> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
+          padding: EdgeInsets.symmetric(vertical: 30.w),
           child: Image.asset(
             'assets/images/theme${box.read("theme")}/menu_logo.png',
-            width: 201,
+            width: 201.w,
           ),
         ),
         Expanded(
@@ -37,14 +37,14 @@ class _LeftMenuState extends State<LeftMenu> {
                   children: [
                     InkWell(
                       onTap: () {
-                        if (menuController.selectIndex.value != index) { 
+                        if (menuController.selectIndex.value != index) {
                           menuController.selectIndex.value = index;
                           menuController.bottomMenuIndex.value = 0;
                         }
                       },
                       child: Container(
-                        height: 64,
-                        width: 201,
+                        height: 64.h,
+                        width: 201.w,
                         decoration: menuController.selectIndex.value == index
                             ? BoxDecoration(
                                 image: DecorationImage(
@@ -55,22 +55,22 @@ class _LeftMenuState extends State<LeftMenu> {
                               )
                             : null,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.only(left: 16),
+                        padding: EdgeInsets.only(left: 16.w),
                         child: Row(
                           children: [
                             Image.asset(
                               menuController.selectIndex.value == index
                                   ? 'assets/images/theme${box.read("theme")}/${menuController.image[index]}'
                                   : 'assets/images/theme${box.read("theme")}/${menuController.unImage[index]}',
-                              width: 20,
+                              width: 20.w,
                             ),
-                            const SizedBox(
-                              width: 17,
+                            SizedBox(
+                              width: 17.w,
                             ),
                             Text(
                               menuController.title[index],
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: menuController.selectIndex.value == index
                                     ? Get.theme.highlightColor
                                     : Get.theme.hintColor,

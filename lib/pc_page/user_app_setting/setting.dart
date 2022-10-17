@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
@@ -25,20 +26,20 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 109),
+      padding: EdgeInsets.only(top: 109.h),
       child: Column(
         children: [
           _title(),
-          const SizedBox(height: 38),
+          SizedBox(height: 38.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: _themeList(),
           ),
-          const SizedBox(height: 95),
+          SizedBox(height: 95.h),
           CustomButton(
             text: 'Confirm',
-            width: 165,
-            height: 64,
+            width: 165.w,
+            height: 64.h,
             bgColor: Get.theme.primaryColor,
             borderColor: Colors.transparent,
             borderWidth: 0,
@@ -70,7 +71,7 @@ class _SettingState extends State<Setting> {
 
   Widget _themeItem(index) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
+      padding: EdgeInsets.symmetric(horizontal: 50.w),
       child: InkWell(
         onTap: () {
           selectIndex.value = index;
@@ -82,10 +83,10 @@ class _SettingState extends State<Setting> {
                 selectIndex.value == index
                     ? 'assets/images/theme${box.read("theme")}/select.png'
                     : 'assets/images/theme${box.read("theme")}/un_select.png',
-                width: 28,
+                width: 28.w,
               ),
             ),
-            const SizedBox(width: 10),
+            SizedBox(width: 10.w),
             Text(
               'theme$index',
               style: TextStyle(

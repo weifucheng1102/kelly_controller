@@ -53,8 +53,6 @@ class _VisualizationState extends State<Visualization> {
         );
       }
 
-      
-
       // dashValueChange(list.first, secondDashValue);
 
       // ///第5位 前进开关   第6位 后退开关
@@ -87,7 +85,7 @@ class _VisualizationState extends State<Visualization> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Config.left_menu_margin),
+      margin: EdgeInsets.symmetric(horizontal: 320.w),
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [

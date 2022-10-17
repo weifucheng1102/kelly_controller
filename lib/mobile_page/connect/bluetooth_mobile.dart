@@ -84,7 +84,6 @@ class FindDevicesScreen extends StatelessWidget {
                 stream: Stream.periodic(Duration(seconds: 2))
                     .asyncMap((_) => FlutterBluePlus.instance.connectedDevices),
                 initialData: [],
-             
                 builder: (c, snapshot) => Column(
                   children: snapshot.data!
                       .map((d) => ListTile(

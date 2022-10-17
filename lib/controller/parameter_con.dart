@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:kelly_user_project/common/show_success_dialog.dart';
 import 'package:kelly_user_project/models/parameter.dart';
 
+import '../common/custom_dialog.dart';
 import '../models/mot_property.dart';
 
 class ParameterCon extends GetxController {
@@ -175,13 +177,13 @@ class ParameterCon extends GetxController {
   }
 
   ///写文件
-  writeFile(String str) async {
-    final currentDirectory = await getApplicationDocumentsDirectory();
-    print(currentDirectory.path);
-    File(currentDirectory.path + '/parameter.txt')
-        .writeAsString(str, mode: FileMode.write)
-        .whenComplete(() {
-      print('完成');
-    });
+  writeFile(context, String str) async {
+    final String? result = await FilePicker.platform
+        .saveFile(fileName: 'parameter.txt', dialogTitle: 'save File');
+    if (result != null && result.isNotEmpty) {
+      File(result).writeAsString(str, mode: FileMode.write).whenComplete(() {
+        CustomDialog.showCustomDialog(context, child: ShowSuccessDialog());
+      });
+    }
   }
 }
