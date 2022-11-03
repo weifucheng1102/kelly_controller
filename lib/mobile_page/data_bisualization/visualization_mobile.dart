@@ -51,7 +51,7 @@ class _VisualizationMobileState extends State<VisualizationMobile> {
                         ? isLandScape()
                             ? Expanded(
                                 child: Container(
-                                  padding: EdgeInsets.all(20),
+                                  padding: EdgeInsets.all(20.w),
                                   child: LineChartWidget(
                                     colorList: colorList,
                                     lineChartData: linechartData,
@@ -61,7 +61,7 @@ class _VisualizationMobileState extends State<VisualizationMobile> {
                             : Container(
                                 height: 1.sw,
                                 width: 1.sw,
-                                padding: EdgeInsets.all(20),
+                                padding: EdgeInsets.all(20.w),
                                 child: LineChartWidget(
                                   colorList: colorList,
                                   lineChartData: linechartData,

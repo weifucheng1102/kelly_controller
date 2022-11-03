@@ -32,7 +32,7 @@ class _FirmwareMobileState extends State<FirmwareMobile> {
         left: false,
         right: false,
         child: ListView(
-          padding: EdgeInsets.only(top: 19),
+          padding: EdgeInsets.only(top: 19, bottom: 20),
           children: [
             Column(
               children: [

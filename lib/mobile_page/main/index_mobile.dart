@@ -36,6 +36,7 @@ class _IndexMobileState extends State<IndexMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: NativeDeviceOrientedWidget(
         fallback: (context) => const SizedBox(),
 
@@ -96,7 +97,14 @@ class _IndexMobileState extends State<IndexMobile> {
           Expanded(
             flex: 3,
             child: Container(
-              color: Colors.black,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/theme${box.read("theme")}/mobile_main_bg.png',
+                  ),
+                  fit: BoxFit.fill,
+                ),
+              ),
               child: currentPage(),
             ),
           ),
@@ -109,6 +117,7 @@ class _IndexMobileState extends State<IndexMobile> {
   portraitWidget() {
     return Obx(
       () => Scaffold(
+        resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
         appBar: AppBarMobile(
           title: menuCon.title[menuCon.selectIndex.value],

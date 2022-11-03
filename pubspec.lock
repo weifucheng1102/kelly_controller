@@ -99,6 +99,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.5"
+  ext_storage:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "98faf095ed6786a0bb0db26cb2f3966513f3f7aa"
+      url: "https://github.com/GitJournal/ext_storage.git"
+    source: git
+    version: "1.0.3"
   extended_wrap:
     dependency: "direct main"
     description:
@@ -160,6 +169,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.1"
+  flutter_bluetooth_serial:
+    dependency: "direct main"
+    description:
+      name: flutter_bluetooth_serial
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.0"
   flutter_libserialport:
     dependency: "direct main"
     description:

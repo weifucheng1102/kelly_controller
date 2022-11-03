@@ -56,9 +56,24 @@ class _ParameterPageState extends State<ParameterPage> {
 
     ///发送 获取参数指令
     if (connectionCon.port != null) {
+      print('发送命令1');
       connectionCon.port!.write(
-          Uint8List.fromList([hexToInt('61'), hexToInt('00'), hexToInt('61')]),
+          Uint8List.fromList([
+            hexToInt('A5'),
+            hexToInt('D1'),
+            hexToInt('0A'),
+            hexToInt('00'),
+            hexToInt('00'),
+            hexToInt('00'),
+            hexToInt('82'),
+            hexToInt('01'),
+            hexToInt('00'),
+            hexToInt('01'),
+          ]),
           timeout: 0);
+      // connectionCon.port!.write(
+      //     Uint8List.fromList([hexToInt('61'), hexToInt('00'), hexToInt('61')]),
+      //     timeout: 0);
     }
   }
 

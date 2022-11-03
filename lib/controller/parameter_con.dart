@@ -1,12 +1,16 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ext_storage/ext_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kelly_user_project/common/show_success_dialog.dart';
+import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/models/parameter.dart';
 
 import '../common/custom_dialog.dart';
@@ -164,26 +168,55 @@ class ParameterCon extends GetxController {
   }
 
   ///读文件
-  Future<PlatformFile?> readFile() async {
+  Future<void> parameterReadFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       dialogTitle: 'Select File',
     );
 
     if (result != null && result.files.isNotEmpty) {
-      return result.files.first;
-    } else {
-      return null;
+      String contents = await File(result.files.first.path!).readAsString();
+      print(contents);
+
+      ///转json
+      Map map = json.decode(contents);
+
+      ///更新参数
+
+      map.keys.forEach((element) {
+        print(element);
+        if (all_parameter_value.keys.contains(element)) {
+          all_parameter_value[element] = map[element];
+        }
+      });
+
+      ///通知参数页 更新数据
+      bus.emit('updateParameterWithFile');
     }
   }
 
   ///写文件
-  writeFile(context, String str) async {
-    final String? result = await FilePicker.platform
-        .saveFile(fileName: 'parameter.txt', dialogTitle: 'save File');
-    if (result != null && result.isNotEmpty) {
-      File(result).writeAsString(str, mode: FileMode.write).whenComplete(() {
+  writeFile(context) async {
+    String str = json.encode(all_parameter_value);
+    print(str);
+    str = str.replaceAll(',', ',\r\n');
+
+    if (GetPlatform.isMobile) {
+      String? path = await ExtStorage.getExternalStoragePublicDirectory(
+          ExtStorage.DIRECTORY_DOWNLOADS);
+      print(path);
+      File file = await File(path! + '/parameter.txt').create(recursive: true);
+
+      file.writeAsString(str, mode: FileMode.write).whenComplete(() {
         CustomDialog.showCustomDialog(context, child: ShowSuccessDialog());
       });
+    } else {
+      final String? result = await FilePicker.platform
+          .saveFile(fileName: 'parameter.txt', dialogTitle: 'save File');
+      if (result != null && result.isNotEmpty) {
+        File(result).writeAsString(str, mode: FileMode.write).whenComplete(() {
+          CustomDialog.showCustomDialog(context, child: ShowSuccessDialog());
+        });
+      }
     }
   }
 }

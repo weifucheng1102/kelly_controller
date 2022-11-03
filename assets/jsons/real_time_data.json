@@ -1,0 +1,137 @@
+[
+    {
+        "id": 1,
+        "motId": 1,
+        "parm_name": "Throttle",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 65535.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 1,
+        "motId": 2,
+        "parm_name": "Throttle",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 65535.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 1,
+        "motId": 3,
+        "parm_name": "Throttle",
+        "@type": "enum",
+        "@permission": "write",
+        "enum_value": [
+            "N",
+            "R",
+            "F"
+        ],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 1,
+        "motId": 4,
+        "parm_name": "Throttle",
+        "@type": "slider",
+        "@permission": "write",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 5000.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 1,
+        "motId": 129,
+        "parm_name": "Throttle",
+        "@type": "slider",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 10000.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 1,
+        "motId": 130,
+        "parm_name": "Throttle",
+        "@type": "slider",
+        "@permission": "read",
+        "enum_value": [],
+        "slider_min": 0.0,
+        "slider_max": 65535.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    },
+    {
+        "id": 1,
+        "motId": 131,
+        "parm_name": "Throttle",
+        "@type": "enum",
+        "@permission": "read",
+        "enum_value": [
+            "Init",
+            "Stop",
+            "Run",
+            "Fault"
+        ],
+        "slider_min": 0.0,
+        "slider_max": 0.0,
+        "toolTip": "Voltage at terminal B+",
+        "motProperties": {
+            "categoryMain": "MotorController",
+            "MotorController": "VMONITOR_VPOS",
+            "unit": "Volts",
+            "category1": "VoltageMonitor",
+            "color": "red"
+        }
+    }
+]

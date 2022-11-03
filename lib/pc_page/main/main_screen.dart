@@ -201,36 +201,15 @@ class _MainScreenState extends State<MainScreen> {
             -1,
             indexTap: () async {
               ///读文件
-              PlatformFile? selectFile = await ParameterCon().readFile();
-              if (selectFile != null) {
-                String contents = await File(selectFile.path!).readAsString();
-                print(contents);
 
-                ///转json
-                Map map = json.decode(contents);
-
-                ///更新参数
-
-                map.keys.forEach((element) {
-                  print(element);
-                  if (parameterController.all_parameter_value.keys
-                      .contains(element)) {
-                    parameterController.all_parameter_value[element] =
-                        map[element];
-                  }
-                });
-
-                ///通知参数页 更新数据
-                bus.emit('updateParameterWithFile');
-              }
+              await parameterController.parameterReadFile();
             },
           ),
           bottomMenuItem(
             'Write file',
             -1,
             indexTap: () {
-              parameterController.writeFile(context,
-                  json.encode(parameterController.all_parameter_value));
+              parameterController.writeFile(context);
             },
           ),
           bottomMenuItem(

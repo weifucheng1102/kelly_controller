@@ -14,6 +14,7 @@ class Parameter {
     required this.sliderMax,
     required this.toolTip,
     required this.motProperties,
+    required this.motId,
   });
 
   final int id;
@@ -29,18 +30,22 @@ class Parameter {
   final double sliderMax;
   final String toolTip;
   final Map motProperties;
+  final int motId;
 
   factory Parameter.fromJson(Map<String, dynamic> json) => Parameter(
-      id: json['id'] as int,
-      parmName: json['parm_name'].toString(),
-      type: json['@type'].toString(),
-      permission: json['@permission'].toString(),
-      enumValue:
-          (json['enum_value'] as List? ?? []).map((e) => e as String).toList(),
-      sliderMin: json['slider_min'] as double,
-      sliderMax: json['slider_max'] as double,
-      toolTip: json['toolTip'].toString(),
-      motProperties: json['motProperties'] as Map? ?? {});
+        id: json['id'] as int,
+        parmName: json['parm_name'].toString(),
+        type: json['@type'].toString(),
+        permission: json['@permission'].toString(),
+        enumValue: (json['enum_value'] as List? ?? [])
+            .map((e) => e as String)
+            .toList(),
+        sliderMin: json['slider_min'] as double,
+        sliderMax: json['slider_max'] as double,
+        toolTip: json['toolTip'].toString(),
+        motProperties: json['motProperties'] as Map? ?? {},
+        motId: json['motId'] as int,
+      );
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -51,19 +56,22 @@ class Parameter {
         'slider_min': sliderMin,
         'slider_max': sliderMax,
         'toolTip': toolTip,
-        'motProperties': motProperties
+        'motProperties': motProperties,
+        'motId': motId,
       };
 
   Parameter clone() => Parameter(
-      id: id,
-      parmName: parmName,
-      type: type,
-      permission: permission,
-      enumValue: enumValue.toList(),
-      sliderMin: sliderMin,
-      sliderMax: sliderMax,
-      toolTip: toolTip,
-      motProperties: motProperties);
+        id: id,
+        parmName: parmName,
+        type: type,
+        permission: permission,
+        enumValue: enumValue.toList(),
+        sliderMin: sliderMin,
+        sliderMax: sliderMax,
+        toolTip: toolTip,
+        motProperties: motProperties,
+        motId: motId,
+      );
 
   Parameter copyWith(
           {int? id,
@@ -74,7 +82,8 @@ class Parameter {
           double? sliderMin,
           double? sliderMax,
           String? toolTip,
-          Map? motProperties}) =>
+          Map? motProperties,
+          int? motId}) =>
       Parameter(
         id: id ?? this.id,
         parmName: parmName ?? this.parmName,
@@ -85,6 +94,7 @@ class Parameter {
         sliderMax: sliderMax ?? this.sliderMax,
         toolTip: toolTip ?? this.toolTip,
         motProperties: motProperties ?? this.motProperties,
+        motId: motId ?? this.motId,
       );
 
   @override
@@ -98,9 +108,9 @@ class Parameter {
           enumValue == other.enumValue &&
           sliderMin == other.sliderMin &&
           sliderMax == other.sliderMax &&
-          
           toolTip == other.toolTip &&
-          motProperties == other.motProperties;
+          motProperties == other.motProperties &&
+          motId == other.motId;
 
   @override
   int get hashCode =>
@@ -112,7 +122,8 @@ class Parameter {
       sliderMin.hashCode ^
       sliderMax.hashCode ^
       toolTip.hashCode ^
-      motProperties.hashCode;
+      motProperties.hashCode ^
+      motId.hashCode;
 }
 
 enum ParameterTypeEnum { Input, Enum, Slider, Switcher }

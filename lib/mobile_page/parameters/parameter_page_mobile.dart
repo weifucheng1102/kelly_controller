@@ -1,5 +1,7 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
@@ -8,6 +10,7 @@ import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/filter_button_mobile.dart';
+import 'package:kelly_user_project/controller/connection_con.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
 import 'package:kelly_user_project/models/parameter.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -22,15 +25,18 @@ class ParameterPageMobile extends StatefulWidget {
 
 class _ParameterPageMobileState extends State<ParameterPageMobile> {
   final parameterCon = Get.put(ParameterCon());
+  final ConnectionCon connectionCon = Get.put(ConnectionCon());
   double leftMenuMargin = isLandScape() ? 1.sw / 4 : 0;
   @override
   void initState() {
     super.initState();
+    connectionCon.sendMessage();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       appBar: isLandScape() ? const AppBarMobile(title: 'Parameters') : null,
       body: SafeArea(
@@ -40,10 +46,10 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
           children: [
             topView(),
             Expanded(child: lsitview()),
-            FilterButtonMobile(),
           ],
         ),
       ),
+      bottomNavigationBar: FilterButtonMobile(),
     );
   }
 
@@ -84,9 +90,14 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
   topView() {
     return Row(
       children: [
-        topButton('Read file'),
-        topButton('Write file'),
-        topButton('Modify'),
+        topButton('Read file', onTap: () async {
+          ///读文件
+          await parameterCon.parameterReadFile();
+        }),
+        topButton('Write file', onTap: () {
+          parameterCon.writeFile(context);
+        }),
+        topButton('Modify', onTap: () {}),
       ],
     );
   }

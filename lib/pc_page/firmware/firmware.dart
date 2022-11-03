@@ -81,13 +81,13 @@ class _FirmwareState extends State<Firmware> {
               textColor: file == null ? null : Get.theme.highlightColor,
               onTap: () async {
                 if (canClick) {
-                  canClick = false;
-                  PlatformFile? selectFile = await ParameterCon().readFile();
-                  if (selectFile != null) {
-                    file = selectFile;
-                  }
-                  canClick = true;
-                  setState(() {});
+                  // canClick = false;
+                  // PlatformFile? selectFile = await ParameterCon().readFile();
+                  // if (selectFile != null) {
+                  //   file = selectFile;
+                  // }
+                  // canClick = true;
+                  // setState(() {});
                 }
               },
             ),

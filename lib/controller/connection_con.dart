@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/config/event.dart';
@@ -15,6 +16,8 @@ class ConnectionCon extends GetxController {
 
   Timer? timers;
   int millsecondtime = 50;
+
+  BluetoothConnection? bluetoothConnection;
 
   ///打开串口
   portOpenAction({
@@ -37,6 +40,8 @@ class ConnectionCon extends GetxController {
     print('串口是否开启${port!.isOpen}');
 
     final reader = SerialPortReader(port!, timeout: 50000);
+
+    ///数据监听
     reader.stream.listen((data) {
       ///插件bug  收数据有时候会通过两次收到完整数据 处理了数据50ms 以内接受的数据拼成一个完整的数据
       if (millsecondtime > 0) {
@@ -104,5 +109,42 @@ class ConnectionCon extends GetxController {
     // print(uint8list);
     // int m = hexToInt(sublist.first.toString());
     // print(m);
+  }
+
+  blueToothConnect(String address) {
+    BluetoothConnection.toAddress(address).then((_connection) {
+      print('Connected to the device');
+      bluetoothConnection = _connection;
+      bluetoothConnection!.input!.listen(_onDataReceived).onDone(() {});
+      // bluetoothConnection!.output.add(data);
+      // bluetoothConnection!.output.allSent;
+    }).catchError((error) {
+      print('Cannot connect, exception occured');
+      print(error);
+    });
+  }
+
+  _onDataReceived(Uint8List data) {
+    print('蓝牙收到数据了');
+    print(data);
+  }
+
+  sendMessage() async {
+    bluetoothConnection!.output.add(
+      Uint8List.fromList([
+        hexToInt('A5'),
+        hexToInt('D1'),
+        hexToInt('0A'),
+        hexToInt('00'),
+        hexToInt('00'),
+        hexToInt('00'),
+        hexToInt('82'),
+        hexToInt('01'),
+        hexToInt('01'),
+        hexToInt('01'),
+      ]),
+    );
+    await bluetoothConnection!.output.allSent;
+    print('蓝牙发送指令');
   }
 }
