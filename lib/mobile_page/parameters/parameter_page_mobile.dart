@@ -69,6 +69,14 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    bus.off('updateParameterWithFile');
+    bus.off('updateParameterWithSerial');
+    bus.off('updateParameterSuccess');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
