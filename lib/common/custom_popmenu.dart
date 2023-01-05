@@ -9,7 +9,7 @@ class CustomPopMenu extends StatefulWidget {
   final String title;
   final double width;
   final double height;
-  final List<MenuItem> items; // 显示的内容
+  final List<MenuItems> items; // 显示的内容
   final String hint;
   final Color? hintColor;
   final dynamic value;
@@ -120,13 +120,13 @@ class _CustomPopMenuState extends State<CustomPopMenu> {
   }
 }
 
-class MenuItem {
+class MenuItems {
   String label; // 显示的文本
   dynamic value; // 选中的值
 
   // bool checked; // 是否选中
 
-  MenuItem({
+  MenuItems({
     this.label = '',
     this.value,
     //this.checked = false,

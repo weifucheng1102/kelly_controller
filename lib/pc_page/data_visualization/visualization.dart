@@ -17,6 +17,9 @@ import 'package:kelly_user_project/common/line_chart_widget.dart';
 import 'package:kelly_user_project/config/config.dart';
 import 'package:kelly_user_project/common/filter_view.dart';
 import 'package:kelly_user_project/config/event.dart';
+import 'package:kelly_user_project/controller/parameter_con.dart';
+import 'package:kelly_user_project/models/parameter.dart';
+import 'package:kelly_user_project/pc_page/data_visualization/real_time_data_filter.dart';
 
 import '../../common/common.dart';
 import '../../controller/connection_con.dart';
@@ -29,54 +32,53 @@ class Visualization extends StatefulWidget {
 }
 
 class _VisualizationState extends State<Visualization> {
-  List<Color> colorList = [];
-  List<List<FlSpot>> linechartData = [];
+  Map<int, List<FlSpot>> linechartData = {};
 
   Timer? timer;
   final connectionCon = Get.put(ConnectionCon());
+  final parameterCon = Get.put(ParameterCon());
+
   @override
   void initState() {
-    bus.on('updateControl', (arg) {
+    parameterCon.real_time_data_list.forEach((element) {
+      linechartData.addAll({
+        element.motId: [FlSpot(0, 0)]
+      });
+      setState(() {});
+    });
+    bus.on('updateRealParameter', (arg) {
       print(arg);
-      Uint8List list = arg;
 
-      ///随机颜色
-      if (colorList.isEmpty) {
-        colorList = List.generate(
-          list.length,
-          (index) => Color.fromRGBO(
-            Random().nextInt(256),
-            Random().nextInt(256),
-            Random().nextInt(256),
-            1,
-          ),
-        );
-      }
-
-      // dashValueChange(list.first, secondDashValue);
-
-      // ///第5位 前进开关   第6位 后退开关
-      // getGearData(list[4], list[5]);
+      ///修改id 为 257 的值
+      updateFlspotDate(257, arg);
     });
     super.initState();
 
-    ///发送指令 每100ms 发送一次
-    timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
+    ///发送指令 每1000ms 发送一次
+    timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       if (connectionCon.port != null) {
         ///发送指令
-        connectionCon.port!.write(
-            Uint8List.fromList(
-                [hexToInt('63'), hexToInt('00'), hexToInt('63')]),
-            timeout: 0);
+        connectionCon.sendParameterInstruct(257);
       }
     });
+  }
+
+  ///更新数据
+  updateFlspotDate(int id, int value) {
+    if (linechartData.containsKey(id)) {
+      List<FlSpot>? flspotList = linechartData[id];
+      int length = flspotList!.length;
+      flspotList.add(FlSpot(length.toDouble(), value.toDouble()));
+      linechartData[id] = flspotList;
+      print(linechartData);
+      setState(() {});
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
-    bus.off('updateControl');
-    bus.off('control');
+    bus.off('updateRealParameter');
     if (timer != null) {
       timer!.cancel();
     }
@@ -85,30 +87,74 @@ class _VisualizationState extends State<Visualization> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 320.w),
+      margin: EdgeInsets.symmetric(horizontal: left_menu_margin()),
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          Container(
-            height: 50,
-            width: 100,
-            color: Colors.red,
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 20.w,
+            runSpacing: 20.w,
+            children: wrapList(),
           ),
           SizedBox(
             height: 30,
           ),
           Expanded(
             child: LineChartWidget(
-              colorList: colorList,
-              lineChartData: [],
+              lineChartData: linechartData,
             ),
           ),
           FilterButton(
             voidCallback: () {
-              setState(() {});
+              CustomDialog.showCustomDialog(
+                context,
+                child: RealTimeDataFilter(
+                  selectids: parameterCon.real_time_data_select,
+                  voidCallback: () {
+                    setState(() {});
+                  },
+                ),
+              );
             },
           ),
         ],
+      ),
+    );
+  }
+
+  List<Widget> wrapList() {
+    List<Widget> list = [];
+    parameterCon.real_time_data_list.forEach((element) {
+      if (parameterCon.real_time_data_select.contains(element.motId)) {
+        list.add(wrapItem(element));
+      }
+    });
+    return list;
+  }
+
+  Widget wrapItem(Parameter parameter) {
+    return Container(
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: parameter.parmName,
+              style: TextStyle(
+                fontSize: 20.sp,
+                color: Get.theme.hintColor,
+              ),
+            ),
+            WidgetSpan(
+              child: Container(
+                margin: EdgeInsets.only(left: 5.w),
+                width: 20.w,
+                height: 20.w,
+                color: parameterCon.real_time_data_color[parameter.motId],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

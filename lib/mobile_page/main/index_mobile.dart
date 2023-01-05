@@ -199,6 +199,7 @@ class _IndexMobileState extends State<IndexMobile> {
   ///菜单item
   portraitMenuItemWidget(index) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         menuCon.selectIndex.value = index;
         if (_scaffoldKey.currentState!.isDrawerOpen) Navigator.pop(context);

@@ -8,12 +8,16 @@ import 'package:kelly_user_project/common/filter_view.dart';
 import 'package:kelly_user_project/common/filter_view_mobile.dart';
 import 'package:kelly_user_project/config/config.dart';
 
+import '../controller/parameter_con.dart';
 import 'custom_button.dart';
 import 'custom_dialog.dart';
 import 'get_box.dart';
 
 class FilterButtonMobile extends StatefulWidget {
-  const FilterButtonMobile({Key? key}) : super(key: key);
+  final VoidCallback voidCallback;
+
+  const FilterButtonMobile({Key? key, required this.voidCallback})
+      : super(key: key);
 
   @override
   State<FilterButtonMobile> createState() => _FilterButtonMobileState();
@@ -21,6 +25,7 @@ class FilterButtonMobile extends StatefulWidget {
 
 class _FilterButtonMobileState extends State<FilterButtonMobile> {
   RxBool showFilter = false.obs;
+  final parameterCon = Get.put(ParameterCon());
   @override
   Widget build(BuildContext context) {
     return Obx(() => filterButton());
@@ -87,7 +92,7 @@ class _FilterButtonMobileState extends State<FilterButtonMobile> {
       margin: EdgeInsets.only(left: isLandScape() ? 1.sw / 4 : 0),
       decoration: BoxDecoration(
         color: Get.theme.dialogBackgroundColor,
-        borderRadius:const BorderRadius.vertical(
+        borderRadius: const BorderRadius.vertical(
             top: Radius.circular(20), bottom: Radius.zero),
       ),
       child: SafeArea(
@@ -101,20 +106,30 @@ class _FilterButtonMobileState extends State<FilterButtonMobile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  text: 'Verfy',
-                  width: 127,
-                  height: 35,
-                  onTap: () {},
+                  text: 'Reset',
+                  width: mobileButtonWidth(),
+                  height: mobileButtonHeight(),
+                  onTap: () async {
+                    await parameterCon.getDefaultProPertySelectList();
+                    await parameterCon.getParameterWithProperty();
+
+                    Navigator.pop(context);
+                    widget.voidCallback();
+                  },
                 ),
                 const SizedBox(width: 20),
                 CustomButton(
-                  text: 'Program',
-                  width: 127,
-                  height: 35,
+                  text: 'Confirm',
+                  width: mobileButtonWidth(),
+                  height: mobileButtonHeight(),
                   bgColor: Get.theme.primaryColor,
                   borderWidth: 0,
                   borderColor: Colors.transparent,
-                  onTap: () {},
+                  onTap: () async {
+                    await parameterCon.getParameterWithProperty();
+                    Navigator.pop(context);
+                    widget.voidCallback();
+                  },
                 ),
               ],
             ),

@@ -38,6 +38,7 @@ class _MainScreenState extends State<MainScreen> {
   final menuController = Get.put(MenuController());
   final parameterController = Get.put(ParameterCon());
   final connectionCon = Get.put(ConnectionCon());
+  double barHeight() => 100.h;
 
   @override
   void initState() {
@@ -74,10 +75,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget _mainWidget() {
     return Obx(
       () => Positioned(
-        top: 100.h,
         left: 0,
-        bottom: 100.h,
+        bottom: barHeight(),
         right: 0,
+        top: 0,
         child: _indexWidget(),
       ),
     );
@@ -89,7 +90,7 @@ class _MainScreenState extends State<MainScreen> {
       left: 0,
       bottom: 0,
       child: Container(
-        width: 320.w,
+        width: left_menu_margin(),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -98,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
             fit: BoxFit.fill,
           ),
         ),
-        padding: EdgeInsets.only(top: 100.h, left: 42.w),
+        padding: EdgeInsets.only(top: barHeight(), left: 42.w),
         child: const LeftMenu(),
       ),
     );
@@ -109,7 +110,7 @@ class _MainScreenState extends State<MainScreen> {
       top: 0,
       left: 0,
       right: 0,
-      height: 100.h,
+      height: barHeight(),
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -140,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
       bottom: 0,
       left: 0,
       right: 0,
-      height: 100.h,
+      height: barHeight(),
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -166,16 +167,28 @@ class _MainScreenState extends State<MainScreen> {
       case 0:
         return Container();
       case 1:
-        return Connection();
+        return Padding(
+          padding: EdgeInsets.only(top: barHeight()),
+          child: Connection(),
+        );
 
       case 2:
-        return ParameterPage();
+        return Padding(
+          padding: EdgeInsets.only(top: barHeight()),
+          child: ParameterPage(),
+        );
       case 3:
         return MonitorPage();
       case 4:
-        return Visualization();
+        return Padding(
+          padding: EdgeInsets.only(top: barHeight()),
+          child: Visualization(),
+        );
       case 5:
-        return Firmware();
+        return Padding(
+          padding: EdgeInsets.only(top: barHeight()),
+          child: Firmware(),
+        );
       case 6:
         return Setting();
       default:
@@ -216,27 +229,26 @@ class _MainScreenState extends State<MainScreen> {
             'Modify',
             -1,
             indexTap: () {
-              List list = parameterController.all_parameter_value.values
-                  .toList()
-                  .sublist(0, 2);
-              List<int> intList = List.generate(
-                  list.length, (index) => int.parse(list[index].toString()));
+              // List list = parameterController.all_parameter_value.values
+              //     .toList()
+              //     .sublist(0, 2);
+              // List<int> intList = List.generate(
+              //     list.length, (index) => int.parse(list[index].toString()));
 
-              intList.insertAll(0, [
-                hexToInt('62'),
-                hexToInt('02'),
-              ]);
-              int sum = 0;
+              // intList.insertAll(0, [
+              //   hexToInt('62'),
+              //   hexToInt('02'),
+              // ]);
+              // int sum = 0;
 
-              intList.forEach((element) {
-                sum = sum + element;
-              });
-              print(sum);
-              intList.add(sum);
+              // intList.forEach((element) {
+              //   sum = sum + element;
+              // });
+              // print(sum);
+              // intList.add(sum);
 
               ///参数数据写入电机
-              connectionCon.port!
-                  .write(Uint8List.fromList(intList), timeout: 0);
+              connectionCon.sendParameterSaveInstruct(257);
             },
           ),
         ];
@@ -244,8 +256,7 @@ class _MainScreenState extends State<MainScreen> {
         return [
           bottomMenuItem('Primary', 0),
           bottomMenuItem('Advanced', 1),
-          bottomMenuItem('Specialized', 2),
-          bottomMenuItem('Test Monitoring', 3),
+          bottomMenuItem('Test Monitoring', 2),
         ];
       case 4:
         return [

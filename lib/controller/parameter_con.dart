@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:kelly_user_project/common/common.dart';
 import 'package:kelly_user_project/common/show_success_dialog.dart';
 import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/models/parameter.dart';
@@ -33,6 +34,15 @@ class ParameterCon extends GetxController {
   ///参数的值
   Map<String, dynamic> all_parameter_value = {};
 
+  ///实时参数
+  List<Parameter> real_time_data_list = [];
+
+  ///实时参数对应色折线图颜色
+  Map<int, Color> real_time_data_color = {};
+
+  ///选择要显示的实时参数
+  List<int> real_time_data_select = [];
+
   ///获取筛选
   Future getPropertyFromJson() async {
     final String response =
@@ -44,6 +54,7 @@ class ParameterCon extends GetxController {
     await getDefaultProPertySelectList();
   }
 
+  ///获取默认选择的筛选 （-1 为不选择）
   Future getDefaultProPertySelectList() async {
     property_isSelect_list = property_list.map((e) => -1).toList();
   }
@@ -165,6 +176,21 @@ class ParameterCon extends GetxController {
     });
 
     print(filter_parameter_maplist);
+  }
+
+  ///获取实时参数
+  Future getRealTimeDataFromJson() async {
+    final String response =
+        await rootBundle.loadString('assets/jsons/real_time_data.json');
+    final List data = await json.decode(response);
+    real_time_data_list = data.map((e) => Parameter.fromJson(e)).toList();
+
+    ///设置实时参数全选
+    real_time_data_select = List.generate(real_time_data_list.length,
+        (index) => real_time_data_list[index].motId);
+    real_time_data_list.forEach((element) {
+      real_time_data_color.addAll({element.motId: randomColor()});
+    });
   }
 
   ///读文件

@@ -105,7 +105,7 @@ class _BluetoothMobileState extends State<BluetoothMobile> {
                   print(
                       'Bonding with ${device.address} has ${bonded ? 'succed' : 'failed'}.');
                   if (bonded) {
-                    connectionCon.blueToothConnect(address);
+                    connectionCon.blueConnect(address);
                   }
                 }
                 setState(() {

@@ -5,20 +5,32 @@ import 'package:get/get.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
+import 'package:kelly_user_project/models/parameter.dart';
 
-import '../config/config.dart';
+import '../../config/config.dart';
 
-class FilterView extends StatefulWidget {
+class RealTimeDataFilter extends StatefulWidget {
+  final List<int> selectids;
   final VoidCallback voidCallback;
-  const FilterView({Key? key, required this.voidCallback}) : super(key: key);
+  const RealTimeDataFilter({
+    Key? key,
+    required this.selectids,
+    required this.voidCallback,
+  }) : super(key: key);
 
   @override
-  State<FilterView> createState() => _FilterViewState();
+  State<RealTimeDataFilter> createState() => _RealTimeDataFilterState();
 }
 
-class _FilterViewState extends State<FilterView> {
+class _RealTimeDataFilterState extends State<RealTimeDataFilter> {
   final parameterCon = Get.put(ParameterCon());
-  bool show = false;
+  List<int> selectids = [];
+  @override
+  void initState() {
+    super.initState();
+    selectids = List.generate(
+        widget.selectids.length, (index) => widget.selectids[index]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,96 +38,41 @@ class _FilterViewState extends State<FilterView> {
   }
 
   filterListView() {
-    return ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 78.w, vertical: 42.h),
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                parameterCon.property_list[index].motMetaKey,
-                style: TextStyle(
-                  color: Get.theme.highlightColor,
-                  fontSize: 22.sp,
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: GridView.count(
-                      padding: const EdgeInsets.only(),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 6,
-                      childAspectRatio: 120 / 40,
-                      mainAxisSpacing: 15.w,
-                      crossAxisSpacing: 15.h,
-                      children: gridViewList(
-                        index,
-                        parameterCon.property_list[index].motMetaValues,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Container(
-                    height: 44.h,
-                    width: 90.w,
-                    alignment: Alignment.centerLeft,
-                    child:
-                        parameterCon.property_list[index].motMetaValues.length >
-                                    6 &&
-                                !parameterCon.property_select_more[index]
-                            ? foldButton(index)
-                            : SizedBox(),
-                  ),
-                ],
-              ),
-            ],
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 25,
-          );
-        },
-        itemCount: parameterCon.property_list.length);
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 78.w, vertical: 42.h),
+      children: [
+        Wrap(
+          spacing: 20.w,
+          runSpacing: 20.w,
+          children: gridViewList(),
+        )
+      ],
+    );
   }
 
-  List<Widget> gridViewList(int index, List array) {
+  List<Widget> gridViewList() {
     List<Widget> list = [];
-    List dataArr = [];
-    if (!parameterCon.property_select_more[index] && array.length > 6) {
-      dataArr = array.sublist(0, 6);
-    } else {
-      dataArr = array;
-    }
 
-    for (var i = 0; i < dataArr.length; i++) {
+    for (var i = 0; i < parameterCon.real_time_data_list.length; i++) {
+      Parameter parameter = parameterCon.real_time_data_list[i];
       list.add(
         Tooltip(
-          message: parameterCon.property_list[index].motMetaValues[i],
+          message: parameter.toolTip,
           showDuration: const Duration(seconds: 0),
           preferBelow: false,
           child: InkWell(
             onTap: () {
-              if (parameterCon.property_isSelect_list[index] != i) {
-                parameterCon.property_isSelect_list[index] = i;
+              if (selectids.contains(parameter.motId)) {
+                selectids.remove(parameter.motId);
               } else {
-                parameterCon.property_isSelect_list[index] = -1;
+                selectids.add(parameter.motId);
               }
 
               setState(() {});
             },
             child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(5),
-              decoration: parameterCon.property_isSelect_list[index] == i
+              padding: const EdgeInsets.all(10),
+              decoration: selectids.contains(parameter.motId)
                   ? BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: Get.theme.primaryColor,
@@ -129,12 +86,12 @@ class _FilterViewState extends State<FilterView> {
                       ),
                     ),
               child: Text(
-                parameterCon.property_list[index].motMetaValues[i],
+                parameter.parmName,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 18.sp,
-                  color: parameterCon.property_isSelect_list[index] == i
+                  color: selectids.contains(parameter.motId)
                       ? Get.theme.highlightColor
                       : Get.theme.hintColor,
                 ),
@@ -142,11 +99,6 @@ class _FilterViewState extends State<FilterView> {
             ),
           ),
         ),
-      );
-    }
-    if (parameterCon.property_select_more[index] && dataArr.length > 6) {
-      list.add(
-        foldButton(index),
       );
     }
 
@@ -205,31 +157,30 @@ class _FilterViewState extends State<FilterView> {
                 width: buttonWidth(),
                 height: buttonHeight(),
                 onTap: () async {
-                  await parameterCon.getDefaultProPertySelectList();
-                  await parameterCon.getParameterWithProperty();
-
                   Navigator.pop(context);
+                  parameterCon.real_time_data_select = List.generate(
+                      parameterCon.real_time_data_list.length,
+                      (index) => parameterCon.real_time_data_list[index].motId);
                   widget.voidCallback();
                 },
               ),
               SizedBox(width: 30.w),
               CustomButton(
                 text: 'Confirm',
-                width: buttonWidth(),
+                 width: buttonWidth(),
                 height: buttonHeight(),
                 bgColor: Get.theme.primaryColor,
                 borderWidth: 0,
                 borderColor: Colors.transparent,
                 onTap: () async {
-                  await parameterCon.getParameterWithProperty();
                   Navigator.pop(context);
+                  parameterCon.real_time_data_select = selectids;
                   widget.voidCallback();
                 },
               ),
             ],
           ),
           SizedBox(height: 40.h),
-          //filterButton(),
         ],
       ),
     );

@@ -15,6 +15,7 @@ class Parameter {
     required this.toolTip,
     required this.motProperties,
     required this.motId,
+    required this.unit,
   });
 
   final int id;
@@ -31,6 +32,7 @@ class Parameter {
   final String toolTip;
   final Map motProperties;
   final int motId;
+  final String unit;
 
   factory Parameter.fromJson(Map<String, dynamic> json) => Parameter(
         id: json['id'] as int,
@@ -45,6 +47,7 @@ class Parameter {
         toolTip: json['toolTip'].toString(),
         motProperties: json['motProperties'] as Map? ?? {},
         motId: json['motId'] as int,
+        unit: json['unit'].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -58,6 +61,7 @@ class Parameter {
         'toolTip': toolTip,
         'motProperties': motProperties,
         'motId': motId,
+        'unit': unit,
       };
 
   Parameter clone() => Parameter(
@@ -71,6 +75,7 @@ class Parameter {
         toolTip: toolTip,
         motProperties: motProperties,
         motId: motId,
+        unit: unit,
       );
 
   Parameter copyWith(
@@ -83,7 +88,8 @@ class Parameter {
           double? sliderMax,
           String? toolTip,
           Map? motProperties,
-          int? motId}) =>
+          int? motId,
+          String? unit}) =>
       Parameter(
         id: id ?? this.id,
         parmName: parmName ?? this.parmName,
@@ -95,6 +101,7 @@ class Parameter {
         toolTip: toolTip ?? this.toolTip,
         motProperties: motProperties ?? this.motProperties,
         motId: motId ?? this.motId,
+        unit: unit ?? this.unit,
       );
 
   @override
@@ -110,7 +117,8 @@ class Parameter {
           sliderMax == other.sliderMax &&
           toolTip == other.toolTip &&
           motProperties == other.motProperties &&
-          motId == other.motId;
+          motId == other.motId &&
+          unit == other.unit;
 
   @override
   int get hashCode =>
@@ -123,7 +131,8 @@ class Parameter {
       sliderMax.hashCode ^
       toolTip.hashCode ^
       motProperties.hashCode ^
-      motId.hashCode;
+      motId.hashCode ^
+      unit.hashCode;
 }
 
 enum ParameterTypeEnum { Input, Enum, Slider, Switcher }

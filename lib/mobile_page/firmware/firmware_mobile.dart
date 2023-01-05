@@ -9,6 +9,8 @@ import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_select_button.dart';
 import 'package:kelly_user_project/config/config.dart';
+import 'package:kelly_user_project/config/event.dart';
+import 'package:kelly_user_project/controller/connection_con.dart';
 
 class FirmwareMobile extends StatefulWidget {
   const FirmwareMobile({Key? key}) : super(key: key);
@@ -19,12 +21,43 @@ class FirmwareMobile extends StatefulWidget {
 
 class _FirmwareMobileState extends State<FirmwareMobile> {
   PlatformFile? file;
+  final connectionCon = Get.put(ConnectionCon());
+  int stepIndex = 1;
+  @override
+  void initState() {
+    super.initState();
+    bus.on('updateFirmware', (arg) {
+      stepIndex++;
+      updateFirmware();
+    });
+  }
+
+  updateFirmware() {
+    switch (stepIndex) {
+      case 1:
+        //connectionCon.firmware_opdate_erase();
+        break;
+      case 2:
+        //connectionCon.firmware_opdate_write_init();
+        break;
+        // case 3:
+        //   connectionCon.firmware_opdate_erase();
+        //   break;
+        // case 4:
+        //   connectionCon.firmware_opdate_erase();
+        //   break;
+        // case 5:
+        //   connectionCon.firmware_opdate_erase();
+        break;
+      default:
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = 1.sw - getMobileLeftMargin() - 60.w;
     double height = 50;
-
+    double spaceHeight = 26;
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: isLandScape() ? const AppBarMobile(title: 'Firmware') : null,
@@ -44,7 +77,7 @@ class _FirmwareMobileState extends State<FirmwareMobile> {
                   height: height,
                 ),
                 SizedBox(
-                  height: 26,
+                  height: spaceHeight,
                 ),
                 CustomInput(
                   title: 'Factory serial number',
@@ -54,7 +87,7 @@ class _FirmwareMobileState extends State<FirmwareMobile> {
                   height: height,
                 ),
                 SizedBox(
-                  height: 26,
+                  height: spaceHeight,
                 ),
                 CustomInput(
                   title: 'Factory serial number',
@@ -64,7 +97,17 @@ class _FirmwareMobileState extends State<FirmwareMobile> {
                   height: height,
                 ),
                 SizedBox(
-                  height: 26,
+                  height: spaceHeight,
+                ),
+                CustomInput(
+                  title: 'Version number',
+                  hint: 'content here',
+                  readOnly: false,
+                  width: width,
+                  height: height,
+                ),
+                SizedBox(
+                  height: spaceHeight,
                 ),
                 CustomSelectButton(
                   width: width,
@@ -92,10 +135,13 @@ class _FirmwareMobileState extends State<FirmwareMobile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CustomButton(
+                    CustomButton(
                       text: 'Verfy',
                       width: 166,
                       height: 50,
+                      onTap: () {
+                        updateFirmware();
+                      },
                     ),
                     const SizedBox(width: 12),
                     CustomButton(

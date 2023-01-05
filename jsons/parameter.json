@@ -10,5 +10,6 @@
     "slider_max": 100.0,
     "toolTip": "Voltage at terminal B+",
     "motProperties": "",
-    "motId": 1
+    "motId": 1,
+    "unit": ""
 }

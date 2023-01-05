@@ -7,9 +7,13 @@ import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:kelly_user_project/common/app_bar_mobile.dart';
 import 'package:kelly_user_project/common/common.dart';
+import 'package:kelly_user_project/common/custom_dialog.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/filter_button_mobile.dart';
+import 'package:kelly_user_project/common/get_box.dart';
+import 'package:kelly_user_project/common/show_success_dialog.dart';
+import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/controller/connection_con.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
 import 'package:kelly_user_project/models/parameter.dart';
@@ -27,10 +31,41 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
   final parameterCon = Get.put(ParameterCon());
   final ConnectionCon connectionCon = Get.put(ConnectionCon());
   double leftMenuMargin = isLandScape() ? 1.sw / 4 : 0;
+  var sliderBuild;
+
   @override
   void initState() {
+    //设置滑块参数显示方式：   slider 滑块，  input 输入框
+    if (box.read('sliderDisplay') == null) {
+      box.write('sliderDisplay', 'slider');
+    }
+
+    ///读取文件更新数据
+    bus.on('updateParameterWithFile', (arg) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+    bus.on('updateParameterSuccess', (arg) {
+      print('2222');
+      if (mounted) {
+        CustomDialog.showCustomDialog(context, child: ShowSuccessDialog());
+      }
+    });
+
+    ///指令处理数据
+    bus.on('updateParameterWithSerial', (arg) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+
     super.initState();
-    connectionCon.sendMessage();
+    if (connectionCon.bluetoothConnection != null &&
+        connectionCon.bluetoothConnection!.isConnected) {
+      ///发送指令
+      connectionCon.sendParameterInstruct(257);
+    }
   }
 
   @override
@@ -49,13 +84,17 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
           ],
         ),
       ),
-      bottomNavigationBar: FilterButtonMobile(),
+      bottomNavigationBar: FilterButtonMobile(
+        voidCallback: () {
+          setState(() {});
+        },
+      ),
     );
   }
 
   lsitview() {
     return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.all(10),
       itemBuilder: (context, index) {
         List<String> keys = parameterCon.filter_parameter_maplist.keys
             .where((element) => true)
@@ -67,7 +106,7 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
 
         switch (keys[index]) {
           case 'input':
-            return inputGridview(values[index]);
+            return inputGridview(values[index], false);
           case 'enum':
             return enumGridview(values[index]);
           case 'switcher':
@@ -97,7 +136,10 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
         topButton('Write file', onTap: () {
           parameterCon.writeFile(context);
         }),
-        topButton('Modify', onTap: () {}),
+        topButton('Modify', onTap: () {
+          ///保存参数指令
+          connectionCon.sendParameterSaveInstruct(257);
+        }),
       ],
     );
   }
@@ -124,7 +166,7 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
     );
   }
 
-  Widget inputGridview(List<Parameter> list) {
+  Widget inputGridview(List<Parameter> list, bool isSlider) {
     return Wrap(
       spacing: 20,
       runSpacing: 20,
@@ -141,7 +183,12 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
                       text: parameterCon.all_parameter_value[e.parmName]
                           .toString()),
                   onChanged: (res) async {
-                    await parameterCon.updateParameterValue(e, res);
+                    if (isSlider) {
+                      await parameterCon.updateParameterValue(
+                          e, res.isEmpty ? 0 : double.parse(res));
+                    } else {
+                      await parameterCon.updateParameterValue(e, res);
+                    }
                   },
                 ),
               ))
@@ -154,15 +201,26 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
       spacing: 20,
       runSpacing: 20,
       children: list
-          .map((e) => SizedBox(
+          .map(
+            (e) => SizedBox(
+              width: (1.sw - leftMenuMargin - 40) / 2,
+              child: CustomPopMenu(
+                title: e.parmName,
                 width: (1.sw - leftMenuMargin - 40) / 2,
-                child: CustomPopMenu(
-                  title: e.parmName,
-                  width: (1.sw - leftMenuMargin - 40) / 2,
-                  height: 40,
-                  value: -1,
-                ),
-              ))
+                height: 40,
+                items: e.enumValue
+                    .map((value) => MenuItems(label: value, value: value))
+                    .toList(),
+                value: e.enumValue.length == 0 ||
+                        parameterCon.all_parameter_value[e.parmName].length == 0
+                    ? null
+                    : parameterCon.all_parameter_value[e.parmName],
+                valueChanged: (res) async {
+                  await parameterCon.updateParameterValue(e, res);
+                },
+              ),
+            ),
+          )
           .toList(),
     );
   }
@@ -187,9 +245,8 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
                   CupertinoSwitch(
                     activeColor: Get.theme.primaryColor,
                     value: parameterCon.all_parameter_value[e.parmName],
-                    onChanged: (res) {
-                      parameterCon.all_parameter_value[e.parmName] =
-                          !parameterCon.all_parameter_value[e.parmName];
+                    onChanged: (res) async {
+                      await parameterCon.updateParameterValue(e, res);
                       switchbuild(() {});
                     },
                   )
@@ -202,72 +259,157 @@ class _ParameterPageMobileState extends State<ParameterPageMobile> {
   }
 
   Widget sliderGridview(List<Parameter> list) {
-    return StatefulBuilder(builder: (context, switchbuild) {
-      return Wrap(
-        spacing: 20,
-        runSpacing: 20,
-        children: list
-            .map(
-              (e) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    e.parmName,
-                    style: TextStyle(
-                      color: Get.theme.hintColor,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SfSliderTheme(
-                          data: SfSliderThemeData(
-                            activeTrackHeight: 25,
-                            inactiveTrackHeight: 25,
-                            activeTrackColor: Get.theme.primaryColor,
-                            inactiveTrackColor: Get.theme.hintColor,
-                            trackCornerRadius: 12.5,
-                            thumbRadius: 16,
-                          ),
-                          child: SfSlider(
-                            min: 0,
-                            max: 5,
-                            stepSize: 1,
-                            value: 2,
-                            trackShape: _SfTrackShape(),
-                            thumbIcon: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(32),
-                                color: Get.theme.focusColor,
-                              ),
-                              padding: EdgeInsets.all(4),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(32),
-                                  color: Get.theme.primaryColor,
-                                ),
+    return StatefulBuilder(builder: (context, sliderbuild) {
+      sliderBuild = sliderbuild;
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          displayValue(),
+          box.read('sliderDisplay') == 'slider'
+              ? Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  children: list
+                      .map(
+                        (e) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              e.parmName,
+                              style: TextStyle(
+                                color: Get.theme.hintColor,
+                                fontSize: 16,
                               ),
                             ),
-                            onChanged: (res) {},
-                          ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: SfSliderTheme(
+                                    data: SfSliderThemeData(
+                                      activeTrackHeight: 25,
+                                      inactiveTrackHeight: 25,
+                                      activeTrackColor: Get.theme.primaryColor,
+                                      inactiveTrackColor: Get.theme.hintColor,
+                                      trackCornerRadius: 12.5,
+                                      thumbRadius: 16,
+                                    ),
+                                    child: SfSlider(
+                                      min: e.sliderMin,
+                                      max: e.sliderMax,
+                                      stepSize: 1,
+                                      value: parameterCon
+                                          .all_parameter_value[e.parmName],
+                                      trackShape: _SfTrackShape(),
+                                      thumbIcon: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(32),
+                                          color: Get.theme.focusColor,
+                                        ),
+                                        padding: EdgeInsets.all(4),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(32),
+                                            color: Get.theme.primaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                      onChanged: (res) async {
+                                        await parameterCon.updateParameterValue(
+                                            e, res);
+                                        sliderbuild(() {});
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                Text(
+                                  parameterCon.all_parameter_value[e.parmName]
+                                      .toStringAsFixed(1),
+                                  style: TextStyle(
+                                    color: Get.theme.highlightColor,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      SizedBox(
-                        width: 50,
-                        child: TextFormField(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-            .toList(),
+                      )
+                      .toList(),
+                )
+              : inputGridview(list, true),
+        ],
       );
     });
+  }
+
+  Widget displayValue() {
+    double textFont = 18;
+    return DropdownButtonHideUnderline(
+      child: Theme(
+        data: ThemeData(
+          focusColor: Colors.transparent,
+        ),
+        child: DropdownButton(
+          focusColor: Colors.transparent,
+          dropdownColor: Get.theme.dialogBackgroundColor,
+          icon: Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Image.asset(
+              'assets/images/theme${box.read("theme")}/point_down.png',
+              width: 19.w,
+            ),
+          ),
+          alignment: AlignmentDirectional.center,
+          items: [
+            DropdownMenuItem(
+              alignment: AlignmentDirectional.center,
+              value: 'slider',
+              child: Text(
+                'slider',
+                style: TextStyle(
+                  color: Get.theme.highlightColor,
+                  fontSize: textFont,
+                ),
+              ),
+            ),
+            DropdownMenuItem(
+              alignment: AlignmentDirectional.center,
+              value: 'input',
+              child: Text(
+                'input',
+                style: TextStyle(
+                  color: Get.theme.highlightColor,
+                  fontSize: textFont,
+                ),
+              ),
+            )
+          ],
+          hint: Text(
+            'Select the display mode',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: textFont,
+              color: Get.theme.hintColor,
+            ),
+          ),
+          onChanged: (value) {
+            box.write('sliderDisplay', value);
+            sliderBuild(() {});
+          },
+        ),
+      ),
+    );
   }
 }
 

@@ -8,6 +8,8 @@ import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/config/themes.dart';
 import 'package:kelly_user_project/controller/theme_con.dart';
 
+import '../../config/config.dart';
+
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
 
@@ -38,8 +40,8 @@ class _SettingState extends State<Setting> {
           SizedBox(height: 95.h),
           CustomButton(
             text: 'Confirm',
-            width: 165.w,
-            height: 64.h,
+            width: buttonWidth(),
+            height: buttonHeight(),
             bgColor: Get.theme.primaryColor,
             borderColor: Colors.transparent,
             borderWidth: 0,

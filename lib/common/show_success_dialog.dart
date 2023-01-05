@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 
+import '../config/config.dart';
+
 class ShowSuccessDialog extends StatefulWidget {
   const ShowSuccessDialog({Key? key}) : super(key: key);
 
@@ -50,8 +52,8 @@ class _ShowSuccessDialogState extends State<ShowSuccessDialog> {
         ),
         CustomButton(
           text: 'OK',
-          width: 165.w,
-          height: 64.h,
+          width: buttonWidth(),
+          height: buttonHeight(),
           bgColor: Get.theme.primaryColor,
           borderWidth: 0,
           borderColor: Colors.transparent,

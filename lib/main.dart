@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -52,6 +50,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     if (box.read('theme') == null) box.write('theme', 0);
     themeCon.updateTheme(Themes.themeList[box.read('theme')]);
+    parameterCon.getRealTimeDataFromJson();
     parameterCon.getPropertyFromJson();
     parameterCon.getParameterFromJson();
   }

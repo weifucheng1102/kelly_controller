@@ -2,13 +2,15 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:get/get.dart';
 import 'package:kelly_user_project/common/custom_button.dart';
 import 'package:kelly_user_project/common/custom_input.dart';
 import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/controller/connection_con.dart';
 import 'package:libserialport/libserialport.dart';
+
+import '../../common/common.dart';
+import '../../config/config.dart';
 
 class Serial extends StatefulWidget {
   const Serial({Key? key}) : super(key: key);
@@ -18,6 +20,10 @@ class Serial extends StatefulWidget {
 }
 
 class _SerialState extends State<Serial> {
+  double menuWidth() => 682.w;
+  double menuHeight() => 66.h;
+  double spaceHeight() => 30.w;
+
   ConnectionCon connectionCon = Get.put(ConnectionCon());
 
   List portList = [];
@@ -26,6 +32,7 @@ class _SerialState extends State<Serial> {
   TextEditingController bitsCon = TextEditingController(text: '8');
   TextEditingController stopBitsCon = TextEditingController(text: '1');
   TextEditingController parityCon = TextEditingController(text: '0');
+
   @override
   void initState() {
     super.initState();
@@ -43,12 +50,13 @@ class _SerialState extends State<Serial> {
         Column(
           children: [
             CustomPopMenu(
-              width: 682.w,
-              height: 66.h,
+              width: menuWidth(),
+              height: menuHeight(),
               title: 'Port',
               hint: 'Please enter the content here',
               value: null,
-              items: portList.map((e) => MenuItem(label: e, value: e)).toList(),
+              items:
+                  portList.map((e) => MenuItems(label: e, value: e)).toList(),
               valueChanged: (res) {
                 selectPort = res;
               },
@@ -59,35 +67,35 @@ class _SerialState extends State<Serial> {
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: baudRateCon,
-              width: 682.w,
-              height: 66.h,
+              width: menuWidth(),
+              height: menuHeight(),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: spaceHeight()),
             CustomInput(
               title: 'parity',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: parityCon,
-              width: 682.w,
-              height: 66.h,
+              width: menuWidth(),
+              height: menuHeight(),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: spaceHeight()),
             CustomInput(
               title: 'stopBits',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: stopBitsCon,
-              width: 682.w,
-              height: 66.h,
+              width: menuWidth(),
+              height: menuHeight(),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: spaceHeight()),
             CustomInput(
               title: 'bits',
               hint: 'Please enter the content here',
               readOnly: true,
               fieldCon: bitsCon,
-              width: 682.w,
-              height: 66.h,
+              width: menuWidth(),
+              height: menuHeight(),
             ),
             SizedBox(height: 40.h),
             Row(
@@ -95,10 +103,13 @@ class _SerialState extends State<Serial> {
               children: [
                 CustomButton(
                   text: 'Scin',
-                  width: 165.w,
-                  height: 64.h,
+                  width: buttonWidth(),
+                  height: buttonHeight(),
                   onTap: () {
                     print(connectionCon.port);
+                    connectionCon.port!
+                        .write(Uint8List.fromList([0x5a]), timeout: 0);
+
                     // int a = connectionCon.port!.write(
                     //   Uint8List.fromList(
                     //       "hello1  hello2  hello3 hello4  hello5 ".codeUnits),
@@ -108,8 +119,8 @@ class _SerialState extends State<Serial> {
                 const SizedBox(width: 30),
                 CustomButton(
                   text: 'Connect',
-                  width: 165.w,
-                  height: 64.h,
+                  width: buttonWidth(),
+                  height: buttonHeight(),
                   borderWidth: 0,
                   borderColor: Colors.transparent,
                   bgColor: Get.theme.primaryColor,

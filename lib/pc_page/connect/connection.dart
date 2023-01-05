@@ -21,7 +21,8 @@ class _ConnectionState extends State<Connection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 320.w, vertical: 40.h),
+      padding:
+          EdgeInsets.symmetric(horizontal: left_menu_margin(), vertical: 40.h),
       child: Obx(
         () =>
             menuController.bottomMenuIndex.value == 0 ? Serial() : Bluetooth(),

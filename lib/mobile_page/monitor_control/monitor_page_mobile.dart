@@ -36,7 +36,7 @@ class _MonitorPageMobileState extends State<MonitorPageMobile> {
               children: [
                 tabbarWidget(),
                 Expanded(
-                  child: menuController.bottomMenuIndex.value == 3
+                  child: menuController.bottomMenuIndex.value == 2
                       ? const TestMonitoringMobile()
                       : const MonitorControlMobile(),
                 )
@@ -52,8 +52,7 @@ class _MonitorPageMobileState extends State<MonitorPageMobile> {
       children: const [
         TopTabbarItemMobile('Primary', 0),
         TopTabbarItemMobile('Advanced', 1),
-        TopTabbarItemMobile('Specialized', 2),
-        TopTabbarItemMobile('Test Monitoring', 3),
+        TopTabbarItemMobile('Test Monitoring', 2),
       ],
     );
   }

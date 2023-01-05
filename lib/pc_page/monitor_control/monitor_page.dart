@@ -17,9 +17,9 @@ class _MonitorPageState extends State<MonitorPage> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => menuController.bottomMenuIndex.value == 3
+      () => menuController.bottomMenuIndex.value == 2
           ? const TestMonitoring()
-          : const MonitorControl(),
+          : MonitorControl(index: menuController.bottomMenuIndex.value),
     );
   }
 }

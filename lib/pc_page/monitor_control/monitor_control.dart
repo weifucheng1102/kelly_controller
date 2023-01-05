@@ -12,11 +12,17 @@ import 'package:kelly_user_project/common/dash_board.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/config/event.dart';
 import 'package:kelly_user_project/controller/connection_con.dart';
+import 'package:kelly_user_project/controller/parameter_con.dart';
+import 'package:kelly_user_project/models/parameter.dart';
+import 'package:kelly_user_project/pc_page/monitor_control/battery_view.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
+import '../../config/config.dart';
+
 class MonitorControl extends StatefulWidget {
-  const MonitorControl({Key? key}) : super(key: key);
+  final int index;
+  const MonitorControl({Key? key, required this.index}) : super(key: key);
 
   @override
   State<MonitorControl> createState() => _MonitorControlState();
@@ -25,6 +31,7 @@ class MonitorControl extends StatefulWidget {
 class _MonitorControlState extends State<MonitorControl> {
   //RxBool showFilter = false.obs;
   final connectionCon = Get.put(ConnectionCon());
+  final parameterCon = Get.put(ParameterCon());
 
   ///档位(前进 后退)
   RxString gear = 'N'.obs;
@@ -35,34 +42,29 @@ class _MonitorControlState extends State<MonitorControl> {
 
   Timer? timer;
 
+  Parameter? realTimeDataShow0;
+  Parameter? realTimeDataShow1;
+  Parameter? realTimeDataShow2;
+
   @override
   void initState() {
-    bus.on('updateControl', (arg) {
-      print(arg);
-      Uint8List list = arg;
-      dashValueChange(list.first, secondDashValue);
+    realTimeDataShow0 = parameterCon.real_time_data_list[0];
+    realTimeDataShow1 = parameterCon.real_time_data_list[1];
+    realTimeDataShow2 = parameterCon.real_time_data_list[2];
 
-      ///第5位 前进开关   第6位 后退开关
-      getGearData(list[4], list[5]);
-    });
     super.initState();
-    print('=======');
-    bus.on('control', (arg) {
-      print(arg);
-      Uint8List list = arg;
-      dashValueChange(list.first, firstDashValue);
-      dashValueChange(list[1], secondDashValue);
-      dashValueChange(list.last, thirdDashValue);
+
+    bus.on('updateRealParameter', (arg) {
+      dashValueChange(arg, firstDashValue);
+      //dashValueChange(list[1], secondDashValue);
+      //dashValueChange(list.last, thirdDashValue);
     });
 
-    ///发送指令 每100ms 发送一次
+    ///发送指令 每1000ms 发送一次
     timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
       if (connectionCon.port != null) {
         ///发送指令
-        connectionCon.port!.write(
-            Uint8List.fromList(
-                [hexToInt('63'), hexToInt('00'), hexToInt('63')]),
-            timeout: 0);
+        connectionCon.sendParameterInstruct(257);
       }
     });
   }
@@ -70,8 +72,7 @@ class _MonitorControlState extends State<MonitorControl> {
   @override
   void dispose() {
     super.dispose();
-    bus.off('control');
-    bus.off('updateControl');
+    bus.off('updateRealParameter');
     if (timer != null) {
       timer!.cancel();
     }
@@ -82,14 +83,101 @@ class _MonitorControlState extends State<MonitorControl> {
     return Padding(
       padding: EdgeInsets.only(bottom: 10.h, top: 50.h),
       child: Obx(
-        () => ListView(
-          controller: ScrollController(),
+        () => Column(
           children: [
-            Column(
-              children: widgetList(),
+            Padding(
+              padding: EdgeInsets.only(right: 90.w, bottom: 20.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  BatteryView(electricQuantity: 0.8),
+                  SizedBox(
+                    width: 20.w,
+                  ),
+                  Text(
+                    'Electricity：80%',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      color: Get.theme.hintColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            // _filterButton(),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: left_menu_margin()),
+                controller: ScrollController(),
+                children: [
+                  Column(
+                    children: widgetList(),
+                  ),
+                  // _filterButton(),
+                ],
+              ),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget displayValue(index) {
+    return Expanded(
+      child: Center(
+        child: DropdownButtonHideUnderline(
+          child: Theme(
+            data: ThemeData(
+              focusColor: Colors.transparent,
+            ),
+            child: DropdownButton(
+              focusColor: Colors.transparent,
+              dropdownColor: Get.theme.dialogBackgroundColor,
+              icon: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: Image.asset(
+                  'assets/images/theme${box.read("theme")}/point_down.png',
+                  width: 19.w,
+                ),
+              ),
+              alignment: AlignmentDirectional.center,
+              items: parameterCon.real_time_data_list
+                  .map(
+                    (item) => DropdownMenuItem(
+                      value: item,
+                      child: Text(
+                        item.parmName,
+                        style: TextStyle(
+                          color: Get.theme.highlightColor,
+                          fontSize: 18.sp,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              hint: Text(
+                'display value',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  color: Get.theme.hintColor,
+                ),
+              ),
+              onChanged: (value) {
+                if (index == 0) {
+                  realTimeDataShow0 = value as Parameter?;
+                }
+                if (index == 1) {
+                  realTimeDataShow1 = value as Parameter?;
+                }
+                if (index == 2) {
+                  realTimeDataShow2 = value as Parameter?;
+                }
+                setState(() {});
+              },
+            ),
+          ),
         ),
       ),
     );
@@ -248,74 +336,118 @@ class _MonitorControlState extends State<MonitorControl> {
       SizedBox(
         height: 25.h,
       ),
-      Container(
-        width: 664.w,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            alignment: Alignment.topCenter,
-            image: AssetImage(
-                'assets/images/theme${box.read("theme")}/control_bg.png'),
-            fit: BoxFit.fitWidth,
+      widget.index == 0
+          ? Column(
+              children: [
+                realTimeDataWidget(),
+                SizedBox(
+                  height: 25.w,
+                ),
+                gearWidget(),
+                SizedBox(
+                  height: 25.w,
+                ),
+                acceleratorWidget(),
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                realTimeDataWidget(),
+                gearWidget(),
+                acceleratorWidget(),
+              ],
+            ),
+    ];
+
+    return list;
+  }
+
+  realTimeDataWidget() {
+    return Column(
+      children: [
+        SizedBox(
+          width: 664.w,
+          child: Row(
+            children: [
+              displayValue(0),
+              displayValue(1),
+              displayValue(2),
+            ],
           ),
         ),
-        child: Row(
-          children: [
-            rowItem('Rotating speed', '80', 'Km/h'),
-            rowItem('Voltage', '200', 'V'),
-            rowItem('Current', '10', ' A'),
-          ],
+        Container(
+          width: 664.w,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              alignment: Alignment.topCenter,
+              image: AssetImage(
+                  'assets/images/theme${box.read("theme")}/control_bg.png'),
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          child: Row(
+            children: [
+              rowItem(
+                  realTimeDataShow0!.parmName, '80', realTimeDataShow0!.unit),
+              rowItem(
+                  realTimeDataShow1!.parmName, '200', realTimeDataShow0!.unit),
+              rowItem(
+                  realTimeDataShow2!.parmName, '10', realTimeDataShow0!.unit),
+            ],
+          ),
         ),
-      ),
-      SizedBox(
-        height: 25.h,
-      ),
-      CustomInput(
-        title: 'Error code',
-        hint: '',
-        readOnly: true,
-        textColor: Get.theme.errorColor,
-        width: 472.w,
-        height: 66.h,
-        fieldCon: TextEditingController(text: 'ErrorCode：2021'),
-      ),
-      SizedBox(
-        height: 25.h,
-      ),
-      // Row(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     const CustomPopMenu(
-      //       title: 'Battery',
-      //       width: 472,
-      //       height: 66,
-      //       value: null,
-      //     ),
-      //     const SizedBox(
-      //       width: 95,
-      //     ),
-      //     CustomInput(
-      //       title: 'Error code',
-      //       hint: '',
-      //       readOnly: true,
-      //       textColor: Get.theme.errorColor,
-      //       width: 472,
-      //       height: 66,
-      //       fieldCon: TextEditingController(text: 'ErrorCode：2021'),
-      //     ),
-      //   ],
-      // ),
-      Row(
+        SizedBox(
+          height: 25.h,
+        ),
+        CustomInput(
+          title: 'Error code',
+          hint: '',
+          readOnly: true,
+          textColor: Get.theme.errorColor,
+          width: 472.w,
+          height: 66.h,
+          fieldCon: TextEditingController(text: 'ErrorCode：2021'),
+        ),
+        SizedBox(
+          height: 25.h,
+        ),
+      ],
+    );
+  }
+
+  ///档位
+  gearWidget() {
+    if (widget.index == 0) {
+      return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           gearButton('R'),
           gearButton('N'),
           gearButton('D'),
         ],
-      ),
-      SizedBox(
-        height: 25.h,
-      ),
-      Container(
+      );
+    } else {
+      return Column(
+        children: [
+          gearButton('R'),
+          gearButton('N'),
+          gearButton('D'),
+        ],
+      );
+    }
+    // return [
+    //   SizedBox(
+    //     height: 25.h,
+    //   ),
+    // ];
+  }
+
+  ///油门
+  Widget acceleratorWidget() {
+    if (widget.index == 0) {
+      return SizedBox(
         width: 606.w,
         child: SfSliderTheme(
           data: SfSliderThemeData(
@@ -358,12 +490,54 @@ class _MonitorControlState extends State<MonitorControl> {
             },
           ),
         ),
-      ),
-    ];
-
-    return list;
+      );
+    } else {
+      return SizedBox(
+        height: 406.h,
+        child: SfSliderTheme(
+          data: SfSliderThemeData(
+            activeTrackHeight: 50.w,
+            inactiveTrackHeight: 50.w,
+            activeTrackColor: Get.theme.primaryColor,
+            inactiveTrackColor: Get.theme.hintColor,
+            trackCornerRadius: 25.w,
+            thumbRadius: 30.w,
+          ),
+          child: SfSlider.vertical(
+            min: 0,
+            max: 5,
+            stepSize: 1,
+            value: sliderValue.value,
+            thumbIcon: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.h),
+                color: Get.theme.focusColor,
+              ),
+              padding: EdgeInsets.all(4.w),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Get.theme.primaryColor,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  sliderValue.value.toStringAsFixed(0),
+                  style: TextStyle(
+                    color: Get.theme.highlightColor,
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            onChanged: (res) {
+              sliderValue.value = res;
+            },
+          ),
+        ),
+      );
+    }
   }
-
   // Widget _filterButton() {
   //   return InkWell(
   //     highlightColor: Colors.transparent,
@@ -404,7 +578,9 @@ class _MonitorControlState extends State<MonitorControl> {
   ///档位
   Widget gearButton(str) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 45.w),
+      padding: EdgeInsets.symmetric(
+          horizontal: widget.index == 0 ? 45.w : 0,
+          vertical: widget.index == 1 ? 45.w : 0),
       child: InkWell(
         onTap: () {
           if (gear.value != str) {
