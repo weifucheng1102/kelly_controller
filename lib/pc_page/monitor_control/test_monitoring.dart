@@ -33,6 +33,8 @@ class _TestMonitoringState extends State<TestMonitoring> {
   Parameter? realTimeDataShow1;
   Parameter? realTimeDataShow2;
   Parameter? realTimeDataShow3;
+
+  int? errorCode;
   @override
   void initState() {
     realTimeDataShow0 = parameterCon.real_time_data_list[0];
@@ -41,10 +43,7 @@ class _TestMonitoringState extends State<TestMonitoring> {
     realTimeDataShow3 = parameterCon.real_time_data_list[3];
 
     super.initState();
-    bus.on('updateRealParameter', (arg) {
-      
-
-    });
+    bus.on('updateRealParameter', (arg) {});
 
     ///发送指令 每1000ms 发送一次
     timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
@@ -89,7 +88,10 @@ class _TestMonitoringState extends State<TestMonitoring> {
                   width: 322.w,
                   height: 66.h,
                   child: TextFormField(
-                    controller: TextEditingController(text: 'errorcode:2022'),
+                    controller: TextEditingController(
+                        text: errorCode == null
+                            ? '-'
+                            : errorCode!.toStringAsFixed(0)),
                     readOnly: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -112,6 +114,7 @@ class _TestMonitoringState extends State<TestMonitoring> {
           ),
           Expanded(
               child: ListView(
+            padding: EdgeInsets.only(bottom: 20.h),
             controller: ScrollController(),
             children: [
               Row(
@@ -123,33 +126,8 @@ class _TestMonitoringState extends State<TestMonitoring> {
                         height: 80.h,
                         child: displayValue(0),
                       ),
-                      DashBoard(
-                        minnum: 0,
-                        maxnum: 200,
-                        size: 280.w,
-                        interval: 20,
-                        endValue: 100,
-                        centerWidget: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                            Text(
-                              realTimeDataShow0!.unit,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      dashBoardWidget(
+                          parameter: realTimeDataShow0, interval: 20),
                     ],
                   ),
                   Column(
@@ -158,33 +136,8 @@ class _TestMonitoringState extends State<TestMonitoring> {
                         height: 80.h,
                         child: displayValue(1),
                       ),
-                      DashBoard(
-                        minnum: 0,
-                        maxnum: 200,
-                        size: 280.w,
-                        interval: 20,
-                        endValue: 100,
-                        centerWidget: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                            Text(
-                              realTimeDataShow1!.unit,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      dashBoardWidget(
+                          parameter: realTimeDataShow1, interval: 20),
                     ],
                   ),
                   Column(
@@ -193,33 +146,8 @@ class _TestMonitoringState extends State<TestMonitoring> {
                         height: 80.h,
                         child: displayValue(2),
                       ),
-                      DashBoard(
-                        minnum: 0,
-                        maxnum: 200,
-                        size: 280.w,
-                        interval: 20,
-                        endValue: 100,
-                        centerWidget: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                            Text(
-                              realTimeDataShow2!.unit,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      dashBoardWidget(
+                          parameter: realTimeDataShow2, interval: 20),
                     ],
                   ),
                   Column(
@@ -228,33 +156,8 @@ class _TestMonitoringState extends State<TestMonitoring> {
                         height: 80.h,
                         child: displayValue(3),
                       ),
-                      DashBoard(
-                        minnum: 0,
-                        maxnum: 200,
-                        size: 280.w,
-                        interval: 20,
-                        endValue: 100,
-                        centerWidget: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                            Text(
-                              realTimeDataShow3!.unit,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Get.theme.highlightColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      dashBoardWidget(
+                          parameter: realTimeDataShow3, interval: 20),
                     ],
                   ),
                 ],
@@ -272,6 +175,41 @@ class _TestMonitoringState extends State<TestMonitoring> {
                   .toList()),
             ],
           ))
+        ],
+      ),
+    );
+  }
+
+  dashBoardWidget({
+    required Parameter? parameter,
+    required double interval,
+  }) {
+    return DashBoard(
+      minnum: parameter!.sliderMin,
+      maxnum: parameter.sliderMax,
+      size: 280.w,
+      interval: interval,
+      endValue: parameterCon.real_time_data_value[parameter.motId] ?? 0,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            parameterCon.real_time_data_value[parameter.motId] == null
+                ? '0'
+                : '${parameterCon.real_time_data_value[parameter.motId]}',
+            style: TextStyle(
+              fontSize: 25.sp,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            parameter.unit,
+            style: TextStyle(
+              fontSize: 10.sp,
+              color: Get.theme.highlightColor,
+            ),
+          ),
         ],
       ),
     );
@@ -354,38 +292,40 @@ class _TestMonitoringState extends State<TestMonitoring> {
   //   }
   //   return list;
   // }
-}
+  ///输入框类型参数布局
+  Widget inputGridview(List<Parameter> list) {
+    return Wrap(
+      runSpacing: 30.h,
+      spacing: 30.w,
+      children: list
+          .map(
+            (e) => Tooltip(
+              preferBelow: false,
+              message: e.toolTip,
+              child: CustomInput(
+                title: e.parmName,
+                hint: parameterCon.real_time_data_value[e.motId] == null
+                    ? ''
+                    : '${parameterCon.real_time_data_value[e.motId]}',
 
-///输入框类型参数布局
-Widget inputGridview(List<Parameter> list) {
-  return Wrap(
-    runSpacing: 30.h,
-    spacing: 30.w,
-    children: list
-        .map(
-          (e) => Tooltip(
-            preferBelow: false,
-            message: e.toolTip,
-            child: CustomInput(
-              title: e.parmName,
-              hint: '',
-              readOnly: true,
-              width: 350,
-              height: 66.w,
-              // fieldCon: TextEditingController(
-              //     text:
-              //         parameterCon.all_parameter_value[e.parmName].toString()),
-              // onChanged: (res) async {
-              //   if (isSlider) {
-              //     await parameterCon.updateParameterValue(
-              //         e, res.isEmpty ? 0 : double.parse(res));
-              //   } else {
-              //     await parameterCon.updateParameterValue(e, res);
-              //   }
-              // },
+                readOnly: true,
+                width: 350,
+                height: 66.w,
+                // fieldCon: TextEditingController(
+                //     text:
+                //         parameterCon.all_parameter_value[e.parmName].toString()),
+                // onChanged: (res) async {
+                //   if (isSlider) {
+                //     await parameterCon.updateParameterValue(
+                //         e, res.isEmpty ? 0 : double.parse(res));
+                //   } else {
+                //     await parameterCon.updateParameterValue(e, res);
+                //   }
+                // },
+              ),
             ),
-          ),
-        )
-        .toList(),
-  );
+          )
+          .toList(),
+    );
+  }
 }

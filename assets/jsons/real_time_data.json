@@ -2,13 +2,13 @@
     {
         "id": 1,
         "motId": 1,
-        "unit": "",
+        "unit": "C",
         "parm_name": "Throttle",
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 65535.0,
+        "slider_min": -100.0,
+        "slider_max": 200.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
             "categoryMain": "MotorController",
@@ -21,13 +21,13 @@
     {
         "id": 1,
         "motId": 2,
-        "unit": "",
+        "unit": "v",
         "parm_name": "Brake",
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 65535.0,
+        "slider_min": -100.0,
+        "slider_max": 200.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
             "categoryMain": "MotorController",
@@ -40,7 +40,7 @@
     {
         "id": 1,
         "motId": 3,
-        "unit": "",
+        "unit": "m",
         "parm_name": "Direction",
         "@type": "enum",
         "@permission": "write",
@@ -49,8 +49,8 @@
             "R",
             "F"
         ],
-        "slider_min": 0.0,
-        "slider_max": 0.0,
+        "slider_min": -100.0,
+        "slider_max": 200.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
             "categoryMain": "MotorController",
@@ -68,8 +68,8 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 5000.0,
+        "slider_min": -100.0,
+        "slider_max": 200.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
             "categoryMain": "MotorController",
@@ -87,8 +87,8 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 5000.0,
+        "slider_min": -100.0,
+        "slider_max": 200.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
             "categoryMain": "MotorController",
@@ -106,8 +106,8 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
-        "slider_max": 5000.0,
+        "slider_min": -100.0,
+        "slider_max": 200.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
             "categoryMain": "MotorController",
@@ -125,7 +125,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -144,7 +144,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -163,7 +163,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -182,7 +182,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -201,7 +201,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -220,7 +220,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -239,7 +239,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -258,7 +258,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -277,7 +277,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -296,7 +296,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -315,7 +315,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -334,7 +334,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -353,7 +353,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -372,7 +372,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -391,7 +391,7 @@
         "@type": "slider",
         "@permission": "write",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 5000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -410,7 +410,7 @@
         "@type": "slider",
         "@permission": "read",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 65535.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -434,7 +434,7 @@
             "Run",
             "Fault"
         ],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 0.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -458,7 +458,7 @@
             "Run",
             "Fault"
         ],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 0.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -482,7 +482,7 @@
             "Run",
             "Fault"
         ],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 0.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -506,7 +506,7 @@
             "Run",
             "Fault"
         ],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 0.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -530,7 +530,7 @@
             "Run",
             "Fault"
         ],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 0.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {
@@ -549,7 +549,7 @@
         "@type": "slider",
         "@permission": "read",
         "enum_value": [],
-        "slider_min": 0.0,
+        "slider_min": -100.0,
         "slider_max": 10000.0,
         "toolTip": "Voltage at terminal B+",
         "motProperties": {

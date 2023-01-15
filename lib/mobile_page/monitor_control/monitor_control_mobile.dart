@@ -11,6 +11,7 @@ import 'package:kelly_user_project/common/custom_popmenu.dart';
 import 'package:kelly_user_project/common/dash_board.dart';
 import 'package:kelly_user_project/common/get_box.dart';
 import 'package:kelly_user_project/common/top_tabbar_item_mobile.dart';
+import 'package:kelly_user_project/config/config.dart';
 import 'package:kelly_user_project/controller/parameter_con.dart';
 import 'package:kelly_user_project/models/parameter.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -31,20 +32,46 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
   final connectionCon = Get.put(ConnectionCon());
 
   ///档位
-  RxString gear = ''.obs;
+  RxString gear = 'N'.obs;
+
+  ///油门
   RxDouble sliderValue = 0.0.obs;
+
+  ///仪表盘参数值
+  RxDouble firstDashValue = 0.0.obs;
+  RxDouble secondDashValue = 0.0.obs;
+  RxDouble thirdDashValue = 0.0.obs;
+
+  ///三个仪表盘参数
+  Parameter? dashParameter0;
+  Parameter? dashParameter1;
+  Parameter? dashParameter2;
+
   Parameter? realTimeDataShow0;
   Parameter? realTimeDataShow1;
   Parameter? realTimeDataShow2;
   Timer? timer;
 
+  ///电池电量  (0~1)
+  double? electricity;
+
+  ///错误码
+  int? errorCode;
   @override
   void initState() {
+    ///默认显示前三个参数  可修改
+    dashParameter0 = parameterCon.real_time_data_list[0];
+    dashParameter1 = parameterCon.real_time_data_list[1];
+    dashParameter2 = parameterCon.real_time_data_list[2];
+
+    ///默认显示前三个参数  可修改
     realTimeDataShow0 = parameterCon.real_time_data_list[0];
     realTimeDataShow1 = parameterCon.real_time_data_list[1];
     realTimeDataShow2 = parameterCon.real_time_data_list[2];
     super.initState();
     bus.on('updateRealParameter', (arg) {
+      dashValueChange(arg, firstDashValue);
+
       // dashValueChange(arg, firstDashValue);
       //dashValueChange(list[1], secondDashValue);
       //dashValueChange(list.last, thirdDashValue);
@@ -92,9 +119,38 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DashBoard1(3.5),
-          DashBoard2(3),
-          DashBoard3(3.5),
+          dashBoardWidget(
+              dashValue: firstDashValue.value,
+              parameter: dashParameter0!,
+              size: (1.sw - getMobileLeftMargin()) / 3.5,
+              interval: 20,
+              valueFont: 15,
+              unitFont: 8),
+          dashBoardWidget(
+            dashValue: secondDashValue.value,
+            parameter: dashParameter1!,
+            size: (1.sw - getMobileLeftMargin()) / 3,
+            interval: 20,
+            valueFont: 20,
+            unitFont: 10,
+            bottomPadding: 20,
+            bottomWidget: Text(
+              gear.value,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Get.theme.focusColor,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          dashBoardWidget(
+              dashValue: thirdDashValue.value,
+              parameter: dashParameter2!,
+              size: (1.sw - getMobileLeftMargin()) / 3.5,
+              interval: 20,
+              valueFont: 15,
+              unitFont: 8),
         ],
       );
     } else {
@@ -103,11 +159,40 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              DashBoard1(2),
-              DashBoard3(2),
+              dashBoardWidget(
+                  dashValue: firstDashValue.value,
+                  parameter: dashParameter0!,
+                  size: (1.sw - getMobileLeftMargin()) / 2,
+                  interval: 20,
+                  valueFont: 20,
+                  unitFont: 10),
+              dashBoardWidget(
+                  dashValue: thirdDashValue.value,
+                  parameter: dashParameter2!,
+                  size: (1.sw - getMobileLeftMargin()) / 2,
+                  interval: 20,
+                  valueFont: 20,
+                  unitFont: 10),
             ],
           ),
-          DashBoard2(2),
+          dashBoardWidget(
+            dashValue: secondDashValue.value,
+            parameter: dashParameter1!,
+            size: (1.sw - getMobileLeftMargin()) / 2,
+            interval: 20,
+            valueFont: 20,
+            unitFont: 10,
+            bottomPadding: 20,
+            bottomWidget: Text(
+              gear.value,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Get.theme.focusColor,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ],
       );
     }
@@ -145,45 +230,21 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
           child: Row(
             children: [
               rowItem(
-                  realTimeDataShow0!.parmName, '80', realTimeDataShow0!.unit),
+                  realTimeDataShow0!.parmName,
+                  parameterCon.real_time_data_value[realTimeDataShow0?.motId],
+                  realTimeDataShow0!.unit),
               rowItem(
-                  realTimeDataShow1!.parmName, '200', realTimeDataShow0!.unit),
+                  realTimeDataShow1!.parmName,
+                  parameterCon.real_time_data_value[realTimeDataShow1?.motId],
+                  realTimeDataShow0!.unit),
               rowItem(
-                  realTimeDataShow2!.parmName, '10', realTimeDataShow0!.unit),
+                  realTimeDataShow2!.parmName,
+                  parameterCon.real_time_data_value[realTimeDataShow2?.motId],
+                  realTimeDataShow0!.unit),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  Widget DashBoard1(double sizeratio) {
-    return DashBoard(
-      minnum: 0,
-      maxnum: 200,
-      interval: 20,
-      size: (1.sw - getMobileLeftMargin()) / sizeratio,
-      endValue: 100,
-      centerWidget: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '1',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: Get.theme.highlightColor,
-            ),
-          ),
-          Text(
-            'Km/A',
-            style: TextStyle(
-              fontSize: 8,
-              color: Get.theme.highlightColor,
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -257,17 +318,69 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
     );
   }
 
+  dashBoardWidget({
+    required double dashValue,
+    required Parameter parameter,
+    required double size,
+    required double interval,
+    required double valueFont,
+    required double unitFont,
+    Widget? bottomWidget,
+    double bottomPadding = 0,
+  }) {
+    return DashBoard(
+      minnum: parameter.sliderMin,
+      maxnum: parameter.sliderMax,
+      interval: interval,
+      size: size,
+      endValue:
+          dashValue > parameter.sliderMax ? parameter.sliderMax : dashValue,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            dashValue > parameter.sliderMax
+                ? parameter.sliderMax.toStringAsFixed(0)
+                : dashValue.toStringAsFixed(0),
+            style: TextStyle(
+              fontSize: valueFont,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            parameter.unit,
+            style: TextStyle(
+              fontSize: unitFont,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+        ],
+      ),
+      bottomWidget: bottomWidget,
+      bottomPadding: bottomPadding,
+    );
+  }
+
   Widget bottomWidget() {
     return Column(
       children: [
         const SizedBox(
           height: 15,
         ),
-        CustomPopMenu(
+        CustomInput(
           title: 'Battery',
+          hint: '',
+          readOnly: true,
           width: 1.sw - 40,
           height: 50,
-          value: null,
+          fieldCon: TextEditingController(
+            text: 'Electricity：' +
+                (electricity == null
+                    ? '0'
+                    : (electricity! * 100).toStringAsFixed(0)) +
+                '%',
+          ),
         ),
         const SizedBox(
           height: 15,
@@ -279,33 +392,34 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
           textColor: Get.theme.errorColor,
           width: 1.sw - 40,
           height: 50,
-          fieldCon: TextEditingController(text: 'ErrorCode：2021'),
+          fieldCon: TextEditingController(
+              text: 'ErrorCode：' + (errorCode == null ? '-' : '$errorCode')),
         ),
         Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 15),
           child: SfSliderTheme(
             data: SfSliderThemeData(
-              activeTrackHeight: 25,
-              inactiveTrackHeight: 25,
+              activeTrackHeight: 30,
+              inactiveTrackHeight: 30,
               activeTrackColor: Get.theme.primaryColor,
               inactiveTrackColor: Get.theme.hintColor,
-              trackCornerRadius: 25,
-              thumbRadius: 15,
+              trackCornerRadius: 30,
+              thumbRadius: 20,
             ),
             child: SfSlider(
-              min: 0,
-              max: 5,
+              min: Config.acceleratorMin,
+              max: Config.acceleratorMax,
               stepSize: 1,
               value: sliderValue.value,
               thumbIcon: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(60),
                   color: Get.theme.focusColor,
                 ),
                 padding: EdgeInsets.all(4),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(60),
                     color: Get.theme.primaryColor,
                   ),
                   alignment: Alignment.center,
@@ -313,7 +427,7 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
                     sliderValue.value.toStringAsFixed(0),
                     style: TextStyle(
                       color: Get.theme.highlightColor,
-                      fontSize: 18,
+                      fontSize: 10,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -330,14 +444,14 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            gearButton('R'),
-            gearButton('N'),
-            gearButton('D'),
-          ],
+          children: gearButtonList(),
         ),
       ],
     );
+  }
+
+  List<Widget> gearButtonList() {
+    return Config.gearList.map((e) => gearButton(e)).toList();
   }
 
   Widget rowItem(title, amount, unit) {
@@ -357,7 +471,7 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: amount,
+                    text: amount == null ? '0' : amount.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       color: Get.theme.highlightColor,
@@ -463,5 +577,20 @@ class _MonitorControlMobileState extends State<MonitorControlMobile> {
         ),
       ),
     );
+  }
+
+  dashValueChange(int newCount, RxDouble dashValue) async {
+    int oldValue = dashValue.value.toInt();
+    if (newCount > oldValue) {
+      for (var i = oldValue; i < newCount + 1; i++) {
+        dashValue.value = i.toDouble();
+        await Future.delayed(const Duration(milliseconds: 1));
+      }
+    } else if (newCount < oldValue) {
+      for (var i = oldValue; i > newCount - 1; i--) {
+        dashValue.value = i.toDouble();
+        await Future.delayed(const Duration(milliseconds: 1));
+      }
+    }
   }
 }

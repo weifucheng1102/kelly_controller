@@ -62,6 +62,7 @@ class _ParameterPageState extends State<ParameterPage> {
     ///指令处理数据
     bus.on('updateParameterWithSerial', (arg) {
       setState(() {});
+      
     });
     super.initState();
 

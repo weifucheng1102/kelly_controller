@@ -202,10 +202,10 @@ class _MainScreenState extends State<MainScreen> {
         return [];
       case 1:
         return [
-          bottomMenuItem('Serial', 0),
-          bottomMenuItem('Bluetooth', 1),
-          bottomMenuItem('X', 2),
-          bottomMenuItem('Y', 3),
+          //  bottomMenuItem('Serial', 0),
+          // bottomMenuItem('Bluetooth', 1),
+          // bottomMenuItem('X', 2),
+          // bottomMenuItem('Y', 3),
         ];
       case 2:
         return [
@@ -260,9 +260,9 @@ class _MainScreenState extends State<MainScreen> {
         ];
       case 4:
         return [
-          bottomMenuItem('X', 0),
-          bottomMenuItem('Y', 1),
-          bottomMenuItem('Z', 2),
+          // bottomMenuItem('X', 0),
+          // bottomMenuItem('Y', 1),
+          // bottomMenuItem('Z', 2),
         ];
       case 5:
         return [];

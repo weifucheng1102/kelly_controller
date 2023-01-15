@@ -37,6 +37,9 @@ class ParameterCon extends GetxController {
   ///实时参数
   List<Parameter> real_time_data_list = [];
 
+  ///实时参数值
+  Map<int, dynamic> real_time_data_value = {};
+
   ///实时参数对应色折线图颜色
   Map<int, Color> real_time_data_color = {};
 
@@ -184,6 +187,9 @@ class ParameterCon extends GetxController {
         await rootBundle.loadString('assets/jsons/real_time_data.json');
     final List data = await json.decode(response);
     real_time_data_list = data.map((e) => Parameter.fromJson(e)).toList();
+    real_time_data_list.forEach((element) {
+      real_time_data_value.addAll({element.motId: null});
+    });
 
     ///设置实时参数全选
     real_time_data_select = List.generate(real_time_data_list.length,

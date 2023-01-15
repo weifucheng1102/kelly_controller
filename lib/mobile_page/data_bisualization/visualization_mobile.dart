@@ -98,7 +98,7 @@ class _VisualizationMobileState extends State<VisualizationMobile> {
               Expanded(
                 child: Column(
                   children: [
-                    tabbarWidget(),
+                    // tabbarWidget(),
                     SizedBox(
                       height: 10,
                     ),

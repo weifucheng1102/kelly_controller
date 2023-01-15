@@ -35,19 +35,39 @@ class _MonitorControlState extends State<MonitorControl> {
 
   ///档位(前进 后退)
   RxString gear = 'N'.obs;
+
+  ///油门
   RxDouble sliderValue = 0.0.obs;
+  ///仪表盘参数值
   RxDouble firstDashValue = 0.0.obs;
   RxDouble secondDashValue = 0.0.obs;
   RxDouble thirdDashValue = 0.0.obs;
 
+  ///三个仪表盘参数
+  Parameter? dashParameter0;
+  Parameter? dashParameter1;
+  Parameter? dashParameter2;
   Timer? timer;
 
+  ///
   Parameter? realTimeDataShow0;
   Parameter? realTimeDataShow1;
   Parameter? realTimeDataShow2;
 
+  ///电池电量  (0~1)
+  double? electricity;
+
+  ///错误码
+  int? errorCode;
+
   @override
   void initState() {
+    ///默认显示前三个参数  可修改
+    dashParameter0 = parameterCon.real_time_data_list[0];
+    dashParameter1 = parameterCon.real_time_data_list[1];
+    dashParameter2 = parameterCon.real_time_data_list[2];
+
+    ///默认显示前三个参数  可修改
     realTimeDataShow0 = parameterCon.real_time_data_list[0];
     realTimeDataShow1 = parameterCon.real_time_data_list[1];
     realTimeDataShow2 = parameterCon.real_time_data_list[2];
@@ -90,12 +110,16 @@ class _MonitorControlState extends State<MonitorControl> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  BatteryView(electricQuantity: 0.8),
+                  BatteryView(electricQuantity: electricity ?? 0),
                   SizedBox(
                     width: 20.w,
                   ),
                   Text(
-                    'Electricity：80%',
+                    'Electricity：' +
+                        (electricity == null
+                            ? '0'
+                            : (electricity! * 100).toStringAsFixed(0)) +
+                        '%',
                     style: TextStyle(
                       fontSize: 20.sp,
                       color: Get.theme.hintColor,
@@ -200,7 +224,7 @@ class _MonitorControlState extends State<MonitorControl> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: amount,
+                    text: amount == null ? '0' : amount.toString(),
                     style: TextStyle(
                       fontSize: 60.sp,
                       color: Get.theme.highlightColor,
@@ -228,108 +252,44 @@ class _MonitorControlState extends State<MonitorControl> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DashBoard(
-            minnum: 0,
-            maxnum: 200,
-            interval: 20,
+          dashBoardWidget(
+            dashValue: firstDashValue.value,
+            parameter: dashParameter0!,
             size: 330.w,
-            endValue: firstDashValue.value > 200 ? 200 : firstDashValue.value,
-            centerWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  firstDashValue.value > 200
-                      ? '200'
-                      : firstDashValue.value.toStringAsFixed(0),
-                  style: TextStyle(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Get.theme.highlightColor,
-                  ),
-                ),
-                Text(
-                  'A',
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    color: Get.theme.highlightColor,
-                  ),
-                ),
-              ],
-            ),
+            interval: 20,
+            valueFont: 25.sp,
+            unitFont: 10.sp,
           ),
           SizedBox(
             width: 25.w,
           ),
-          DashBoard(
-            minnum: 0,
-            maxnum: 240,
-            size: 400.w,
-            interval: 20,
-            bottomPadding: 23.h,
-            endValue: secondDashValue.value > 240 ? 240 : secondDashValue.value,
-            centerWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  secondDashValue.value > 240
-                      ? '240'
-                      : secondDashValue.value.toStringAsFixed(0),
-                  style: TextStyle(
-                    fontSize: 40.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Get.theme.highlightColor,
-                  ),
+          dashBoardWidget(
+              dashValue: secondDashValue.value,
+              parameter: dashParameter1!,
+              size: 440.w,
+              interval: 20,
+              valueFont: 40.sp,
+              unitFont: 13.sp,
+              bottomPadding: 23.h,
+              bottomWidget: Text(
+                gear.value,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Get.theme.focusColor,
+                  fontSize: 52.sp,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  'Km/h',
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    color: Get.theme.highlightColor,
-                  ),
-                ),
-              ],
-            ),
-            bottomWidget: Text(
-              gear.value,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Get.theme.focusColor,
-                fontSize: 52.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+              )),
           SizedBox(
             width: 25.w,
           ),
-          DashBoard(
-            maxnum: 10,
-            minnum: 0,
-            interval: 1,
-            endValue: thirdDashValue.value > 10 ? 10 : thirdDashValue.value,
+          dashBoardWidget(
+            dashValue: firstDashValue.value,
+            parameter: dashParameter0!,
             size: 330.w,
-            centerWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  thirdDashValue.value > 10
-                      ? '10'
-                      : thirdDashValue.value.toStringAsFixed(0),
-                  style: TextStyle(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Get.theme.highlightColor,
-                  ),
-                ),
-                Text(
-                  'x 1000rpm',
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    color: Get.theme.highlightColor,
-                  ),
-                ),
-              ],
-            ),
+            interval: 20,
+            valueFont: 25.sp,
+            unitFont: 10.sp,
           ),
         ],
       ),
@@ -364,6 +324,50 @@ class _MonitorControlState extends State<MonitorControl> {
     return list;
   }
 
+  dashBoardWidget({
+    required double dashValue,
+    required Parameter parameter,
+    required double size,
+    required double interval,
+    required double valueFont,
+    required double unitFont,
+    Widget? bottomWidget,
+    double bottomPadding = 0,
+  }) {
+    return DashBoard(
+      minnum: parameter.sliderMin,
+      maxnum: parameter.sliderMax,
+      interval: interval,
+      size: size,
+      endValue:
+          dashValue > parameter.sliderMax ? parameter.sliderMax : dashValue,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            dashValue > parameter.sliderMax
+                ? parameter.sliderMax.toStringAsFixed(0)
+                : dashValue.toStringAsFixed(0),
+            style: TextStyle(
+              fontSize: valueFont,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            parameter.unit,
+            style: TextStyle(
+              fontSize: unitFont,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+        ],
+      ),
+      bottomWidget: bottomWidget,
+      bottomPadding: bottomPadding,
+    );
+  }
+
   realTimeDataWidget() {
     return Column(
       children: [
@@ -390,11 +394,17 @@ class _MonitorControlState extends State<MonitorControl> {
           child: Row(
             children: [
               rowItem(
-                  realTimeDataShow0!.parmName, '80', realTimeDataShow0!.unit),
+                  realTimeDataShow0!.parmName,
+                  parameterCon.real_time_data_value[realTimeDataShow0?.motId],
+                  realTimeDataShow0!.unit),
               rowItem(
-                  realTimeDataShow1!.parmName, '200', realTimeDataShow0!.unit),
+                  realTimeDataShow1!.parmName,
+                  parameterCon.real_time_data_value[realTimeDataShow1?.motId],
+                  realTimeDataShow1!.unit),
               rowItem(
-                  realTimeDataShow2!.parmName, '10', realTimeDataShow0!.unit),
+                  realTimeDataShow2!.parmName,
+                  parameterCon.real_time_data_value[realTimeDataShow2?.motId],
+                  realTimeDataShow2!.unit),
             ],
           ),
         ),
@@ -408,7 +418,8 @@ class _MonitorControlState extends State<MonitorControl> {
           textColor: Get.theme.errorColor,
           width: 472.w,
           height: 66.h,
-          fieldCon: TextEditingController(text: 'ErrorCode：2021'),
+          fieldCon: TextEditingController(
+              text: 'ErrorCode：' + (errorCode == null ? '-' : '$errorCode')),
         ),
         SizedBox(
           height: 25.h,
@@ -422,19 +433,11 @@ class _MonitorControlState extends State<MonitorControl> {
     if (widget.index == 0) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          gearButton('R'),
-          gearButton('N'),
-          gearButton('D'),
-        ],
+        children: gearButtonList(),
       );
     } else {
       return Column(
-        children: [
-          gearButton('R'),
-          gearButton('N'),
-          gearButton('D'),
-        ],
+        children: gearButtonList(),
       );
     }
     // return [
@@ -442,6 +445,10 @@ class _MonitorControlState extends State<MonitorControl> {
     //     height: 25.h,
     //   ),
     // ];
+  }
+
+  List<Widget> gearButtonList() {
+    return Config.gearList.map((e) => gearButton(e)).toList();
   }
 
   ///油门
@@ -459,8 +466,8 @@ class _MonitorControlState extends State<MonitorControl> {
             thumbRadius: 30.h,
           ),
           child: SfSlider(
-            min: 0,
-            max: 5,
+            min: Config.acceleratorMin,
+            max: Config.acceleratorMax,
             stepSize: 1,
             value: sliderValue.value,
             thumbIcon: Container(
@@ -479,7 +486,7 @@ class _MonitorControlState extends State<MonitorControl> {
                   sliderValue.value.toStringAsFixed(0),
                   style: TextStyle(
                     color: Get.theme.highlightColor,
-                    fontSize: 30.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -504,8 +511,8 @@ class _MonitorControlState extends State<MonitorControl> {
             thumbRadius: 30.w,
           ),
           child: SfSlider.vertical(
-            min: 0,
-            max: 5,
+            min: Config.acceleratorMin,
+            max: Config.acceleratorMax,
             stepSize: 1,
             value: sliderValue.value,
             thumbIcon: Container(
@@ -524,7 +531,7 @@ class _MonitorControlState extends State<MonitorControl> {
                   sliderValue.value.toStringAsFixed(0),
                   style: TextStyle(
                     color: Get.theme.highlightColor,
-                    fontSize: 30.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -615,14 +622,14 @@ class _MonitorControlState extends State<MonitorControl> {
     }
   }
 
-  getGearData(int D, int R) {
-    print('d' + D.toString() + 'r' + R.toString());
-    if (D == 0) {
-      gear.value = 'D';
-    } else if (R == 0) {
-      gear.value = 'R';
-    } else {
-      gear.value = 'N';
-    }
-  }
+  // getGearData(int D, int R) {
+  //   print('d' + D.toString() + 'r' + R.toString());
+  //   if (D == 0) {
+  //     gear.value = 'D';
+  //   } else if (R == 0) {
+  //     gear.value = 'R';
+  //   } else {
+  //     gear.value = 'N';
+  //   }
+  // }
 }

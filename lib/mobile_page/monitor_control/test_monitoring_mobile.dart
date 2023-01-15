@@ -34,6 +34,7 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
   Parameter? realTimeDataShow2;
   Parameter? realTimeDataShow3;
   Timer? timer;
+  int? errorCode;
 
   @override
   void initState() {
@@ -71,7 +72,9 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
               textColor: Get.theme.errorColor,
               width: 1.sw - getMobileLeftMargin() - 40,
               height: 50,
-              fieldCon: TextEditingController(text: 'ErrorCode：2021'),
+              fieldCon: TextEditingController(
+                  text:
+                      errorCode == null ? '-' : errorCode!.toStringAsFixed(0)),
             ),
             SizedBox(
               height: 20,
@@ -99,33 +102,7 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
               width: 130,
               child: displayValue(0),
             ),
-            DashBoard(
-              minnum: 0,
-              maxnum: 200,
-              interval: 20,
-              size: 180,
-              endValue: 100,
-              centerWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                  Text(
-                    realTimeDataShow0!.unit,
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            dashBoardWidget(parameter: realTimeDataShow0, interval: 20),
           ],
         ),
         Column(
@@ -134,33 +111,7 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
               width: 130,
               child: displayValue(1),
             ),
-            DashBoard(
-              minnum: 0,
-              maxnum: 200,
-              interval: 20,
-              size: 180,
-              endValue: 100,
-              centerWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                  Text(
-                    realTimeDataShow1!.unit,
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            dashBoardWidget(parameter: realTimeDataShow1, interval: 20),
           ],
         ),
         Column(
@@ -169,33 +120,7 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
               width: 130,
               child: displayValue(2),
             ),
-            DashBoard(
-              minnum: 0,
-              maxnum: 200,
-              interval: 20,
-              size: 180,
-              endValue: 100,
-              centerWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                  Text(
-                    realTimeDataShow2!.unit,
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            dashBoardWidget(parameter: realTimeDataShow2, interval: 20),
           ],
         ),
         Column(
@@ -204,36 +129,45 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
               width: 130,
               child: displayValue(3),
             ),
-            DashBoard(
-              minnum: 0,
-              maxnum: 200,
-              interval: 20,
-              size: 180,
-              endValue: 100,
-              centerWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                  Text(
-                    realTimeDataShow3!.unit,
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Get.theme.highlightColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            dashBoardWidget(parameter: realTimeDataShow3, interval: 20),
           ],
         ),
       ],
+    );
+  }
+
+  dashBoardWidget({
+    required Parameter? parameter,
+    required double interval,
+  }) {
+    return DashBoard(
+      minnum: parameter!.sliderMin,
+      maxnum: parameter.sliderMax,
+      interval: 20,
+      size: 180,
+      endValue: parameterCon.real_time_data_value[parameter.motId] ?? 0,
+      centerWidget: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            parameterCon.real_time_data_value[parameter.motId] == null
+                ? '0'
+                : '${parameterCon.real_time_data_value[parameter.motId]}',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+          Text(
+            realTimeDataShow0!.unit,
+            style: TextStyle(
+              fontSize: 8,
+              color: Get.theme.highlightColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -307,7 +241,9 @@ class _TestMonitoringMobileState extends State<TestMonitoringMobile> {
               message: e.toolTip,
               child: CustomInput(
                 title: e.parmName,
-                hint: 'hint',
+                hint: parameterCon.real_time_data_value[e.motId] == null
+                    ? ''
+                    : '${parameterCon.real_time_data_value[e.motId]}',
                 readOnly: true,
                 width: (1.sw - leftMenuMargin - 40) / 2,
                 height: 40,

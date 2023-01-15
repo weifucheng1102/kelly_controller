@@ -56,12 +56,12 @@ class _ConnectMobileState extends State<ConnectMobile> {
         Expanded(
           child: TopTabbarItemMobile('Bluetooth', 0),
         ),
-        Expanded(
-          child: TopTabbarItemMobile('X', 1),
-        ),
-        Expanded(
-          child: TopTabbarItemMobile('Y', 2),
-        ),
+        // Expanded(
+        //   child: TopTabbarItemMobile('X', 1),
+        // ),
+        // Expanded(
+        //   child: TopTabbarItemMobile('Y', 2),
+        // ),
       ],
     );
   }

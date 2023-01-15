@@ -239,15 +239,25 @@ class ConnectionCon extends GetxController {
 
   ///更新参数
   updateParameterWithSerial(int num) {
-    bus.emit('updateRealParameter', num);
-
+   
     List li = parameterCon.all_parameterList
         .where((element) => element.parmName == 'InputMode')
         .toList();
     if (li.isNotEmpty) {
       Parameter par = li.first;
       parameterCon.all_parameter_value[par.parmName] = par.enumValue[num];
+
+    
     }
+
+    List real_li = parameterCon.real_time_data_list
+        .where((element) => element.motId == 'InputMode')
+        .toList();
+    if (li.isNotEmpty) {
+      Parameter par = li.first;
+      parameterCon.all_parameter_value[par.parmName] = par.enumValue[num];
+    }
+    bus.emit('updateRealParameter', num);
 
     bus.emit('updateParameterWithSerial');
   }
